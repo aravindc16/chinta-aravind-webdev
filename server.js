@@ -1,5 +1,11 @@
 var express = require('express');
+var mongodb = require('mongodb');
+var uri = process.env.MONGODB_URI;
 var app = express();
+
+mongodb.MongoClient.connect(uri, function (err, db) {
+    /* adventure! */
+});
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
