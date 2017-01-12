@@ -1,6 +1,6 @@
 var express = require('express');
 var mongodb = require('mongodb');
-var mongoClient = mongodb.mongoClient;
+var mongoClient = mongodb.MongoClient;
 
 var uri = process.env.MONGODB_URI;
 var app = express();
