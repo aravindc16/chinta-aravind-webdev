@@ -1,22 +1,5 @@
 var express = require('express');
-var mongodb = require('mongodb');
-var mongoClient = mongodb.MongoClient;
-
-var uri = process.env.MONGODB_URI;
 var app = express();
-
-mongoClient.connect(uri, function (err, db) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    console.log('Connection established to', url);
-
-    // do some work here with the database.
-
-    //Close connection
-    db.close();
-  }
-});
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
