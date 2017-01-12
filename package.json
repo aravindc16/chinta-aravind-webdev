@@ -1,5 +1,5 @@
 {
-  "name": "web-dev",
+  "name": "achinta-webdev",
   "version": "1.0.0",
   "description": "Web Dev at Northeastern University",
   "main": "server.js",
@@ -14,5 +14,19 @@
     "start": "node server.js"
   },
   "author": "Jose G. Annunziato",
-  "license": "ISC"
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aravindc16/chinta-aravind-webdev.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "bugs": {
+    "url": "https://github.com/aravindc16/chinta-aravind-webdev/issues"
+  },
+  "homepage": "https://github.com/aravindc16/chinta-aravind-webdev#readme"
 }
