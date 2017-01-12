@@ -11,6 +11,7 @@ app.use(express.static(__dirname + '/public'));
 require ("./test/app.js")(app);
 
 var port      = process.env.PORT || 3000;
+var uri = process.env.MONGODB_URI
 
 app.listen(port, function() {
 	console.log("Test");
