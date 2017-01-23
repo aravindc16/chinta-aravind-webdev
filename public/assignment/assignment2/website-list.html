@@ -31,9 +31,12 @@
 
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
-        <h4>Profile </h4><span flex></span>
         <md-button class="md-icon-button md-primary" href="profile.html">
-            <md-icon md-svg-icon="icons/done.svg"></md-icon>
+            <md-icon md-svg-icon="icons/back.svg"></md-icon>
+        </md-button>
+        <h4>Websites </h4><span flex></span>
+        <md-button class="md-icon-button md-primary" href="website-new.html">
+            <md-icon md-svg-icon="icons/create.svg"></md-icon>
         </md-button>
     </div>
 </md-toolbar>
@@ -45,32 +48,44 @@
 
         <div>
 
-            <md-input-container class="md-block" flex md-no-float>
-                <label>Username</label>
-                <input type="text" value="aravindc16" />
-            </md-input-container>
-            <md-input-container class="md-block" flex md-no-float>
-                <label>Email</label>
-                <input type="email" value="chinta.a@husky.neu.edu"/>
-            </md-input-container>
-            <md-input-container class="md-block" flex md-no-float>
-                <label>First Name</label>
-                <input type="text" value="Aravind"/>
-            </md-input-container>
-            <md-input-container class="md-block" flex md-no-float>
-                <label>Last Name</label>
-                <input type="text" value="Chinta"/>
-            </md-input-container>
-            <section layout="row" layout-align="center center">
-                <md-button md-colors="{background: 'BLUE'}" class="md-raised md-primary" href="website-list.html">Websites</md-button>
-                <md-button md-colors="{background: 'RED', foreground: 'WHITE'}"class="md-raised md-warn" href="login.html">Logout</md-button>
-            </section>
+            <md-list-item>
+                Blogger
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" href="website-edit.html">
+                    <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                Address Book App
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" href="website-edit.html">
+                    <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                Blogging App
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" href="website-edit.html">
+                    <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                Script Testing App
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" href="website-edit.html">
+                    <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                </md-button>
+            </md-list-item>
 
 
         </div>
     </md-content>
+
 </div>
-<footer><div layout="row" layout-align="center center" flex="none">
+
+
+
+<footer><div layout="row" layout-align="center" flex="none">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools">
             <span flex></span>
