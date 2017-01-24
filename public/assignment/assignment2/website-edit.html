@@ -28,55 +28,52 @@
     angular.module('BlankApp', ['ngMaterial']);
 </script>
 
+<div layout="column" layout-fill>
+    <header>
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button md-primary" href="website-list.html">
+                    <md-icon md-svg-icon="icons/back.svg"></md-icon>
+                </md-button>
+                <h4>Edit Website </h4><span flex></span>
+                <md-button class="md-icon-button md-primary" href="website-list.html">
+                    <md-icon md-svg-icon="icons/done.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+    </header>
 
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools">
-        <md-button class="md-icon-button md-primary" href="website-list.html">
-            <md-icon md-svg-icon="icons/back.svg"></md-icon>
-        </md-button>
-        <h4>Edit Website </h4><span flex></span>
-        <md-button class="md-icon-button md-primary" href="website-list.html">
-            <md-icon md-svg-icon="icons/done.svg"></md-icon>
-        </md-button>
-    </div>
-</md-toolbar>
+    <main flex>
+        <div class="md-inline-form" layout-align="center center">
+            <md-content class="md-padding">
 
+                <div>
 
-
-<div class="md-inline-form" layout-align="center center">
-    <md-content class="md-padding">
-
-        <div>
-
-            <md-input-container class="md-block" flex md-no-float>
-                <label> Website Name </label>
-                <input type="text" value="Blogger"/>
-            </md-input-container>
-            <md-input-container class="md-block" flex md-no-float>
-                <label> Website Description </label>
-                <textarea rows="5" md-select-on-focus>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</textarea>
-            </md-input-container>
-
-
-
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label> Website Name </label>
+                        <input type="text" value="Blogger"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label> Website Description </label>
+                        <textarea rows="5" md-select-on-focus>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</textarea>
+                    </md-input-container>
+                </div>
+            </md-content>
         </div>
-    </md-content>
+    </main>
 
+
+    <footer>
+        <md-toolbar class="md-hue-2" md-scroll-shrink>
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" href="profile.html">
+                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+    </footer>
 </div>
-
-
-
-<footer><div layout="row" layout-align="center" flex="none">
-    <md-toolbar class="md-hue-2">
-        <div class="md-toolbar-tools">
-            <span flex></span>
-            <md-button class="md-icon-button md-primary" href="profile.html">
-                <md-icon md-svg-icon="icons/person.svg"></md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-</div>
-</footer>
 </body>
 </html>
 
