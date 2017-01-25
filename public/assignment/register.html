@@ -1,27 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Register</h1>
-        <input type="text"
-               class="form-control"
-               placeholder="username"/>
-        <input type="password"
-               class="form-control"
-               placeholder="password"/>
-        <input type="password"
-               class="form-control"
-               placeholder="very password"/>
-        <a class="btn btn-primary btn-block"
-           href="profile.html">Register</a>
-        <a class="btn btn-danger  btn-block"
-           href="login.html">Cancel</a>
-    </div>
+<title>Register</title>
+<body ng-app="BlankApp" ng-cloak>
+<!--
+  Your HTML content here
+-->
+
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<!-- Your application bootstrap  -->
+<script type="text/javascript">
+    /**
+     * You must include the dependency on 'ngMaterial'
+     */
+    angular.module('BlankApp', ['ngMaterial']);
+</script>
+<div class="md-inline-form" layout-align="center center">
+
+    <md-content layout-padding>
+        <div>
+            <h3> Register </h3>
+            <md-input-container class="md-block" flex md-no-float>
+                <label>Username</label>
+                <input type="text" />
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+                <label>Password</label>
+                <input type="password"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex>
+                <label>Verify Password</label>
+                <input type="password"/>
+            </md-input-container>
+            <section layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" href="profile.html">Register</md-button>
+                <md-button class="md-raised md-accent" href="login.html">Cancel</md-button>
+            </section>
+        </div>
+    </md-content>
+</div>
 </body>
 </html>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->

@@ -5,7 +5,7 @@
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="assignment/css/style.css" rel="stylesheet"/>
 
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -19,28 +19,25 @@
     <title>Welcome to Aravind Chinta's Web Dev Home Page</title>
 </head>
 <script type="text/javascript">
-    angular.module('BlankApp', ['ngMaterial']);
+    angular.module('HomeApp', ['ngMaterial']);
 </script>
 
-<body ng-app="BlankApp" ng-cloak>
+<body ng-app="HomeApp" ng-cloak>
 
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools">
-        <h1>Welcome to <b>Aravind Chinta's</b> Web Dev Page.</h1>
+<md-toolbar class="md-hue-3">
+    <div class="md-toolbar-tools" layout-align="center center">
+        <h1><b>Aravind Chinta's</b> Web Dev Home Page.</h1>
     </div>
 </md-toolbar>
 <md-content layout-padding>
 
-    <h2>Required links</h2>
-    <div flex layout-padding>
-    <md-list-item href="project/index.html">Project</md-list-item>
-    <md-divider></md-divider>
-    <md-list-item href="assignment/assignment2/login.html">Assignment</md-list-item>
-    <md-divider></md-divider>
-    <md-list-item href="test/index.html">Test MongoDB</md-list-item>
-    <md-divider></md-divider>
-    <md-list-item href="https://github.com/aravindc16/chinta-aravind-webdev">Your public repository at GitHub.com</md-list-item>
-    <md-divider></md-divider>
+    <div flex layout="row" layout-align="center" layout-padding>
+        <md-list-item href="project/index.html">Project</md-list-item>
+        <md-divider></md-divider>
+        <md-list-item href="assignment/assignment2/login.html">Assignment</md-list-item>
+        <md-divider></md-divider>
+        <md-list-item href="https://github.com/aravindc16/chinta-aravind-webdev">GitHub Repo</md-list-item>
+
     </div>
 </md-content>
 </body>

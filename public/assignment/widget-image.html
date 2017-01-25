@@ -16,7 +16,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script src="app.js"></script>
 </head>
-<title>Profile</title>
+<title>Image</title>
 <body ng-app="BlankApp" ng-cloak>
 <!--
   Your HTML content here
@@ -29,8 +29,11 @@
     <header>
         <md-toolbar class="md-hue-2" md-scroll-shrink>
             <div class="md-toolbar-tools">
-                <h4>Profile </h4><span flex></span>
-                <md-button class="md-icon-button md-primary" href="profile.html">
+                <md-button class="md-icon-button md-primary" href="widget-list.html">
+                    <md-icon md-svg-icon="icons/back.svg"></md-icon>
+                </md-button>
+                <h4>Widget Edit </h4><span flex></span>
+                <md-button class="md-icon-button md-primary" href="widget-list.html">
                     <md-icon md-svg-icon="icons/done.svg"></md-icon>
                 </md-button>
             </div>
@@ -42,20 +45,29 @@
             <md-content class="md-padding">
                 <div>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>Username</label>
-                        <input type="text" value="aravindc16" />
+                        <label>Name</label>
+                        <input type="text" />
                     </md-input-container>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>Email</label>
-                        <input type="email" value="chinta.a@husky.neu.edu"/>
+                        <label>Text</label>
+                        <input type="text" />
                     </md-input-container>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>First Name</label>
-                        <input type="text" value="Aravind"/>
+                        <label>URL</label>
+                        <input type="text" />
                     </md-input-container>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>Last Name</label>
-                        <input type="text" value="Chinta"/>
+                        <label>Width</label>
+                        <input type="text" />
+                    </md-input-container>
+                    <md-input-container>
+                        <input id="fileInput" type="file" class="ng-hide">
+                        <md-button id="uploadButton"
+                                   class="md-raised md-primary"
+                                   aria-label="attach_image" ng-disabled="true">
+                            <input type="file">
+                            Choose Image
+                        </md-button>
                     </md-input-container>
                 </div>
             </md-content>
