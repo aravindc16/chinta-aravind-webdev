@@ -15,3 +15,13 @@ main {
 .createPad{
     padding-top: 13px
 }
+
+.cardActions{
+    margin-right: -20px;
+    position: relative;
+    margin-top: -16px
+}
+
+#cardButtonSpace{
+    margin-right: -30px;
+}
