@@ -16,7 +16,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script src="app.js"></script>
 </head>
-<title>New Page</title>
+<title>Widget List</title>
 <body ng-app="BlankApp" ng-cloak>
 
 <div layout="column" layout-fill>
@@ -41,7 +41,7 @@
 
                     <md-card>
                         <md-card-content layout="row" layout-align="space-between">
-                            <h1>Northeastern University</h1>
+                           <span flex><h1>Northeastern University</h1></span>
                             <md-card-actions class="cardActions">
                                 <span id="cardButtonSpace">
                                     <md-button class="md-icon-button md-primary" aria-label="Settings">
@@ -55,21 +55,73 @@
                             </md-card-actions>
                         </md-card-content>
                     </md-card>
+                    <md-card>
 
-                    <md-card layout-padding>
-                        <img src="http://nuweb9.neu.edu/numa/wp-content/uploads/NEU-logo.png"/>
-                    </md-card>
-                    <md-card layout layout-padding>
-                        <h3>College of Computer and Information Science</h3>
-                    </md-card>
-                    <md-card layout layout-padding>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Ct6BUPvE2sM"
-                                frameborder="0" allowfullscreen></iframe>
-                    </md-card>
-                    <md-card layout layout-padding>
-                        Discusses Web development for sites that are dynamic, data driven, and interactive. Focuses on the software development issues of integrating multiple languages, assorted data technologies, and Web interaction. Considers ASP.NET, C#, HTTP, HTML, CSS, XML, XSLT, JavaScript, AJAX, RSS/Atom, SQL, and Web services. Each student must deploy individually designed Web experiments that illustrate the Web technologies and at least one major integrative Web site project. Students may work in teams with the permission of the instructor. Each student or team must also create extensive documentation of their goals, plans, design decisions, accomplishments, and user guidelines. All source files must be open and be automatically served by a sources server.
-                    </md-card>
+                        <md-card-content layout="row" layout-align="space-between">
+                            <span flex><img src="http://nuweb9.neu.edu/numa/wp-content/uploads/NEU-logo.png" layout/></span>
+                            <md-card-actions class="cardActions">
+                                <span id="cardButtonSpace">
+                                    <md-button class="md-icon-button md-primary" aria-label="Settings">
+                                        <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                                    </md-button>
+                                    </span>
+                                <md-button class="md-icon-button md-primary" aria-label="Drag">
+                                    <md-icon md-svg-icon="icons/menu_black.svg"></md-icon>
+                                </md-button>
 
+                            </md-card-actions>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+
+                        <md-card-content layout="row" layout-align="space-between">
+                            <span flex><h3>College of Computer and Information Science</h3></span>
+                            <md-card-actions class="cardActions">
+                                <span id="cardButtonSpace">
+                                    <md-button class="md-icon-button md-primary" aria-label="Settings">
+                                        <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                                    </md-button>
+                                    </span>
+                                <md-button class="md-icon-button md-primary" aria-label="Drag">
+                                    <md-icon md-svg-icon="icons/menu_black.svg"></md-icon>
+                                </md-button>
+
+                            </md-card-actions>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+
+                        <md-card-content layout="row" layout-align="space-between">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ct6BUPvE2sM"
+                                    frameborder="0" allowfullscreen flex></iframe>
+                            <md-card-actions class="cardActions">
+                                <span id="cardButtonSpace">
+                                    <md-button class="md-icon-button md-primary" aria-label="Settings">
+                                        <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                                    </md-button>
+                                    </span>
+                                <md-button class="md-icon-button md-primary" aria-label="Drag">
+                                    <md-icon md-svg-icon="icons/menu_black.svg"></md-icon>
+                                </md-button>
+
+                            </md-card-actions>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content layout="row" layout-align="space-between">
+                            <span flex><p align="justify">Discusses Web development for sites that are dynamic, data driven, and interactive. Focuses on the software development issues of integrating multiple languages, assorted data technologies, and Web interaction. Considers ASP.NET, C#, HTTP, HTML, CSS, XML, XSLT, JavaScript, AJAX, RSS/Atom, SQL, and Web services. Each student must deploy individually designed Web experiments that illustrate the Web technologies and at least one major integrative Web site project. Students may work in teams with the permission of the instructor. Each student or team must also create extensive documentation of their goals, plans, design decisions, accomplishments, and user guidelines. All source files must be open and be automatically served by a sources server.</p></span>
+                            <md-card-actions class="cardActions">
+                                <span id="cardButtonSpace">
+                                    <md-button class="md-icon-button md-primary" aria-label="Settings">
+                                        <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                                    </md-button>
+                                    </span>
+                                <md-button class="md-icon-button md-primary" aria-label="Drag">
+                                    <md-icon md-svg-icon="icons/menu_black.svg"></md-icon>
+                                </md-button>
+                            </md-card-actions>
+                        </md-card-content>
+                    </md-card>
                 </div>
             </div>
         </md-content>
