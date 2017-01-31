@@ -3,7 +3,7 @@
  */
 
 (function(){
-    angular.module('BlankApp', ['ngMaterial','ngRoute']);
+    angular.module('BlankApp', ['ngMaterial']);
 
 
 })();
