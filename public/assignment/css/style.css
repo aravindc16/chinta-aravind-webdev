@@ -27,3 +27,7 @@ main {
 #cardButtonSpace{
     margin-right: -30px;
 }
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
