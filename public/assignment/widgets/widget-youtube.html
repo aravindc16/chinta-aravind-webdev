@@ -4,7 +4,7 @@
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
@@ -14,30 +14,25 @@
 
     <!-- Angular Material Library -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script src="app.js"></script>
+    <script src="../app.js"></script>
 </head>
-<title>Header</title>
+<title>YouTube</title>
 <body ng-app="BlankApp" ng-cloak>
-<!--
-  Your HTML content here
--->
 
-
-<!-- Your application bootstrap  -->
 
 <div layout="column" layout-fill>
     <header>
         <md-toolbar class="md-hue-2" md-scroll-shrink>
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button md-primary" href="widget-list.html">
-                    <md-icon md-svg-icon="icons/back.svg"></md-icon>
+                    <md-icon md-svg-icon="../icons/back.svg"></md-icon>
                 </md-button>
                 <h4>Widget Edit </h4><span flex></span>
                 <md-button class="md-icon-button md-primary" href="widget-list.html">
-                    <md-icon md-svg-icon="icons/done.svg"></md-icon>
+                    <md-icon md-svg-icon="../icons/done.svg"></md-icon>
                 </md-button>
                 <md-button class="md-icon-button md-primary" href="widget-list.html">
-                    <md-icon md-svg-icon="icons/delete.svg"></md-icon>
+                    <md-icon md-svg-icon="../icons/delete.svg"></md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -56,21 +51,24 @@
                         <input type="text" />
                     </md-input-container>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>Size</label>
+                        <label>URL</label>
+                        <input type="text" value="https://www.youtube.com/embed/Ct6BUPvE2sM"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>Width</label>
                         <input type="text" />
                     </md-input-container>
                 </div>
             </md-content>
         </div>
     </main>
-
     <footer>
 
         <md-toolbar class="md-hue-2" md-scroll-shrink>
             <div class="md-toolbar-tools">
                 <span flex></span>
-                <md-button class="md-icon-button md-primary" href="profile.html">
-                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                <md-button class="md-icon-button md-primary" href="../user/profile.html">
+                    <md-icon md-svg-icon="../icons/person.svg"></md-icon>
                 </md-button>
             </div>
         </md-toolbar>

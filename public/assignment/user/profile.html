@@ -4,7 +4,8 @@
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet"/>
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
@@ -14,25 +15,24 @@
 
     <!-- Angular Material Library -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script src="app.js"></script>
+    <script src="../app.js"></script>
 </head>
-<title>Image</title>
+<title>Profile</title>
 <body ng-app="BlankApp" ng-cloak>
+<!--
+  Your HTML content here
+-->
 
+
+<!-- Your application bootstrap  -->
 
 <div layout="column" layout-fill>
     <header>
         <md-toolbar class="md-hue-2" md-scroll-shrink>
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button md-primary" href="widget-list.html">
-                    <md-icon md-svg-icon="icons/back.svg"></md-icon>
-                </md-button>
-                <h4>Widget Edit </h4><span flex></span>
-                <md-button class="md-icon-button md-primary" href="widget-list.html">
-                    <md-icon md-svg-icon="icons/done.svg"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button md-primary" href="widget-list.html">
-                    <md-icon md-svg-icon="icons/delete.svg"></md-icon>
+                <h4>Profile </h4><span flex></span>
+                <md-button class="md-icon-button md-primary" href="profile.html">
+                    <md-icon md-svg-icon="../icons/done.svg"></md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -43,48 +43,49 @@
             <md-content class="md-padding">
                 <div>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>Name</label>
-                        <input type="text" />
+                        <label>Username</label>
+                        <input type="text" value="aravindc16" />
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>Email</label>
+                        <input type="email" value="chinta.a@husky.neu.edu"/>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>First Name</label>
+                        <input type="text" value="Aravind"/>
                     </md-input-container>
                     <md-input-container class="md-block" flex md-no-float>
-                        <label>Text</label>
-                        <input type="text" />
-                    </md-input-container>
-                    <md-input-container class="md-block" flex md-no-float>
-                        <label>URL</label>
-                        <input type="text" />
-                    </md-input-container>
-                    <md-input-container class="md-block" flex md-no-float>
-                        <label>Width</label>
-                        <input type="text" />
-                    </md-input-container>
-                    <md-input-container>
-                        <input id="fileInput" type="file" class="ng-hide">
-                        <md-button id="uploadButton"
-                                   class="md-raised md-primary"
-                                   aria-label="attach_image" ng-disabled="true">
-                            <input type="file">
-                            Choose Image
-                        </md-button>
+                        <label>Last Name</label>
+                        <input type="text" value="Chinta"/>
                     </md-input-container>
                 </div>
             </md-content>
-            <section layout="row" layout-align="start">
-                <md-button class="md-raised md-primary" href="#">Upload Image</md-button>
+            <section layout="row" layout-align="center">
+                <md-button class="md-raised md-primary" href="../website/website-list.html">Websites</md-button>
+                <md-button class="md-raised md-warn" href="login.html">Logout</md-button>
             </section>
         </div>
     </main>
 
     <footer>
+
         <md-toolbar class="md-hue-2" md-scroll-shrink>
             <div class="md-toolbar-tools">
                 <span flex></span>
                 <md-button class="md-icon-button md-primary" href="profile.html">
-                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                    <md-icon md-svg-icon="../icons/person.svg"></md-icon>
                 </md-button>
             </div>
         </md-toolbar>
+
     </footer>
 </div>
 </body>
 </html>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->
