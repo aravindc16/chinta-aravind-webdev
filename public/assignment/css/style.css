@@ -21,7 +21,9 @@ main {
 .cardActions{
     margin-right: -20px;
     position: relative;
-    margin-top: -16px
+    margin-top: -16px;
+    right: 35px;
+    position: absolute;
 }
 
 #cardButtonSpace{
