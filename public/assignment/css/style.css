@@ -31,3 +31,13 @@ main {
 body{
     font-family: 'Open Sans', sans-serif;
 }
+
+.postAvatar{
+    display: block;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 70px;
+    height: 70px;
+    box-shadow: rgba(0,0,0,.2) 0 2px 3px;
+}
