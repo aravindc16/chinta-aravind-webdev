@@ -19,30 +19,38 @@
 <title>Register</title>
 <body ng-app="BlankApp" ng-cloak>
 
-<div class="md-inline-form" layout-align="center center">
+<!--<div  layout-align="center center">-->
 
-    <md-content layout-padding>
-        <div>
-            <h3> Register </h3>
+<md-content class="md-inline-form">
+    <md-card flex>
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools"><h2><span> Register </span></h2></div>
+        </md-toolbar>
+        <md-card-content layout-padding>
+            <form name="register">
             <md-input-container class="md-block" flex md-no-float>
                 <label>Username</label>
                 <input type="text" />
             </md-input-container>
             <md-input-container class="md-block" flex>
                 <label>Password</label>
-                <input type="password"/>
+                <input type="password" />
             </md-input-container>
             <md-input-container class="md-block" flex>
                 <label>Verify Password</label>
                 <input type="password"/>
             </md-input-container>
+        </md-card-content>
+        <md-card-actions>
             <section layout="row" layout-align="center center">
                 <md-button class="md-raised md-primary" href="profile.html">Register</md-button>
-                <md-button class="md-raised md-accent" href="login.html">Cancel</md-button>
+                <md-button class="md-raised md-warn" href="login.html">Cancel</md-button>
             </section>
-        </div>
-    </md-content>
-</div>
+            </form>
+        </md-card-actions>
+    </md-card>
+</md-content>
+<!--</div>-->
 </body>
 </html>
 
