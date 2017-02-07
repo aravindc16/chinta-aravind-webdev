@@ -1,0 +1,45 @@
+<div class="md-inline-form">
+    <md-content>
+        <md-card flex>
+            <md-toolbar class="md-hue-2">
+                <div class="md-toolbar-tools"><h2><span> Register </span></h2></div>
+            </md-toolbar>
+            <md-card-content layout-padding>
+                <form name="register">
+                    <md-input-container class="md-block" flex md-no-float>
+                        <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                        <label for="username">Username</label>
+                        <input ng-model="newuser.username" id="username" type="text" />
+                    </md-input-container>
+                    <md-input-container class="md-block" flex md-no-float>
+                        <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                        <label for="username">FirstName</label>
+                        <input ng-model="newuser.firstName" id="username" type="text" />
+                    </md-input-container>
+                    <md-input-container class="md-block" flex md-no-float>
+                        <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                        <label for="username">LastName</label>
+                        <input ng-model="newuser.lastName" id="username" type="text" />
+                    </md-input-container>
+                    <md-input-container class="md-block" flex >
+                        <md-icon md-svg-icon="icons/lock_closed.svg"></md-icon>
+                        <label>Password</label>
+                        <input ng-model="newuser.password" type="password" />
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <md-icon md-svg-icon="icons/lock_closed.svg"></md-icon>
+                        <label>Verify Password</label>
+                        <input type="password"/>
+                    </md-input-container>
+                    <md-card-actions>
+                        <section layout="row" layout-align="center center">
+                            <md-button class="md-raised md-primary" ng-click="model.register(newuser)">Register</md-button>
+                            <md-button class="md-raised md-warn" href="#/login">Cancel</md-button>
+                        </section>
+                    </md-card-actions>
+                </form>
+            </md-card-content>
+        </md-card>
+    </md-content>
+</div>
+

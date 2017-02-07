@@ -3,7 +3,7 @@
  */
 
 (function(){
-    angular.module('BlankApp', ['ngMaterial']);
+    angular.module('WebAppMaker', ["ngMaterial","ngRoute"]);
 
 
 })();

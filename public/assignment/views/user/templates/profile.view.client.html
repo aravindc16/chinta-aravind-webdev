@@ -1,0 +1,56 @@
+
+<div layout="column" layout-fill>
+    <header>
+        <md-toolbar class="md-hue-2" md-scroll-shrink>
+            <div class="md-toolbar-tools">
+                <h4>Profile </h4><span flex></span>
+                <md-button class="md-icon-button md-primary" ng-click="model.update(model.user)" >
+                    <md-icon md-svg-icon="icons/done.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+    </header>
+
+    <main flex>
+        <div class="md-inline-form" layout="column">
+            <md-content class="md-padding">
+                <div>
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>Username</label>
+                        <input ng-model="model.user.username" type="text" value="aravindc16" ng-disabled/>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>Email</label>
+                        <input ng-model="model.user.email" type="email" value="chinta.a@husky.neu.edu"/>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>First Name</label>
+                        <input ng-model="model.user.firstName" type="text" value="Aravind"/>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex md-no-float>
+                        <label>Last Name</label>
+                        <input ng-model="model.user.lastName" type="text" value="Chinta"/>
+                    </md-input-container>
+                </div>
+            </md-content>
+            <section layout="row" layout-align="center">
+                <md-button class="md-raised md-primary" href="#/user/{{model.user._id}}/website">Websites</md-button>
+                <md-button class="md-raised md-warn" href="#/login">Logout</md-button>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <md-toolbar class="md-hue-2" md-scroll-shrink>
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                <md-button class="md-icon-button md-primary" href="#/user/{{model.user._id}}">
+                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+    </footer>
+</div>
