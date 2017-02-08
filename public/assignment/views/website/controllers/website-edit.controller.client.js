@@ -5,7 +5,7 @@
     angular.module('WebAppMaker')
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($routeParams, WebsiteService){
+    function websiteEditController($routeParams, $location, WebsiteService){
         var vm = this;
 
         vm.userId = $routeParams['uid'];
@@ -20,6 +20,20 @@
                     .title("Website Error!")
                     .textContent("No Website Found.")
                     .ok("OK"));
+        }
+
+        //event handler
+        vm.updateWebsite = updateWebsite;
+        vm.deleteWebsite = deleteWebsite;
+
+        function deleteWebsite(){
+            WebsiteService.deleteWebsite(vm.websiteId);
+            $location.url("/user/"+vm.userId+"/website");
+        }
+
+        function updateWebsite(website){
+            vm.website = WebsiteService.updateWebsite(vm.websiteId, website);
+            $location.url('/user/'+vm.userId+'/website');
         }
     }
 })();

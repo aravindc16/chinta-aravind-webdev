@@ -19,10 +19,30 @@
         var api = {
             'findWebsiteByUser': findWebsiteByUser,
             'createWebsite': createWebsite,
-            'findWebsiteById': findWebsiteById
+            'findWebsiteById': findWebsiteById,
+            'updateWebsite': updateWebsite,
+            'deleteWebsite': deleteWebsite
         };
         return api;
 
+        function deleteWebsite(websiteId){
+            for(var w in websites){
+                if(websites[w]._id == websiteId){
+                    websites.splice(w, 1);
+                }
+            }
+        }
+
+        function updateWebsite(websiteId, website){
+            for(var w in websites){
+                if(websites[w]._id == websiteId){
+                    websites[w].name = website.name;
+                    websites[w].description = website.description;
+                    return angular.copy(websites[w]);
+                }
+            }
+            return null;
+        }
 
         function findWebsiteById(websiteId){
             for(var w in websites){

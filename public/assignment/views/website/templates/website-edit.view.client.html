@@ -31,14 +31,14 @@
             <header>
                 <md-toolbar class="md-hue-2" flex>
                     <div class="md-toolbar-tools">
-                        <md-button class="md-icon-button md-primary" href="website-list.html" hide-gt-xs>
+                        <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website" hide-gt-xs>
                             <md-icon md-svg-icon="icons/back.svg"></md-icon>
                         </md-button>
                         <h4>Edit Website </h4><span flex></span>
-                        <md-button class="md-icon-button md-primary" href="website-list.html">
+                        <md-button class="md-icon-button md-primary" ng-click="model.updateWebsite(model.website)">
                             <md-icon md-svg-icon="icons/done.svg"></md-icon>
                         </md-button>
-                        <md-button class="md-icon-button md-primary" href="website-list.html">
+                        <md-button class="md-icon-button md-primary" ng-click="model.deleteWebsite()">
                             <md-icon md-svg-icon="icons/delete.svg"></md-icon>
                         </md-button>
                     </div>
