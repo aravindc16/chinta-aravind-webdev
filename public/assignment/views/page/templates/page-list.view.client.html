@@ -3,13 +3,13 @@
     <header>
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}">
+                <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website">
                     <md-icon md-svg-icon="icons/back.svg"></md-icon>
                 </md-button>
-                <h4>Websites </h4><span flex></span>
-                <span><md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/new">
+                <h4>Pages </h4><span flex></span>
+                <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
                     <md-icon md-svg-icon="icons/create.svg"></md-icon>
-                </md-button></span>
+                </md-button>
             </div>
         </md-toolbar>
     </header>
@@ -17,15 +17,16 @@
     <main flex>
         <div class="md-inline-form" layout-align="center center">
             <md-content layout-padding>
-                <md-list-item ng-repeat="website in model.websites" href="#/user/{{model.userId}}/website/{{website._id}}/page">
-                    {{website.name}}
+                <md-list-item ng-repeat="page in model.pages" href="../widgets/widget-list.html">
+                    {{page.name}}
                     <span flex></span>
-                    <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{website._id}}">
+                    <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
                         <md-icon md-svg-icon="icons/settings.svg"></md-icon>
                     </md-button>
                     <md-divider></md-divider>
                 </md-list-item>
             </md-content>
+
         </div>
     </main>
 
@@ -40,4 +41,3 @@
         </md-toolbar>
     </footer>
 </div>
-
