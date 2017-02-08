@@ -11,6 +11,7 @@
         //event handlers
 
         vm.login = login;
+        vm.footer = true;
 
         function login(user){
             // If nothing is entered in the fields.
@@ -25,15 +26,22 @@
 
             vm.loginUser = UserService.findUserByCredentials(user.username, user.password);
 
+
+
             if(vm.loginUser != null){
                 $location.url('/user/'+vm.loginUser._id);
             }else{
-               $mdDialog.show(
-                   $mdDialog.alert()
-                       .clickOutsideToClose(true)
-                       .title("Username Error!")
-                       .textContent("User not found. Please check your user name.")
-                       .ok("OK"));
+                //clear the fields
+                user.username='';
+                user.password='';
+
+                //dialog showing the error.
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Username Error!")
+                        .textContent("User not found. Please check your user name.")
+                        .ok("OK"));
             }
         }
     }
