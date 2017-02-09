@@ -51,6 +51,16 @@
                 templateUrl: 'views/page/templates/page-edit.view.client.html',
                 controller: 'pageEditController',
                 controllerAs: 'model'
+            })
+            .when('/user/:uid/website/:wid/page/:pid/widget', {
+                templateUrl: 'views/widget/templates/widget-list.view.client.html',
+                controller: 'widgetListController',
+                controllerAs: 'model'
+            })
+            .when('/user/:uid/website/:wid/page/:pid/widget/new', {
+                templateUrl: 'views/widget/templates/widget-choose.view.client.html',
+                controller: 'widgetNewController',
+                controllerAs: 'model'
             });
     }
 })();

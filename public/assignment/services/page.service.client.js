@@ -9,7 +9,7 @@
         var pages = [
             { "_id": "3", "name": "Post 1", "websiteId": "1", "title": "Post 1" },
             { "_id": "2", "name": "Post 2", "websiteId": "2", "title": "Post 2" },
-            { "_id": "4", "name": "Post 3", "websiteId": "4", "title": "Post 3" }
+            { "_id": "1", "name": "Post 3", "websiteId": "4", "title": "Post 3" }
         ];
 
         var api={

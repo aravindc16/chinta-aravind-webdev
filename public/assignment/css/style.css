@@ -1,5 +1,6 @@
 main {
     overflow-y: auto;
+    min-height: calc(100vh - 176px);
 }
 
 .card img {
@@ -47,7 +48,7 @@ body{
 }
 
 .sticky-footer{
-    position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0px;
 }

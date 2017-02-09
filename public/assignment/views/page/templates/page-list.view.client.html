@@ -17,7 +17,7 @@
     <main flex>
         <div class="md-inline-form" layout-align="center center">
             <md-content layout-padding>
-                <md-list-item ng-repeat="page in model.pages" href="../widgets/widget-list.html">
+                <md-list-item ng-repeat="page in model.pages" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
                     {{page.name}}
                     <span flex></span>
                     <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
