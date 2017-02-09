@@ -12,6 +12,6 @@
         vm.pageId = $routeParams['pid'];
         vm.websiteId = $routeParams['wid'];
         //event handlers
-        
+
     }
 })();

@@ -29,6 +29,7 @@
                     localWidgets.push(widgets[w]);
                 }
             }
+
             return localWidgets;
         }
     }

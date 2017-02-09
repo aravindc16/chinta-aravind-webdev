@@ -17,7 +17,6 @@
 
         if(vm.websites.length == 0){
             var confirm = $mdDialog.confirm()
-                .clickOutsideToClose(true)
                 .title("No Websites.")
                 .textContent("Damn, no websites. Would you like to create one?")
                 .ok("Alright")

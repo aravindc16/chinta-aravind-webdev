@@ -16,7 +16,6 @@
 
         if(vm.pages.length == 0){
             var confirm = $mdDialog.confirm()
-                .clickOutsideToClose(true)
                 .title("No Pages.")
                 .textContent("Damn, no pages. Would you like to create one?")
                 .ok("Alright")
