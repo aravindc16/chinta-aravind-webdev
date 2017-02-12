@@ -57,3 +57,8 @@ footer{
 #footer-padding{
     padding-bottom: 50px;
 }
+
+.button-padding{
+    position: relative;
+    right: 20px;
+}
