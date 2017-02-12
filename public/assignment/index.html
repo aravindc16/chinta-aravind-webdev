@@ -2,12 +2,12 @@
 <html lang="en" ng-app="WebAppMaker">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"/>
-
 
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -20,18 +20,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
+
     <!--Controllers-->
     <script src="views/user/controllers/user.controller.client.js"></script>
-    <script src="views/website/controllers/website-list.controller.client.js"></script>
-    <script src="views/website/controllers/website-new.controller.client.js"></script>
-    <script src="views/website/controllers/website-edit.controller.client.js"></script>
-    <script src="views/page/controllers/page-list.controller.client.js"></script>
-    <script src="views/page/controllers/page-new.controller.client.js"></script>
-    <script src="views/page/controllers/page-edit.controller.client.js"></script>
-    <script src="views/widget/controllers/widget-list.controller.client.js"></script>
-    <script src="views/widget/controllers/widget-new.controller.client.js"></script>
-    <script src="views/widget/controllers/widget-edit.controller.client.js"></script>
-
+    <script src="views/website/controllers/website.controller.client.js"></script>
+    <script src="views/page/controllers/page.controller.client.js"></script>
+    <script src="views/widget/controllers/widget.controller.client.js"></script>
 
     <!--Services-->
     <script src="services/user.service.client.js"></script>
@@ -39,14 +33,12 @@
     <script src="services/page.service.client.js"></script>
     <script src="services/widget.service.client.js"></script>
 
-    <title> Web App</title>
+    <title> Web App Maker</title>
 </head>
 
 <body>
-<!--<h1>Web App Maker</h1>-->
 
 <div ng-view></div>
-
 
 </body>
 </html>
