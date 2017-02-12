@@ -15,16 +15,19 @@
     <main flex>
         <div class="md-inline-form" layout-align="center center">
             <md-content layout-padding>
-                <md-list-item ng-model="widget.widgetType.header" ng-click="model.createWidget(widget)">
-                    Header
+                <md-list-item  ng-click="model.createHeader(widget)">
+                    <!--<md-icon md-icon-svg="icons/header.svg"></md-icon>-->
+                    <label ng-model="widget.widgetType" ng-init="widget.widgetType='HEADER'">Header</label>
                     <md-divider></md-divider>
                 </md-list-item>
-                <md-list-item ng-model="widget.widgetType.header" href="widget-image.html">
-                    Image
+                <md-list-item ng-click="model.createImage(widget)">
+                    <!--<md-icon md-icon-svg="icons/image.svg"></md-icon>-->
+                    <label ng-model="widget.widgetType" ng-init="widget.widgetType='IMAGE'">Image</label>
                     <md-divider></md-divider>
                 </md-list-item>
-                <md-list-item ng-model="widget.widgetType.header" href="widget-youtube.html">
-                    YouTube
+                <md-list-item ng-click="model.createYoutube(widget)">
+                    <!--<md-icon md-icon-svg="icons/image.svg"></md-icon>-->
+                    <label ng-model="widget.widgetType" ng-init="widget.widgetType='YOUTUBE'">YouTube</label>
                     <md-divider></md-divider>
                 </md-list-item>
             </md-content>

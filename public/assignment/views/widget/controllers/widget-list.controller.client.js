@@ -33,10 +33,10 @@
         }
         vm.safeYoutube = safeYoutube;
 
-        function safeYoutube(widget){
-            if(widget.widgetType === 'YOUTUBE'){
-                return $sce.trustAsResourceUrl(widget.url);
-            }
+        function safeYoutube(url){
+            var urlSplit = url.split('=');
+            var urlId = urlSplit[urlSplit.length - 1];
+            return $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+urlId);
         }
     }
 })();

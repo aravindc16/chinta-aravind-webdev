@@ -2,13 +2,13 @@
     <md-toolbar class="md-hue-2" flex>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
-                <md-icon md-svg-icon="icons/back.svg"></md-icon>
+                <md-icon md-svg-icon="icons/back.svg" aria-label="Go back to page list"></md-icon>
             </md-button>
             <h4>Widgets </h4><span flex></span>
             <span>
                 <md-button class="md-icon-button md-primary"
                            href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
-                    <md-icon md-svg-icon="icons/create.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/create.svg" aria-label="createWidget"></md-icon>
                 </md-button></span>
         </div>
     </md-toolbar>
@@ -37,20 +37,20 @@
                                     <h6 ng-if="widget.size===6">{{widget.text}}</h6>
                                 </div>
                                 <div ng-switch-when="IMAGE">
-                                    <span flex><img ng-src="{{widget.url}}" ng-style="{ width : widget.width}"></span>
+                                    <span flex><img ng-src="{{widget.url}}" width="{{widget.width}}"></span>
                                 </div>
                                 <div ng-switch-when="YOUTUBE">
-                                <span flex><iframe ng-src="{{model.safeYoutube(widget)}}" ng-style="{ width : widget.width}"
+                                <span flex><iframe src="{{model.safeYoutube(widget.url)}}" width="{{widget.width}}"
                                                    frameborder="0"
                                                    allowfullscreen>
-
                                 </iframe>
                                 </span>
                                 </div>
 
                                 <md-card-actions class="cardActions">
                                 <span id="cardButtonSpace">
-                                    <md-button class="md-icon-button md-primary" href="widget-heading.html" aria-label="Settings">
+                                    <md-button class="md-icon-button md-primary"
+                                               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" aria-label="Settings">
                                         <md-icon md-svg-icon="icons/settings.svg"></md-icon>
                                     </md-button>
                                     </span>
@@ -70,12 +70,12 @@
 
     </div>
 </md-content>
-<footer class="sticky-footer">
+<footer>
     <md-toolbar class="md-hue-2" md-scroll-shrink>
         <div class="md-toolbar-tools">
             <span flex></span>
             <span><md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}">
-                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/person.svg" aria-label="profile"></md-icon>
                 </md-button></span>
         </div>
     </md-toolbar>
