@@ -16,13 +16,10 @@
 
 <md-content>
     <div layout="column" layout-fill>
-
-        <!--Widgets-->
-
         <main flex>
             <md-content class="md-inline-form" layout-padding flex>
                 <div layout="row" flex>
-                    <div   layout="column" flex>
+                    <div id="footer-padding" layout="column" flex>
 
                         <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType">
 

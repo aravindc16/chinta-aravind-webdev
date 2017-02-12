@@ -50,7 +50,10 @@ body{
 footer{
     position:fixed;
     bottom:-3px;
-    left:2px;
-    right:2px;
-    /*height:50px;*/
+    left:0px;
+    right:0px;
+}
+
+#footer-padding{
+    padding-bottom: 50px;
 }
