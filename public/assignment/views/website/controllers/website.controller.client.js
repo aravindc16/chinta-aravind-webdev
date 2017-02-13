@@ -8,7 +8,7 @@
         .controller('websiteNewController', websiteNewController)
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($routeParams, $location, WebsiteService){
+    function websiteEditController($routeParams, $location, WebsiteService, $mdDialog){
         var vm = this;
 
         vm.userId = $routeParams['uid'];
@@ -30,8 +30,23 @@
         vm.deleteWebsite = deleteWebsite;
 
         function deleteWebsite(){
-            WebsiteService.deleteWebsite(vm.websiteId);
-            $location.url("/user/"+vm.userId+"/website");
+
+            var confirm = $mdDialog.confirm()
+                .title("Delete Website!")
+                .textContent("Are you sure you want to delete?")
+                .ok("Yes")
+                .cancel("No!");
+
+            $mdDialog.show(confirm).then(yes, nope);
+
+            function nope(){
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId);
+            }
+
+            function yes(){
+                WebsiteService.deleteWebsite(vm.websiteId);
+                $location.url("/user/"+vm.userId+"/website");
+            }
         }
 
         function updateWebsite(website){

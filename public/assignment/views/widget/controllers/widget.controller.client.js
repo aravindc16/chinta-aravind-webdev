@@ -7,7 +7,7 @@
         .controller('widgetNewController', widgetNewController)
         .controller('widgetEditController', widgetEditController);
 
-    function widgetEditController($routeParams, WidgetService, $location){
+    function widgetEditController($routeParams, WidgetService, $location, $mdDialog){
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.websiteId = $routeParams['wid'];
@@ -19,6 +19,27 @@
 
         //event handler
         vm.updateWidget = updateWidget;
+        vm.deleteWidget = deleteWidget;
+
+        function deleteWidget(){
+            var confirm = $mdDialog.confirm()
+                .title("Delete Widget!")
+                .textContent("Are you sure you want to delete?")
+                .ok("Yes")
+                .cancel("No!");
+
+            $mdDialog.show(confirm).then(yes, nope);
+
+            function nope(){
+                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widgetId);
+            }
+
+            function yes(){
+                WidgetService.deleteWidget(vm.widgetId);
+                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/');
+            }
+
+        }
 
         function updateWidget(widget){
             vm.widget = WidgetService.updateWidget(vm.widgetId, widget);

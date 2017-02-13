@@ -20,10 +20,19 @@
             'findWidgetsByPageId': findWidgetsByPageId,
             'createWidget': createWidget,
             'findWidgetById': findWidgetById,
-            'updateWidget': updateWidget
+            'updateWidget': updateWidget,
+            'deleteWidget': deleteWidget
         };
 
         return api;
+
+        function deleteWidget(widgetId){
+            for(var w in widgets){
+                if(widgets[w]._id == widgetId){
+                    widgets.splice(w, 1);
+                }
+            }
+        }
 
         function updateWidget(widgetId, widget){
             for(var w in widgets){

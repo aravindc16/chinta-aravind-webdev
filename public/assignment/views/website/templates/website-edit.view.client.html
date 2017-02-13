@@ -3,17 +3,18 @@
     <section layout="row" flex layout-fill>
         <!--Side nav -->
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2"
-                    md-component-id="left" md-whiteframe="3" md-is-locked-open="$mdMedia('gt-xs')">
+                    md-component-id="left" md-whiteframe="3" md-is-locked-open="$mdMedia('gt-xs')"
+                    style="margin-bottom: -50px">
             <md-toolbar class="md-hue-2">
                 <div class="md-toolbar-tools">
-                    <md-button class="md-icon-button md-primary" href="website-list.html">
+                    <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website">
                         <md-icon md-svg-icon="icons/back.svg"></md-icon>
                     </md-button>
                     <h4>Websites</h4>
                 </div>
             </md-toolbar>
             <md-content class="md-padding" flex>
-                <md-list-item ng-repeat="website in model.websites" href="../pages/page-list.html">
+                <md-list-item ng-repeat="website in model.websites" href="#/user/{{model.userId}}/website/{{website._id}}/page">
                     {{website.name}}
                     <span flex></span>
                     <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{website._id}}">

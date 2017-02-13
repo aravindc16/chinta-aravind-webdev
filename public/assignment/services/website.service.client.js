@@ -12,8 +12,8 @@
             { "_id": "2", "name": "Twitter",     "developerId": "4", "description": "This is Twitter Website" },
             { "_id": "3", "name": "Gizmodo",     "developerId": "4", "description": "Yo, this is Gizmodo!" },
             { "_id": "4", "name": "Tic Tac Toe", "developerId": "1", "description": "Wanna play some games?" },
-            { "_id": "2", "name": "Checkers",    "developerId": "1", "description": "Chinese checkers! :D" },
-            { "_id": "3", "name": "Chess",       "developerId": "2", "description": "I am the king in this game" }
+            { "_id": "5", "name": "Checkers",    "developerId": "1", "description": "Chinese checkers! :D" },
+            { "_id": "6", "name": "Chess",       "developerId": "2", "description": "I am the king in this game" }
         ];
 
         var api = {
