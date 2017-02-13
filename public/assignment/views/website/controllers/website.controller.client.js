@@ -14,16 +14,19 @@
         vm.userId = $routeParams['uid'];
         vm.websiteId = $routeParams['wid'];
 
-        vm.websites = WebsiteService.findWebsiteByUser(vm.userId);
-        vm.website = WebsiteService.findWebsiteById(vm.websiteId);
-        if(vm.website == null){
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .clickOutsideToClose(true)
-                    .title("Website Error!")
-                    .textContent("No Website Found.")
-                    .ok("OK"));
+        function init() {
+            vm.websites = WebsiteService.findWebsiteByUser(vm.userId);
+            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            if(vm.website == null){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Website Error!")
+                        .textContent("No Website Found.")
+                        .ok("OK"));
+            }
         }
+        init();
 
         //event handler
         vm.updateWebsite = updateWebsite;
@@ -58,13 +61,16 @@
     function websiteNewController($routeParams, $location, WebsiteService){
         var vm = this;
 
-        //event handler
-        vm.createWebsite = createWebsite;
-
         var userId = $routeParams['uid'];
         vm.userId = userId;
-        vm.websites = WebsiteService.findWebsiteByUser(userId);
 
+        function init() {
+            vm.websites = WebsiteService.findWebsiteByUser(userId);
+        }
+        init();
+
+        //event handler
+        vm.createWebsite = createWebsite;
 
         function createWebsite(website){
             WebsiteService.createWebsite(userId, website)
@@ -77,26 +83,29 @@
 
         var userId = $routeParams['uid'];
         vm.userId = userId;
-        vm.websites = WebsiteService.findWebsiteByUser(userId);
 
-        // console.log(vm.websites);
+        function init() {
+            vm.websites = WebsiteService.findWebsiteByUser(userId);
 
-        if(vm.websites.length == 0){
-            var confirm = $mdDialog.confirm()
-                .title("No Websites.")
-                .textContent("Damn, no websites. Would you like to create one?")
-                .ok("Alright")
-                .cancel("Some other time!");
 
-            $mdDialog.show(confirm).then(yes, nope);
+            if(vm.websites.length == 0){
+                var confirm = $mdDialog.confirm()
+                    .title("No Websites.")
+                    .textContent("Damn, no websites. Would you like to create one?")
+                    .ok("Alright")
+                    .cancel("Some other time!");
 
-            function nope(){
-                $location.url('/user/'+userId);
-            }
+                $mdDialog.show(confirm).then(yes, nope);
 
-            function yes(){
-                $location.url('/user/'+userId+'/website/new');
+                function nope(){
+                    $location.url('/user/'+userId);
+                }
+
+                function yes(){
+                    $location.url('/user/'+userId+'/website/new');
+                }
             }
         }
+        init();
     }
 })();

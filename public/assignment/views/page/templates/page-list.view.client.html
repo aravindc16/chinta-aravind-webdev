@@ -1,14 +1,14 @@
 
 <div layout="column" layout-fill>
     <header>
-        <md-toolbar class="md-hue-2">
+        <md-toolbar class="md-hue-2" md-whiteframe="10">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website">
-                    <md-icon md-svg-icon="icons/back.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/back.svg" aria-label="back to website list"></md-icon>
                 </md-button>
                 <h4>Pages </h4><span flex></span>
                 <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
-                    <md-icon md-svg-icon="icons/create.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/create.svg" aria-label="create page"></md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -21,7 +21,7 @@
                     {{page.name}}
                     <span flex></span>
                     <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
-                        <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                        <md-icon md-svg-icon="icons/settings.svg" aria-label="edit page"></md-icon>
                     </md-button>
                     <md-divider></md-divider>
                 </md-list-item>
@@ -31,11 +31,11 @@
     </main>
 
     <footer class="sticky-footer">
-        <md-toolbar class="md-hue-2" md-scroll-shrink>
+        <md-toolbar class="md-hue-2" md-scroll-shrink id="toolbar-color">
             <div class="md-toolbar-tools">
                 <span flex></span>
                 <span><md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}">
-                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/person.svg" aria-label="profile page"></md-icon>
                 </md-button></span>
             </div>
         </md-toolbar>

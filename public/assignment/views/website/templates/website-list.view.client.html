@@ -1,14 +1,14 @@
 
 <div layout="column" layout-fill>
     <header>
-        <md-toolbar class="md-hue-2">
+        <md-toolbar class="md-hue-2" md-whiteframe="10">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}">
-                    <md-icon md-svg-icon="icons/back.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/back.svg" aria-label="back to user profile"></md-icon>
                 </md-button>
                 <h4>Websites </h4><span flex></span>
                 <span><md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/new">
-                    <md-icon md-svg-icon="icons/create.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/create.svg" aria-label="create website"></md-icon>
                 </md-button></span>
             </div>
         </md-toolbar>
@@ -21,7 +21,7 @@
                     {{website.name}}
                     <span flex></span>
                     <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{website._id}}">
-                        <md-icon md-svg-icon="icons/settings.svg"></md-icon>
+                        <md-icon md-svg-icon="icons/settings.svg" aria-label="create website"></md-icon>
                     </md-button>
                     <md-divider></md-divider>
                 </md-list-item>
@@ -34,7 +34,7 @@
             <div class="md-toolbar-tools">
                 <span flex></span>
                 <span><md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}">
-                    <md-icon md-svg-icon="icons/person.svg"></md-icon>
+                    <md-icon md-svg-icon="icons/person.svg" aria-label="profile page"></md-icon>
                 </md-button></span>
             </div>
         </md-toolbar>

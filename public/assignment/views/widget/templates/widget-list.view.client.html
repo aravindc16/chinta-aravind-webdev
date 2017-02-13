@@ -1,5 +1,5 @@
 <header>
-    <md-toolbar class="md-hue-2" flex>
+    <md-toolbar class="md-hue-2" flex md-whiteframe="10">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
                 <md-icon md-svg-icon="icons/back.svg" aria-label="Go back to page list"></md-icon>
@@ -21,7 +21,7 @@
                 <div layout="row" flex>
                     <div id="footer-padding" layout="column" flex>
 
-                        <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType">
+                        <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType" id="draggable">
 
                             <md-card-content layout="row" layout-align="space-between">
 
@@ -43,7 +43,6 @@
                                 </iframe>
                                 </span>
                                 </div>
-
                                 <md-card-actions class="cardActions">
                                 <span id="cardButtonSpace">
                                     <md-button class="md-icon-button md-primary"
@@ -51,7 +50,7 @@
                                         <md-icon md-svg-icon="icons/settings.svg"></md-icon>
                                     </md-button>
                                     </span>
-                                    <md-button class="md-icon-button md-primary" aria-label="Drag">
+                                    <md-button class="md-icon-button md-primary" aria-label="Drag" >
                                         <md-icon md-svg-icon="icons/menu_black.svg"></md-icon>
                                     </md-button>
                                 </md-card-actions>
@@ -68,7 +67,7 @@
     </div>
 </md-content>
 <footer>
-    <md-toolbar class="md-hue-2" md-scroll-shrink>
+    <md-toolbar class="md-hue-2" md-scroll-shrink md-whiteframe="10">
         <div class="md-toolbar-tools">
             <div>
                 <md-icon md-svg-icon="icons/play.svg" aria-label="profile"></md-icon>

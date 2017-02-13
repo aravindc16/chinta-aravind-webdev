@@ -17,10 +17,28 @@
             "findUserById" : findUserById,
             "updateUser" : updateUser,
             "findUserByCredentials" : findUserByCredentials,
-
+            "deleteUser": deleteUser,
+            "findUserByUsername": findUserByUsername
         };
 
         return api;
+
+        function findUserByUsername(username){
+            for(var u in users){
+                if(users[u].username == username){
+                    return angular.copy(users[u]);
+                }
+            }
+            return null;
+        }
+
+        function deleteUser(userId){
+            for(var u in users){
+                if(users[u]._id == userId){
+                    users.splice(u, 1);
+                }
+            }
+        }
 
         function createUser(user){
             user._id = (new Date()).getTime();

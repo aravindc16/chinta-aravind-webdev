@@ -1,5 +1,5 @@
 <header>
-    <md-toolbar class="md-hue-2" flex>
+    <md-toolbar class="md-hue-2" flex md-whiteframe="10">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                 <md-icon md-svg-icon="icons/back.svg" aria-label="Go back to page list"></md-icon>
@@ -11,7 +11,7 @@
                 </md-button>
             </span>
             <md-button class="md-icon-button md-primary" ng-click="model.deleteWidget()">
-                <md-icon md-svg-icon="icons/delete.svg"></md-icon>
+                <md-icon md-svg-icon="icons/delete.svg" aria-label="delete widget"></md-icon>
             </md-button>
         </div>
     </md-toolbar>

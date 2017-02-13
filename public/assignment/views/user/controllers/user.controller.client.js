@@ -57,16 +57,20 @@
                 $location.url('/user/'+userId);
             }
         }
-
-
     }
 
     function profileController($routeParams, $mdDialog, UserService){
         var vm = this;
 
+        var userId = $routeParams['uid'];
+
+        function init() {
+            vm.user = UserService.findUserById(userId);
+        }
+        init();
+
         //event handlers
         vm.update = update;
-        var userId = $routeParams['uid'];
 
         function update(user){
             var newUser = UserService.updateUser(userId, user);
@@ -88,11 +92,6 @@
             }
         }
 
-
-        // console.log(userId);
-        vm.user = UserService.findUserById(userId);
-
-        // console.log(vm.user);
     }
 
     function loginController(UserService, $location, $mdDialog){
