@@ -45,6 +45,8 @@ body{
     box-shadow: rgba(0,0,0,.2) 0 2px 3px;
     margin-left: 10px;
     margin-top: 10px;
+    position: relative;
+    bottom: 3px;
 }
 
 footer{
@@ -63,7 +65,8 @@ footer{
     right: 20px;
 }
 
-/*#toolbar-color{*/
-    /*background-color: #90A4AE;*/
-    /*opacity: 60;*/
-/*}*/
+.icon-spacing{
+    position: relative;
+    margin-left: 10px;
+    left: 10px;
+}

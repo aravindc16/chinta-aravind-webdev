@@ -24,27 +24,32 @@
     <title> Aravind Chinta's Home Page</title>
 </head>
 
-<body ng-app="WebAppMaker" ng-cloak>
+<body ng-app="WebAppMaker" ng-cloak style="background-color: white">
 
-<md-toolbar class="md-hue-3" layout="row" layout-align="center center">
-    <!--<div class="postAvatar"><img width="70" height="70" src="https://lh6.googleusercontent.com/-p5Mv4i_kAj8/AAAAAAAAAAI/AAAAAAAALwI/6ebbs4TOwY4/photo.jpg"/></div>-->
+<md-toolbar class="md-hue-3" layout="row" layout-align="center center" style="height: 90px;">
+    <div class="postAvatar"><img width="70" height="70" src="https://lh6.googleusercontent.com/-p5Mv4i_kAj8/AAAAAAAAAAI/AAAAAAAALwI/6ebbs4TOwY4/photo.jpg"/></div>
     <div class="md-toolbar-tools" layout-align="center center">
         <h1><b>Aravind Chinta's</b> Home Page.</h1>
     </div>
 </md-toolbar>
-<md-content layout-padding>
+<md-content layout-padding style="background-color: white;">
     <div flex layout="row" layout-align="center" layout-padding>
-        <md-list-item href="project/index.html">Project</md-list-item>
+        <md-list-item href="project/index.html">
+            <div layout="column" layout-align="center" class="icon-spacing">
+                <img height="100px" width="100px" src="https://www.projectsmart.co.uk/img/project.png">
+                <span style="position: relative;left: 20px;"><label>Project</label></span>
+            </div>
+        </md-list-item>
         <md-divider></md-divider>
         <md-list-item href="assignment/#/login">
-            <div layout="column" layout-align="center">
+            <div layout="column" layout-align="center" class="icon-spacing">
             <img height="100px" width="100px" src="http://www.assignmenthelperuk.co.uk/blog/wp-content/uploads/2015/12/img1.jpg">
             <span><label>Assignment</label></span>
             </div>
         </md-list-item>
         <md-divider></md-divider>
         <md-list-item href="https://github.com/aravindc16/chinta-aravind-webdev">
-            <div layout="column" layout-align="center">
+            <div layout="column" layout-align="center" class="icon-spacing">
                 <img height="100px" width="100px" src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png">
                 <span><label>GitHub Repo</label></span>
             </div>
@@ -53,3 +58,4 @@
 </md-content>
 </body>
 </html>
+
