@@ -62,6 +62,13 @@
         vm.createHeader = createHeader;
         vm.createImage = createImage;
         vm.createYoutube = createYoutube;
+        vm.createHTML = createHTML;
+
+        function createHTML(widget){
+            widget.widgetType = 'HTML';
+            vm.widget = WidgetService.createWidget(vm.pageId, widget);
+            $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
+        }
 
         function createYoutube(widget){
             widget.widgetType = 'YOUTUBE';
@@ -113,6 +120,11 @@
         init();
 
         vm.safeYoutube = safeYoutube;
+        vm.getTrustedHTML = getTrustedHTML;
+
+        function getTrustedHTML(text){
+            return $sce.trustAsHtml(text);
+        }
 
         //Implemented for both small URL and regular YouTube URLs.
         function safeYoutube(url){
