@@ -31,7 +31,7 @@ main {
     margin-right: -30px;
 }
 
-body{
+.body-image{
     font-family: 'Open Sans', sans-serif;
     /* Location of the image */
     background-image: url(http://www.strategygroupinc.com/images/o-BOSTON-facebook.jpg);
