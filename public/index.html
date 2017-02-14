@@ -24,51 +24,52 @@
     <title> Aravind Chinta's Home Page</title>
 </head>
 
-<body ng-app="WebAppMaker" ng-cloak style="background-color: white">
+<body ng-app="WebAppMaker" ng-cloak style="background-color: lightcoral">
 
 
-<div layout="column" layout-align="center center" style="padding-top: 120px;">
+<div layout="column" layout-align="center center" style="padding-top: 200px;">
+
+    <md-card md-whiteframe="18" layout="column" layout-align="center center">
+        <div layout="column" layout-align="center center" class="postAvatar">
+            <img width="90" height="90" src="https://lh6.googleusercontent.com/-p5Mv4i_kAj8/AAAAAAAAAAI/AAAAAAAALwI/6ebbs4TOwY4/photo.jpg"/>
+        </div>
+
+        <h1 layout-padding style="text-align: center;color: gray;">Aravind Chinta's Home Page.</h1>
 
 
-    <div layout="column" layout-align="center center" class="postAvatar">
-        <img width="90" height="90" src="https://lh6.googleusercontent.com/-p5Mv4i_kAj8/AAAAAAAAAAI/AAAAAAAALwI/6ebbs4TOwY4/photo.jpg"/>
-    </div>
-
-    <h1>Aravind Chinta's Home Page.</h1>
-
-    <div layout="row" layout-align="center" layout-padding style="padding-top: 40px;margin-right: 40px;">
-        <div layout="column" layout-align="center" class="icon-spacing">
-            <md-list-item href="project/index.html">
+        <div layout="row" layout-align="center" layout-padding class="index-content">
+            <div layout="column" layout-align="center" class="icon-spacing">
+                <md-list-item href="project/index.html">
                 <span layout="column" layout-align="center center">
                     <img height="100px" width="100px" src="https://www.projectsmart.co.uk/img/project.png">
                     <label>Project</label>
                 </span>
-            </md-list-item>
-        </div>
+                </md-list-item>
+            </div>
 
-        <md-divider></md-divider>
+            <md-divider></md-divider>
 
-        <div layout="column" layout-align="center" class="icon-spacing">
-            <md-list-item href="assignment/#/login">
+            <div layout="column" layout-align="center" class="icon-spacing">
+                <md-list-item href="assignment/#/login">
                 <span layout="column" layout-align="center center">
                     <img height="100px" width="100px" src="http://www.assignmenthelperuk.co.uk/blog/wp-content/uploads/2015/12/img1.jpg">
                     <label>Assignment</label>
                 </span>
-            </md-list-item>
-        </div>
+                </md-list-item>
+            </div>
 
-        <md-divider></md-divider>
+            <md-divider></md-divider>
 
-        <div layout="column" layout-align="center" class="icon-spacing">
-            <md-list-item href="https://github.com/aravindc16/chinta-aravind-webdev">
+            <div layout="column" layout-align="center" class="icon-spacing">
+                <md-list-item href="https://github.com/aravindc16/chinta-aravind-webdev">
                 <span layout="column" layout-align="center center">
                     <img height="100px" width="100px" src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png">
                     <label>GitHub Repo</label>
                 </span>
-            </md-list-item>
+                </md-list-item>
+            </div>
         </div>
-    </div>
-
+    </md-card>
 </div>
 
 </body>
