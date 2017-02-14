@@ -59,7 +59,7 @@
         }
     }
 
-    function profileController($routeParams, $mdDialog, UserService){
+    function profileController($routeParams, $mdDialog, UserService, $location){
         var vm = this;
 
         var userId = $routeParams['uid'];
@@ -71,6 +71,29 @@
 
         //event handlers
         vm.update = update;
+        vm.deleteUser = deleteUser;
+
+        function deleteUser() {
+
+            var confirm = $mdDialog.confirm()
+                .title("Unregister Warning!")
+                .textContent("Are you sure you want to unregister and delete your account?")
+                .ok("Yes")
+                .cancel("No!");
+
+            $mdDialog.show(confirm).then(yes, nope);
+
+            function nope(){
+                $location.url('/user/'+userId);
+            }
+
+            function yes(){
+                UserService.deleteUser(userId);
+                $location.url('/login/');
+            }
+
+
+        }
 
         function update(user){
             var newUser = UserService.updateUser(userId, user);
