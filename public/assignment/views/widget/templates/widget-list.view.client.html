@@ -48,14 +48,13 @@
 
                                 <div ng-switch-when="HTML" ng-bind-html="model.getTrustedHTML(widget.text)"
                                      style="text-align: justify">
-
+                                    {{widget._id}}
                                 </div>
                                 <!--Card actions-->
                                 <md-card-actions class="cardActions">
                                 <span id="cardButtonSpace">
                                     <md-button class="md-icon-button md-primary"
-                                               href="#/user/{{model.userId}}/website/
-                                               {{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}"
+                                               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}"
                                                aria-label="Settings">
                                         <md-icon md-svg-icon="icons/settings.svg"></md-icon>
                                     </md-button>
