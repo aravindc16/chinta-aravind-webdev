@@ -26,29 +26,23 @@
                             <md-card-content layout="row" layout-align="space-between">
 
                                 <div ng-switch-when="HEADER">
-                                    <h1 ng-if="widget.size===1">{{widget.text}}</h1>
-                                    <h2 ng-if="widget.size===2">{{widget.text}}</h2>
-                                    <h3 ng-if="widget.size===3">{{widget.text}}</h3>
-                                    <h4 ng-if="widget.size===4">{{widget.text}}</h4>
-                                    <h5 ng-if="widget.size===5">{{widget.text}}</h5>
-                                    <h6 ng-if="widget.size===6">{{widget.text}}</h6>
+                                    <ng-include src="'views/widget/templates/widgets/widget-HEADER.view.client.html'">
+                                    </ng-include>
                                 </div>
 
                                 <div ng-switch-when="IMAGE">
-                                    <span flex><img ng-src="{{widget.url}}" width="{{widget.width}}"></span>
+                                    <ng-include src="'views/widget/templates/widgets/widget-IMAGE.view.client.html'">
+                                    </ng-include>
                                 </div>
 
                                 <div ng-switch-when="YOUTUBE">
-                                <span flex><iframe src="{{model.safeYoutube(widget.url)}}" width="{{widget.width}}"
-                                                   frameborder="0"
-                                                   allowfullscreen>
-                                </iframe>
-                                </span>
+                                    <ng-include src="'views/widget/templates/widgets/widget-YOUTUBE.view.client.html'">
+                                    </ng-include>
                                 </div>
 
-                                <div ng-switch-when="HTML" ng-bind-html="model.getTrustedHTML(widget.text)"
-                                     style="text-align: justify">
-                                    {{widget._id}}
+                                <div ng-switch-when="HTML">
+                                    <ng-include src="'views/widget/templates/widgets/widget-HTML.view.client.html'">
+                                    </ng-include>
                                 </div>
                                 <!--Card actions-->
                                 <md-card-actions class="cardActions">
@@ -64,17 +58,15 @@
                                     </md-button>
                                 </md-card-actions>
                             </md-card-content>
-                        </md-card>
 
+                        </md-card>
                     </div>
                 </div>
             </md-content>
         </main>
-
-
-
     </div>
 </md-content>
+
 <footer>
     <md-toolbar class="md-hue-2" md-scroll-shrink md-whiteframe="10">
         <div class="md-toolbar-tools">
