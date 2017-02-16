@@ -94,7 +94,7 @@
                 widget._id = (new Date()).getTime();
                 widget.pageId = pageId;
                 widget.size = '3';
-                widget.text = 'Your HTML Text';
+                widget.text = '<p>Your HTML Text</p>';
                 widgets.push(widget);
                 return widget;
             }
