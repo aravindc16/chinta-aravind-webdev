@@ -6,7 +6,7 @@
     angular.module('WebAppMaker')
         .factory('WebsiteService', WebsiteService);
 
-    function WebsiteService(){
+    function WebsiteService($http){
         var websites = [
             { "_id": "1", "name": "Facebook",    "developerId": "4", "description": "This is the Facebook Website" },
             { "_id": "2", "name": "Twitter",     "developerId": "4", "description": "This is Twitter Website" },
@@ -26,47 +26,23 @@
         return api;
 
         function deleteWebsite(websiteId){
-            for(var w in websites){
-                if(websites[w]._id == websiteId){
-                    websites.splice(w, 1);
-                }
-            }
+            return $http.delete('/api/website/'+websiteId);
         }
 
         function updateWebsite(websiteId, website){
-            for(var w in websites){
-                if(websites[w]._id == websiteId){
-                    websites[w].name = website.name;
-                    websites[w].description = website.description;
-                    return angular.copy(websites[w]);
-                }
-            }
-            return null;
+            return $http.put('/api/website/'+websiteId, website);
         }
 
         function findWebsiteById(websiteId){
-            for(var w in websites){
-                if(websites[w]._id == websiteId){
-                    return angular.copy(websites[w]);
-                }
-            }
-            return null;
+           return $http.get('/api/website/'+websiteId);
         }
 
         function createWebsite(userId, website){
-            website.developerId = userId;
-            website._id = (new Date()).getTime();
-            websites.push(website);
+           return $http.post('/api/user/'+userId+'/website', website);
         }
 
         function findWebsiteByUser(userId){
-            var localWebsites = [];
-            for(var w in websites){
-                if(websites[w].developerId == userId){
-                    localWebsites.push(websites[w]);
-                }
-            }
-            return angular.copy(localWebsites);
+            return $http.get('/api/user/'+userId+'/website');
         }
 
     }
