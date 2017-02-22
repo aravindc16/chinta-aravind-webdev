@@ -61,6 +61,7 @@ body{
      */
 }
 
+/*background image for mobile screens - responsive*/
 @media only screen and (max-width: 767px) {
     .body-image {
         /* The file size of this background image is 93% smaller
