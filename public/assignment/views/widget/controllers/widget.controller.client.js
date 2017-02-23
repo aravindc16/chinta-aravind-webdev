@@ -125,6 +125,10 @@
         vm.websiteId = $routeParams['wid'];
         vm.pageId = $routeParams['pid'];
 
+        $(".widget-list").sortable({
+            axis: "y"
+        });
+
         function init() {
             var promise = WidgetService.findWidgetsByPageId(vm.pageId);
             promise.success(function (widgets) {

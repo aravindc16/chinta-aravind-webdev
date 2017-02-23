@@ -21,44 +21,44 @@
                 <div layout="row" flex>
                     <div id="footer-padding" layout="column" flex>
 
-                        <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType" id="draggable">
-                            <md-card-content layout="row" layout-align="space-between">
+                        <div class="widget-list">
+                            <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType">
+                                <md-card-content layout="row" layout-align="space-between">
 
-                                <div ng-switch-when="HEADER">
-                                    <ng-include src="'views/widget/templates/widgets/widget-HEADER.view.client.html'">
-                                    </ng-include>
-                                </div>
+                                    <div ng-switch-when="HEADER">
+                                        <ng-include src="'views/widget/templates/widgets/widget-HEADER.view.client.html'">
+                                        </ng-include>
+                                    </div>
 
-                                <div ng-switch-when="IMAGE">
-                                    <ng-include src="'views/widget/templates/widgets/widget-IMAGE.view.client.html'">
-                                    </ng-include>
-                                </div>
+                                    <div ng-switch-when="IMAGE">
+                                        <ng-include src="'views/widget/templates/widgets/widget-IMAGE.view.client.html'">
+                                        </ng-include>
+                                    </div>
 
-                                <div ng-switch-when="YOUTUBE">
-                                    <ng-include src="'views/widget/templates/widgets/widget-YOUTUBE.view.client.html'">
-                                    </ng-include>
-                                </div>
+                                    <div ng-switch-when="YOUTUBE">
+                                        <ng-include src="'views/widget/templates/widgets/widget-YOUTUBE.view.client.html'">
+                                        </ng-include>
+                                    </div>
 
-                                <div ng-switch-when="HTML">
-                                    <ng-include src="'views/widget/templates/widgets/widget-HTML.view.client.html'">
-                                    </ng-include>
-                                </div>
-                                <!--Card actions-->
-                                <md-card-actions class="cardActions">
-                                <span id="cardButtonSpace">
+                                    <div ng-switch-when="HTML">
+                                        <ng-include src="'views/widget/templates/widgets/widget-HTML.view.client.html'">
+                                        </ng-include>
+                                    </div>
+                                    <!--Card actions-->
+                                    <md-card-actions class="cardActions">
+                                    <span id="cardButtonSpace">
                                     <md-button class="md-icon-button md-primary"
                                                href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}"
                                                aria-label="Settings">
                                         <md-icon md-svg-icon="icons/settings.svg"></md-icon>
                                     </md-button>
                                     </span>
-                                    <md-button class="md-icon-button md-primary" aria-label="Drag" >
-                                        <md-icon md-svg-icon="icons/menu_black.svg"></md-icon>
-                                    </md-button>
-                                </md-card-actions>
-                            </md-card-content>
+                                        <md-icon style="margin-right: 19px;" md-svg-icon="icons/menu_black.svg"></md-icon>
+                                    </md-card-actions>
+                                </md-card-content>
 
-                        </md-card>
+                            </md-card>
+                        </div>
                     </div>
                 </div>
             </md-content>
