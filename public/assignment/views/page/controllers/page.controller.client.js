@@ -16,8 +16,15 @@
         vm.pageId = $routeParams['pid'];
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            vm.page = PageService.findPageByPageId(vm.pageId);
+            var promise1 = PageService.findPageByWebsiteId(vm.websiteId);
+            promise1.success(function (pages) {
+                vm.pages = pages;
+            })
+
+            var promise = PageService.findPageByPageId(vm.pageId);
+            promise.success(function (page) {
+                vm.page = page;
+            })
         }
         init();
 
@@ -41,16 +48,22 @@
             }
 
             function yes(){
-                PageService.deletePage(vm.pageId);
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+
+                //On delete, server sends 200 OK.
+                var promise = PageService.deletePage(vm.pageId);
+                promise.success(function (code) {
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+                })
             }
-
-
         }
 
         function updatePage(page){
-            vm.page = PageService.updatePage(vm.pageId, page);
-            $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+            var promise = PageService.updatePage(vm.pageId, page);
+            promise.success(function (page) {
+                vm.page = page;
+                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+            })
+
         }
 
     }
@@ -62,7 +75,10 @@
         vm.websiteId = $routeParams['wid'];
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise.success(function (pages) {
+                vm.pages = pages;
+            })
         }
         init();
 
@@ -70,8 +86,11 @@
         vm.createPage = createPage;
 
         function createPage(page){
-            PageService.createPage(vm.websiteId, page);
-            $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+            var promise = PageService.createPage(vm.websiteId, page);
+            promise.success(function (page) {
+                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+            })
+
         }
     }
 
@@ -82,26 +101,27 @@
         vm.websiteId = $routeParams['wid'];
 
         function init(){
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise.success(function (pages) {
+                vm.pages = pages;
+                if(vm.pages.length == 0){
+                    var confirm = $mdDialog.confirm()
+                        .title("No Pages.")
+                        .textContent("Damn, no pages. Would you like to create one?")
+                        .ok("Alright")
+                        .cancel("Some other time!");
 
+                    $mdDialog.show(confirm).then(yes, nope);
 
-            if(vm.pages.length == 0){
-                var confirm = $mdDialog.confirm()
-                    .title("No Pages.")
-                    .textContent("Damn, no pages. Would you like to create one?")
-                    .ok("Alright")
-                    .cancel("Some other time!");
+                    function nope(){
+                        $location.url('/user/'+vm.userId+'/website');
+                    }
 
-                $mdDialog.show(confirm).then(yes, nope);
-
-                function nope(){
-                    $location.url('/user/'+vm.userId+'/website');
+                    function yes(){
+                        $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/new');
+                    }
                 }
-
-                function yes(){
-                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/new');
-                }
-            }
+            })
         }
         init();
 
