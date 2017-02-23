@@ -4,32 +4,50 @@
         <div class="md-inline-form" layout="column">
             <md-content class="md-padding">
                 <div>
-                    <md-input-container class="md-block" flex md-no-float>
-                        <label>Name</label>
-                        <input ng-model="model.widget.name" type="text" />
-                    </md-input-container>
-                    <md-input-container class="md-block" flex md-no-float>
-                        <label>Text</label>
-                        <input ng-model="model.widget.text" type="text" />
-                    </md-input-container>
-                    <md-input-container class="md-block" flex md-no-float>
-                        <label>URL</label>
-                        <input ng-model="model.widget.url" type="text"/>
-                    </md-input-container>
-                    <md-input-container class="md-block" flex md-no-float>
-                        <label>Width</label>
-                        <input ng-model="model.widget.width" type="text" />
-                    </md-input-container>
-                    <md-input-container>
-                        <!--<input id="fileInput" type="file" class="ng-hide">-->
-                        <md-button id="uploadButton"
+                    <form action="/api/upload" method="post" enctype="multipart/form-data">
+                        <md-input-container class="md-block" flex md-no-float>
+                            <label>Name</label>
+                            <input ng-model="model.widget.name" type="text" />
+                        </md-input-container>
+                        <md-input-container class="md-block" flex md-no-float>
+                            <label>Text</label>
+                            <input ng-model="model.widget.text" type="text" />
+                        </md-input-container>
+                        <md-input-container class="md-block" flex md-no-float>
+                            <label>URL</label>
+                            <input ng-model="model.widget.url" type="text"/>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex md-no-float>
+                            <label>Width</label>
+                            <input ng-model="model.widget.width" type="text" />
+                        </md-input-container>
+                        <md-input-container>
+                            <input type="file" name="myFile">
+                        </md-input-container>
+                        <md-input-container>
+                            <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <input  name="userId" value="{{model.userId}}"   style="display: none"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <input  name="pageId" value="{{model.pageId}}"   style="display: none"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+                        </md-input-container>
+
+                        <md-button type="submit" id="uploadButton"
                                    class="md-raised md-primary"
-                                   aria-label="attach_image" ng-disabled="true" aria-label="upload image">
-                            <input type="file">
-                            Choose Image
+                                   aria-label="attach_image">
+
+                            Upload Image
                         </md-button>
-                    </md-input-container>
-                    <!--<md-button class="md-raised md-primary" href="#">Upload Image</md-button>-->
+
+                    </form>
                 </div>
             </md-content>
         </div>
