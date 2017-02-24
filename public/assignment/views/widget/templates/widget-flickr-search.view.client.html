@@ -1,0 +1,30 @@
+<header>
+    <md-toolbar class="md-hue-2" flex md-whiteframe="10">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
+                <md-icon md-svg-icon="icons/back.svg" aria-label="Go back to page list"></md-icon>
+            </md-button>
+            <h4>Flickr Search </h4><span flex></span>
+        </div>
+    </md-toolbar>
+</header>
+
+<div layout="row" layout-padding>
+
+    <md-input-container class="md-block" flex>
+            <label>Search Flickr</label>
+            <input ng-model="searchText" tye="text">
+    </md-input-container>
+    <md-button style="padding-bottom: 37px;" ng-click="model.searchPhotos(searchText)" aria-label="search flickr">
+        <md-icon md-svg-icon="icons/search.svg">
+        </md-icon>
+    </md-button>
+
+
+</div>
+<md-grid-list md-cols-md="8" md-row-height="4:3" md-gutter="7px">
+    <md-grid-tile layout-padding ng-repeat="photo in model.photos.photo">
+        <img ng-click="model.selectPhoto(photo)"
+             ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
+    </md-grid-tile>
+</md-grid-list>
