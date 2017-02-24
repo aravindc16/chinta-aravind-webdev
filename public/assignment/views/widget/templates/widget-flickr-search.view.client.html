@@ -5,6 +5,7 @@
                 <md-icon md-svg-icon="icons/back.svg" aria-label="Go back to page list"></md-icon>
             </md-button>
             <h4>Flickr Search </h4><span flex></span>
+            <img src="https://static1.squarespace.com/static/51146d9ee4b067782b67bedc/t/51187e72e4b0a31c0363596c/1360559731367/Flickr.png?format=500w" widht="50px" height="50px">
         </div>
     </md-toolbar>
 </header>
@@ -22,8 +23,8 @@
 
 
 </div>
-<md-grid-list md-cols-md="8" md-row-height="4:3" md-gutter="7px">
-    <md-grid-tile layout-padding ng-repeat="photo in model.photos.photo">
+<md-grid-list md-cols="8" md-row-height="4:3" md-gutter="7px">
+    <md-grid-tile layout="row" layout-padding ng-repeat="photo in model.photos.photo">
         <img ng-click="model.selectPhoto(photo)"
              ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
     </md-grid-tile>
