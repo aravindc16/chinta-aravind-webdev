@@ -11,7 +11,6 @@
 </header>
 
 <div layout="row" layout-padding>
-
     <md-input-container class="md-block" flex>
             <label>Search Flickr</label>
             <input ng-model="searchText" tye="text">
@@ -20,12 +19,29 @@
         <md-icon md-svg-icon="icons/search.svg">
         </md-icon>
     </md-button>
-
-
 </div>
+
+<div id="footer-padding">
+<!--To display the images in grid format-->
 <md-grid-list md-cols="8" md-row-height="4:3" md-gutter="7px">
     <md-grid-tile layout="row" layout-padding ng-repeat="photo in model.photos.photo">
         <img ng-click="model.selectPhoto(photo)"
              ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
     </md-grid-tile>
 </md-grid-list>
+</div>
+
+<footer>
+    <md-toolbar class="md-hue-2" md-scroll-shrink md-whiteframe="10">
+        <div class="md-toolbar-tools">
+            <div>
+                <md-icon md-svg-icon="icons/play.svg" aria-label="profile"></md-icon>
+                <md-icon md-svg-icon="icons/eye.svg" aria-label="profile"></md-icon>
+            </div>
+            <span flex></span>
+            <span><md-button class="md-icon-button md-primary" href="#/user/{{model.userId}}">
+                    <md-icon md-svg-icon="icons/person.svg" aria-label="profile"></md-icon>
+                </md-button></span>
+        </div>
+    </md-toolbar>
+</footer>
