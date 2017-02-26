@@ -11,7 +11,8 @@ module.exports = function (app) {
         {_id: "4", username: "achinta", password: "achinta", firstName: "Aravind",   lastName: "Chinta" }
     ]
 
-    app.get('/api/user', findUser);
+    app.get('/api/user/login/', findUserByCredentials);
+    app.get('/api/user/register/', findUserByUsername);
     app.get('/api/user/:userId', findUserById);
     app.put('/api/user/:userId', updateUser);
     app.post('/api/user', createUser);

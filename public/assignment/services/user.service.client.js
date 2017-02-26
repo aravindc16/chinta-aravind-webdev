@@ -19,7 +19,7 @@
         return api;
 
         function findUserByUsername(username){
-            return $http.get('/api/user?username='+username);
+            return $http.get('/api/user/register?username='+username);
         }
 
         function deleteUser(userId){
@@ -35,7 +35,7 @@
         }
 
         function findUserByCredentials(username, password){
-           return $http.get('/api/user?username='+username+'&password='+password);
+           return $http.get('/api/user/login?username='+username+'&password='+password);
         }
 
         function findUserById(userId){
