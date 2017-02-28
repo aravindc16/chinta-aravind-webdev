@@ -151,8 +151,11 @@
         vm.login = login;
 
         function login(user){
+
+            vm.loading = true;
             // If nothing is entered in the fields.
             if(user == undefined){
+                vm.loading = false;
                 $mdDialog.show(
                     $mdDialog.alert()
                         .clickOutsideToClose(true)
@@ -165,9 +168,11 @@
 
             promise
                 .success(function(user){
+                    vm.loading = false;
                     $location.url('/user/'+user._id);
             })
                 .error(function (err){
+                    vm.loading = false;
                     //clear the fields
                     user.username='';
                     user.password='';

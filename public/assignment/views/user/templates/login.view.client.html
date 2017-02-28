@@ -29,6 +29,9 @@
                         </section>
                     </md-card-actions>
                 </form>
+                <div ng-show="model.loading" layout="column" layout-align="center center">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
             </md-card-content>
         </md-card>
     </md-content>
