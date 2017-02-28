@@ -38,7 +38,7 @@ body{
 .body-image{
 
     /* Location of the image */
-    background-image: url(http://www.strategygroupinc.com/images/o-BOSTON-facebook.jpg);
+    background-image: url(../../images/home.jpg);
 
     /* Image is centered vertically and horizontally at all times */
     background-position: center center;
@@ -66,7 +66,7 @@ body{
     .body-image {
         /* The file size of this background image is 93% smaller
          * to improve page load speed on mobile internet connections */
-        background-image: url(http://www.strategygroupinc.com/images/o-BOSTON-facebook.jpg);
+        background-image: url(../../images/home.jpg);
     }
 }
 
