@@ -51,12 +51,23 @@
         }
 
         function updateWidget(widget){
-            //Promise for UpDate Widget.
-            var promise = WidgetService.updateWidget(vm.widgetId, widget);
-            promise.success(function (widget) {
-                vm.widget = widget;
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/');
-            })
+            if(widget.url == ''){
+
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("URL Error!")
+                        .textContent("You can't leave the URL empty!")
+                        .ok("OK"));
+
+            }else {
+                //Promise for UpDate Widget.
+                var promise = WidgetService.updateWidget(vm.widgetId, widget);
+                promise.success(function (widget) {
+                    vm.widget = widget;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/');
+                })
+            }
 
         }
     }
