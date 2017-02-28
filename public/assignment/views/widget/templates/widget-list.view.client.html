@@ -20,8 +20,10 @@
             <md-content class="md-inline-form" layout-padding flex>
                 <div layout="row" flex>
                     <div id="footer-padding" layout="column" flex>
-
                         <div class="widget-list" wbdv-sortable="">
+                            <div ng-show="model.loading" layout="column" layout-align="center center">
+                                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                            </div>
                             <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType">
                                 <md-card-content layout="row" layout-align="space-between">
 
@@ -56,7 +58,6 @@
                                         <md-icon style="margin-right: 19px;" md-svg-icon="icons/menu_black.svg"></md-icon>
                                     </md-card-actions>
                                 </md-card-content>
-
                             </md-card>
                         </div>
                     </div>

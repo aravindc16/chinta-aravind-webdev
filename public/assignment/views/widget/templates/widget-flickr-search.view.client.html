@@ -21,6 +21,10 @@
     </md-button>
 </div>
 
+<div ng-show="model.loading" layout="column" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
 <div id="footer-padding">
 <!--To display the images in grid format-->
 <md-grid-list md-cols="8" md-row-height="4:3" md-gutter="7px">

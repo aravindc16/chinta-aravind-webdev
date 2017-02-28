@@ -18,12 +18,14 @@
         vm.selectPhoto = selectPhoto;
 
         function searchPhotos(searchText) {
+            vm.loading=true;
             var promise = FlickrService.searchPhotos(searchText);
             promise.success(function (response) {
                 data = response.replace("jsonFlickrApi(","");
                 data = data.substring(0,data.length - 1);
                 data = JSON.parse(data);
                 vm.photos = data.photos;
+                vm.loading=false;
             })
         }
 

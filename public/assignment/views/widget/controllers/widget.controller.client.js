@@ -130,10 +130,11 @@
         });
 
         function init() {
+            vm.loading=true;
             var promise = WidgetService.findWidgetsByPageId(vm.pageId);
             promise.success(function (widgets) {
                 vm.widgets = widgets;
-
+                vm.loading=false;
                 if(vm.widgets.length == 0){
                     var confirm = $mdDialog.confirm()
                         .title("No Widgets.")
