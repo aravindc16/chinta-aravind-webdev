@@ -131,27 +131,42 @@
 
         function init() {
             vm.loading=true;
+
             var promise = WidgetService.findWidgetsByPageId(vm.pageId);
             promise.success(function (widgets) {
-                vm.widgets = widgets;
-                vm.loading=false;
-                if(vm.widgets.length == 0){
-                    var confirm = $mdDialog.confirm()
-                        .title("No Widgets.")
-                        .textContent("Damn, no widgets. Would you like to create one?")
-                        .ok("Alright")
-                        .cancel("Some other time!");
 
-                    $mdDialog.show(confirm).then(yes, nope);
-
-                    function nope(){
-                        $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
-                    }
-
-                    function yes(){
-                        $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/new');
+                for(var w in widgets){
+                    if(widgets[w].url == ''){
+                        var promise = WidgetService.deleteWidget(widgets[w]._id);
+                        promise.success(function (suc) {
+                        });
                     }
                 }
+                //Getting the fresh list.
+                var promise = WidgetService.findWidgetsByPageId(vm.pageId);
+                promise.success(function (widgets) {
+                    vm.widgets = widgets;
+
+                    if(vm.widgets.length == 0){
+                        var confirm = $mdDialog.confirm()
+                            .title("No Widgets.")
+                            .textContent("Damn, no widgets. Would you like to create one?")
+                            .ok("Alright")
+                            .cancel("Some other time!");
+
+                        $mdDialog.show(confirm).then(yes, nope);
+
+                        function nope(){
+                            $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+                        }
+
+                        function yes(){
+                            $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/new');
+                        }
+                    }
+                })
+                vm.loading=false;
+
             })
         }
         init();
