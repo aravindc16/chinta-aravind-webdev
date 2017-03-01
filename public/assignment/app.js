@@ -5,6 +5,5 @@
 (function(){
     angular.module('WebAppMaker', ["ngMaterial","ngRoute"]);
 
-
 })();
 
