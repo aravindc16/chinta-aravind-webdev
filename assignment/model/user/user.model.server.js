@@ -15,7 +15,7 @@ module.exports = function () {
     var mongoose = require('mongoose');
 
     var UserSchema = require('./user.schema.server')();
-    var UserModel = mongoose.model('Spring17Assign', UserSchema);
+    var UserModel = mongoose.model('UserModel', UserSchema);
 
     return api;
 
