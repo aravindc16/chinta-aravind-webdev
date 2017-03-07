@@ -3,7 +3,7 @@
  */
 
 
-module.exports = function (app) {
+module.exports = function (app, model) {
     var users = [
         {_id: "1", username: "alice",   email:'',    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
         {_id: "2", username: "bob",     email:'',    password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -22,78 +22,91 @@ module.exports = function (app) {
 
     function deleteUser(req, res){
         var userId = req.params.userId;
-        for(var u in users){
-            if(users[u]._id == userId){
-                users.splice(u, 1);
+
+        model.deleteUser(userId)
+            .then(function (user) {         //Call if this function is successful.
                 res.sendStatus(200);
-                return;
-            }
-        }
+            }, function () {
+                res.sendStatus(400);
+            });
     }
 
     function createUser(req, res){
         var user = req.body;
-        user._id = (new Date()).getTime();
-        users.push(user);
-        res.send(user);
+
+        //Using the model being sent from the app.js to create a new user when he registers.
+        model.createUser(user)
+            .then(function (user) {
+                res.send(user);
+            }, function (error) {
+                res.sendStatus(500).send('Could not create user' + error);
+            });
+
     }
 
     function updateUser(req,res){
         var userId = req.params.userId;
         var user = req.body;
-        for(var u in users){
-            if(users[u]._id==userId){
-                users[u].firstName = user.firstName;
-                users[u].lastName = user.lastName;
-                users[u].email = user.email;
-                res.send(users[u]);
-                return;
-            }
-        }
+
+        model.updateUser(userId, user)
+            .then(function (user) {
+                res.send(user);
+            },function (err) {
+                res.sendStatus(500);
+            });
+
+        // for(var u in users){
+        //     if(users[u]._id==userId){
+        //         users[u].firstName = user.firstName;
+        //         users[u].lastName = user.lastName;
+        //         users[u].email = user.email;
+        //         res.send(users[u]);
+        //         return;
+        //     }
+        // }
     }
     function findUserById(req, res){
         var userId = req.params.userId;
-        var user = users.find(function(user){
-            return user._id == userId;
-        })
-        res.send(user);
-    }
-
-    function findUser(req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-
-        if(username && password){
-            findUserByCredentials(req, res);
-        }else if(username){
-            findUserByUsername(req, res);
-        }
+        //DB query
+        model.findUserById(userId)
+            .then(function (user) {
+                res.send(user);
+            },
+            function (err) {
+                res.sendStatus(404);
+            });
     }
 
     function findUserByUsername(req, res){
         var username = req.query.username;
-        var user = users.find(function (user){
-            return user.username == username;
-        })
-        if(user == undefined){
-            res.sendStatus(404);
-        }else {
-            res.send(user);
-        }
+
+        model.findUserByUsername(username)
+            .then(function (user) {
+                    if(user == undefined){
+                        res.sendStatus(404);
+                    }else {
+                        res.send(user);
+                    }
+            },
+            function (err) {
+                res.sendStatus(505);
+            })
+
     }
 
     function findUserByCredentials(req, res){
         var username = req.query.username;
         var password = req.query.password;
 
-        var user = users.find(function (user){
-            return user.username == username && user.password == password;
-        })
-        if(user == undefined){
-            res.sendStatus(404);
-        }else {
-            res.send(user);
-        }
-
+        model.findUserByCredentials(username,password)
+            .then(function (user) {
+                if(user == undefined){
+                    res.sendStatus(500);
+                }else {
+                    res.send(user);
+                }
+            }, function (error) {
+                res.sendStatus(404).send('No user found');
+            })
     }
 }

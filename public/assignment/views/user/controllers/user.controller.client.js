@@ -170,8 +170,9 @@
                 .success(function(user){
                     vm.loading = false;
                     $location.url('/user/'+user._id);
+
             })
-                .error(function (err){
+                .error(function (err,message){
                     vm.loading = false;
                     //clear the fields
                     user.username='';
@@ -181,8 +182,8 @@
                     $mdDialog.show(
                         $mdDialog.alert()
                             .clickOutsideToClose(true)
-                            .title("Username Error!")
-                            .textContent("User not found. Please check your user name.")
+                            .title("Credentials Error!")
+                            .textContent('No such user found.')
                             .ok("OK"));
 
                 });
