@@ -16,7 +16,7 @@ module.exports = function (app, model) {
     function deleteUser(req, res){
         var userId = req.params.userId;
 
-        model.deleteUser(userId)
+        model.UserModel.deleteUser(userId)
             .then(function (user) {         //Call if this function is successful.
                 res.sendStatus(200);
             }, function () {
@@ -28,7 +28,7 @@ module.exports = function (app, model) {
         var user = req.body;
 
         //Using the model being sent from the app.js to create a new user when he registers.
-        model.createUser(user)
+        model.UserModel.createUser(user)
             .then(function (user) {
                 res.send(user);
             }, function (error) {
@@ -41,7 +41,7 @@ module.exports = function (app, model) {
         var userId = req.params.userId;
         var user = req.body;
 
-        model.updateUser(userId, user)
+        model.UserModel.updateUser(userId, user)
             .then(function (user) {
                 res.send(user);
             },function (err) {
@@ -51,7 +51,7 @@ module.exports = function (app, model) {
     function findUserById(req, res){
         var userId = req.params.userId;
         //DB query
-        model.findUserById(userId)
+        model.UserModel.findUserById(userId)
             .then(function (user) {
                 res.send(user);
             },
@@ -63,7 +63,7 @@ module.exports = function (app, model) {
     function findUserByUsername(req, res){
         var username = req.query.username;
 
-        model.findUserByUsername(username)
+        model.UserModel.findUserByUsername(username)
             .then(function (user) {
                     if(user == undefined){
                         res.sendStatus(404);
@@ -81,7 +81,7 @@ module.exports = function (app, model) {
         var username = req.query.username;
         var password = req.query.password;
 
-        model.findUserByCredentials(username,password)
+        model.UserModel.findUserByCredentials(username,password)
             .then(function (user) {
                 if(user == undefined){
                     res.sendStatus(500);

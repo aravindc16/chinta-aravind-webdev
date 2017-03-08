@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 // require ("./public/assignment/assignment2/app.js")(app);
 require ("./assignment/app.js")(app);
 
-var port      = process.env.PORT || 3000;
+var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
 });

@@ -1,16 +1,7 @@
 /**
  * Created by aravindchinta on 2/22/17.
  */
-module.exports = function (app) {
-
-    var websites = [
-        { "_id": "1", "name": "Facebook",    "developerId": "4", "description": "This is the Facebook Website" },
-        { "_id": "2", "name": "Twitter",     "developerId": "4", "description": "This is Twitter Website" },
-        { "_id": "3", "name": "Gizmodo",     "developerId": "4", "description": "Yo, this is Gizmodo!" },
-        { "_id": "4", "name": "Tic Tac Toe", "developerId": "1", "description": "Wanna play some games?" },
-        { "_id": "5", "name": "Checkers",    "developerId": "1", "description": "Chinese checkers! :D" },
-        { "_id": "6", "name": "Chess",       "developerId": "2", "description": "I am the king in this game" }
-    ];
+module.exports = function (app, model) {
 
     app.get('/api/website/:websiteId', findWebsiteById);
     app.get('/api/user/:userId/website', findWebsiteByUser);
@@ -20,50 +11,83 @@ module.exports = function (app) {
 
     function deleteWebsite(req, res){
         var websiteId = req.params.websiteId;
-        for(var w in websites){
-            if(websites[w]._id == websiteId){
-                websites.splice(w, 1);
-                res.sendStatus(200);
-            }
-        }
+
+        model.WebsiteModel.findWebsiteById(websiteId)
+            .then(function (website) {
+                // console.log('this is' + website);
+                model.UserModel.findUserById(website._user)
+                            .then(function (user) {
+                                user.websites.pull(websiteId);          //First deleting the user reference
+                                user.save();
+
+                            },function (err) {
+                                res.sendStatus(404).send('User not found to delete the ref');
+                            })
+            },function (err) {
+
+            })
+            .then(function () {                                     //And then deleting the website.
+                model.WebsiteModel.deleteWebsite(websiteId)
+                    .then(function (website) {
+                        res.sendStatus(200);
+                    },function (err) {
+                        res.sendStatus(404).send('Website not found to delete');
+                    });
+            });
+
+
     }
 
     function updateWebsite(req, res){
         var websiteId = req.params.websiteId;
         var website = req.body;
-        for(var w in websites){
-            if(websites[w]._id == websiteId){
-                websites[w].name = website.name;
-                websites[w].description = website.description;
-                res.send(websites[w]);
-                return;
-            }
-        }
+
+        model.WebsiteModel.updateWebsite(websiteId, website)
+            .then(function (website) {
+                res.send(website);
+            },function (err) {
+                res.sendStatus(500).send('Could not update website');
+            });
     }
 
     function createWebsite(req, res){
         var userId = req.params.userId;
         var website = req.body;
-        website.developerId = userId;
-        website._id = (new Date()).getTime();
-        websites.push(website);
-        res.send(website);
+
+        model.WebsiteModel.createWebsiteForUser(userId, website)
+            .then(function (website) {
+                model.UserModel.findUserById(userId)
+                    .then(function (user) {
+                        user.websites.push(website._id);
+                        user.save();
+                        res.send(website);
+                    }, function (err) {
+                        res.sendStatus(404);
+                    });
+            },function (err) {
+                res.sendStatus(500).send('Could not create website');
+            });
     }
 
     function findWebsiteByUser(req, res){
         var userId = req.params.userId;
-        var localWebsites = websites.filter(function(w){
-            return w.developerId == userId;
-        })
-        res.send(localWebsites);
+
+        model.WebsiteModel.findAllWebsitesForUser(userId)
+            .then(function (websites) {
+                res.send(websites);
+            },function (err) {
+                res.send(404).send('No website found');
+            });
     }
 
     function findWebsiteById(req, res){
         var websiteId = req.params.websiteId;
-        var website = websites.find(function (w){
-            return w._id == websiteId;
-        })
 
-        res.send(website);
+        model.WebsiteModel.findWebsiteById(websiteId)
+            .then(function (website) {
+                res.send(website);
+            },function (err) {
+                res.sendStatus(404).send('Website not found');
+            });
     }
 }
