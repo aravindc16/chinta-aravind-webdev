@@ -39,6 +39,11 @@ md-card{
     margin-right: 400px;
 }
 
+.text-styling{
+    position: relative;
+    margin-top: -20px;
+}
+
 .body-image{
 
     /* Location of the image */
