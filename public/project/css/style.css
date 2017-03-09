@@ -39,9 +39,45 @@ md-card{
     margin-right: 400px;
 }
 
+.card-image:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    width: 51%;
+    height: 100%;
+    opacity: 0.4;
+    background-image: url(../icons/logo.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: auto;
+    background-attachment: fixed;
+}
+
+.landing-image:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    width: 78.7%;
+    height: 71.7%;
+    opacity: 0.4;
+    background-image: url(../icons/804873-food-wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: local;
+}
+
 .text-styling{
     position: relative;
     margin-top: -20px;
+}
+
+.landing-div{
+    margin-top: 200px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 200px;
+    color: #fff;
 }
 
 .body-image{
@@ -66,15 +102,6 @@ md-card{
     background-color:#464646;
 }
 
-/*background image for mobile screens - responsive*/
-@media only screen and (max-width: 767px) {
-    .body-image {
-        /* The file size of this background image is 93% smaller
-         * to improve page load speed on mobile internet connections */
-        background-image: url(../../images/home.jpg);
-    }
-}
-
 .searchbar{
-    padding-top: 50px
+    padding-top: 100px
 }
