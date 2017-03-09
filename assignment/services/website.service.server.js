@@ -26,6 +26,14 @@ module.exports = function (app, model) {
             },function (err) {
 
             })
+            // .then(function () {
+            //     model.PageModel.findAllPagesForWebsite(websiteId)
+            //         .then(function (pages) {
+            //             //TODO: Chain the delete of pages.
+            //         },function (err) {
+            //
+            //         })
+            // })
             .then(function () {                                     //And then deleting the website.
                 model.WebsiteModel.deleteWebsite(websiteId)
                     .then(function (website) {

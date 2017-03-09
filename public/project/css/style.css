@@ -1,0 +1,63 @@
+.header-color{
+    background-color: #8596f5;
+}
+
+.font-styling{
+    font-family: 'Open Sans';
+    font-style: italic;
+    padding-left: 100px;
+}
+
+.center-header{
+    font-family: 'Lucida Grande';
+}
+
+.header-buttons{
+    padding-right: 100px;
+}
+
+.margins{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+md-card{
+    border-radius: 10px;
+}
+
+.body-image{
+
+    /* Location of the image */
+    background-image: url(http://shunvmall.com/data/out/109/47823582-high-quality-images.jpg);
+
+    /* Image is centered vertically and horizontally at all times */
+    background-position: center center;
+
+    /* Image doesn't repeat */
+    background-repeat: no-repeat;
+
+    /* Makes the image fixed in the viewport so that it doesn't move when
+       the content height is greater than the image height */
+    background-attachment: fixed;
+
+    /* This is what makes the background image rescale based on its container's size */
+    background-size: cover;
+
+    /* Pick a solid background color that will be displayed while the background image is loading */
+    background-color:#464646;
+}
+
+/*background image for mobile screens - responsive*/
+@media only screen and (max-width: 767px) {
+    .body-image {
+        /* The file size of this background image is 93% smaller
+         * to improve page load speed on mobile internet connections */
+        background-image: url(../../images/home.jpg);
+    }
+}
+
+.searchbar{
+    padding-top: 250px
+}

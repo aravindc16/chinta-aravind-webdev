@@ -16,7 +16,8 @@ module.exports = function () {
     //Getting all the models of all types of views in one variable and returning them to app.
     var models = {
       UserModel: require('./user/user.model.server')(),
-      WebsiteModel: require('./website/website.model.server')()
+      WebsiteModel: require('./website/website.model.server')(),
+      PageModel: require('./page/page.model.server')()
     };
 
     return models;

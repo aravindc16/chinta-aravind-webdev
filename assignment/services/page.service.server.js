@@ -2,12 +2,7 @@
  * Created by aravindchinta on 2/22/17.
  */
 
-module.exports = function (app) {
-    var pages = [
-        { "_id": "3", "name": "Post 1", "websiteId": "1", "title": "Post 1" },
-        { "_id": "2", "name": "Post 2", "websiteId": "2", "title": "Post 2" },
-        { "_id": "1", "name": "Post 3", "websiteId": "4", "title": "Post 3" }
-    ];
+module.exports = function (app, model) {
 
     app.get('/api/page/:pageId', findPageByPageId);
     app.get('/api/website/:websiteId/page', findPagesByWebsiteId);
@@ -17,49 +12,81 @@ module.exports = function (app) {
 
     function deletePage(req, res){
         var pageId = req.params.pageId;
-        for(var p in pages){
-            if(pages[p]._id == pageId){
-                pages.splice(p, 1);
-                res.sendStatus(200);
-            }
-        }
+
+        model.PageModel.findPageById(pageId)
+            .then(function (page) {
+                // console.log('this is' + website);
+                model.WebsiteModel.findWebsiteById(page._website)
+                    .then(function (website) {
+                        website.pages.pull(pageId);          //First deleting the user reference
+                        website.save();
+
+                    },function (err) {
+                        res.sendStatus(404).send('Website not found to delete the ref');
+                    })
+            },function (err) {
+
+            })
+            .then(function () {                                     //And then deleting the website.
+                model.PageModel.deletePage(pageId)
+                    .then(function (page) {
+                        res.sendStatus(200);
+                    },function (err) {
+                        res.sendStatus(404).send('Page not found to delete');
+                    });
+            });
     }
 
     function updatePage(req, res) {
         var pageId = req.params.pageId;
         var page = req.body;
-        for(var p in pages){
-            if(pages[p]._id == pageId){
-                pages[p].name = page.name;
-                pages[p].title = page.title;
-                res.send(pages[p]);
-                return;
-            }
-        }
+
+        model.PageModel.updatePage(pageId, page)
+            .then(function () {
+               res.send(page);
+            },function (err) {
+                res.sendStatus(500).send('Could not update the page');
+            });
     }
 
     function createPage(req, res) {
         var websiteId = req.params.websiteId;
         var page = req.body;
-        page.websiteId = websiteId;
-        page._id = (new Date()).getTime();
-        pages.push(page);
-        res.send(page);
+
+        model.PageModel.createPage(websiteId, page)
+            .then(function (page) {
+                model.WebsiteModel.findWebsiteById(websiteId)
+                    .then(function (website) {
+                        website.pages.push(page._id);
+                        website.save();
+                        res.send(page);
+                    },function (err) {
+                        res.sendStatus(404).send('Website not found to ref the page');
+                    })
+            }, function (err) {
+                res.sendStatus(500).send('Could not create the page');
+            });
     }
 
     function findPagesByWebsiteId(req, res){
         var websiteId = req.params.websiteId;
-        var localPages = pages.filter(function (p) {
-            return p.websiteId == websiteId;
-        })
-        res.send(localPages);
+
+        model.PageModel.findAllPagesForWebsite(websiteId)
+            .then(function (pages) {
+                res.send(pages);
+            },function (err) {
+                res.sendStatus(404).send('Pages not found');
+            })
     }
 
     function findPageByPageId(req, res){
         var pageId = req.params.pageId;
-        var page = pages.find(function (p) {
-            return p._id == pageId;
-        })
-        res.send(page);
+
+        model.PageModel.findPageById(pageId)
+            .then(function (page) {
+                res.send(page);
+            },function (err) {
+                res.sendStatus(404),send('Page not found');
+            });
     }
 }

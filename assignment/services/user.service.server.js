@@ -18,7 +18,7 @@ module.exports = function (app, model) {
 
         model.UserModel.deleteUser(userId)
             .then(function (user) {         //Call if this function is successful.
-                res.sendStatus(200);
+                res.sendStatus(200);        //TODO: Remove the websites. Call the delete which calls pages/widgets.
             }, function () {
                 res.sendStatus(400);
             });

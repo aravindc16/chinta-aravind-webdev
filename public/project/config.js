@@ -8,10 +8,13 @@
     function Configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/user/templates/login.view.client.html'
+                templateUrl: 'views/landing/templates/landing.view.client.html'
             })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html'
+            })
+            .when('/signup', {
+                templateUrl: 'views/user/templates/signup.view.client.html'
             })
     }
 })();

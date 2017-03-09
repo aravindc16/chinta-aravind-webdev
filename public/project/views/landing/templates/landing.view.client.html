@@ -1,0 +1,48 @@
+
+<header>
+    <md-toolbar style="background-color: #8596f5" md-scroll-shrink md-whiteframe="10">
+        <div class="md-toolbar-tools">
+            <h4 class="font-styling">FoodForThought </h4>
+            <span flex></span>
+            <div layout="row" class="header-buttons">
+                <md-button class="md-raised" href="#/login">
+                    <label>Log In</label>
+                </md-button>
+                <md-button class="md-raised" href="#/signup" style="background-color: #ffc800">
+                    <label>Sign Up</label>
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+</header>
+<div layout="column" layout-fill flex>
+
+    <div layout="column" class="searchbar" layout-align="center center">
+        <md-card md-whiteframe="20" style="background-color: #8595f1" layout-fill>
+            <div layout="column" layout-align="center center" style="color: #fff;">
+                <h1 class="center-header">FoodForThought</h1>
+                <p>Best places to eat, drink and have fun around you.</p>
+                <md-card-actions layout-gt-sm="row" flex-gt-sm>
+                <span style="padding-right: 23px;">
+                <md-input-container class="md-block">
+                    <label style="font-style: italic;color: yellow;">Search me...</label>
+                    <input type="search">
+                </md-input-container>
+                    </span>
+                    <md-divider></md-divider>
+                    <span style="padding-left: 23px;">
+                <md-input-container>
+                    <label style="font-style: italic;color: yellow;">City</label>
+                    <input type="text">
+                </md-input-container>
+                    </span>
+                    <md-button class="md-icon-button md-primary" style="margin-top: 15px;" aria-label="search">
+                        <md-icon md-svg-icon="icons/search.svg"></md-icon>
+                    </md-button>
+                </md-card-actions>
+            </div>
+        </md-card>
+    </div>
+
+
+</div>
