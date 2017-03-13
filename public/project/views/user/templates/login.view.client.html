@@ -1,5 +1,3 @@
-
-
 <div class="overlay">
     <header>
         <md-toolbar style="background-color: #79589f" md-scroll-shrink md-whiteframe="10">
@@ -12,42 +10,40 @@
         </md-toolbar>
     </header>
     <div class="md-inline-form">
-    <span layout="column" layout-align="center center" style="padding-top: 70px">
-        <img height="100px" width="100px" ng-src="icons/logo.png">
-    </span>
-        <!--<md-content layout="row" style="padding-top: 80px;" layout-align="center center">-->
-            <md-card md-whiteframe="10" >
-                <md-card-content layout-padding class="margins md-padding">
-                    <p class="login-page">Login to your account</p>
-                    <form name="login">
-                        <md-input-container class="md-block" flex>
-                            <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
-                            <label>Login</label>
-                            <input ng-model="user.username" type="text" />
-                        </md-input-container>
 
-                        <md-input-container class="md-block" flex>
-                            <md-icon md-svg-icon="icons/lock.svg"></md-icon>
-                            <label>Password</label>
-                            <input ng-model="user.password" type="password" />
-                        </md-input-container>
 
-                        <md-card-actions>
-                            <section layout="row" layout-align="center">
-                                <div class="button-padding">
-                                    <md-button ng-click="model.login(user)" class="md-raised md-primary">Login</md-button>
-                                </div>
-                            </section>
-                        </md-card-actions>
-                    </form>
-                    <div flex layout-fill>
-                        New to FoodForThought? <a href="#/signup">SignUp</a>
-                    </div>
-                    <div ng-show="model.loading" layout="column" layout-align="center center">
-                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-                    </div>
-                </md-card-content>
-            </md-card>
-        <!--</md-content>-->
+        <md-card md-whiteframe="10" style="margin-top: 150px;">
+            <md-card-content layout-padding class="margins md-padding">
+                <p class="login-page">Login to your account</p>
+                <form name="login">
+                    <md-input-container class="md-block" flex>
+                        <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                        <label>Login</label>
+                        <input ng-model="user.username" type="text" />
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex>
+                        <md-icon md-svg-icon="icons/lock.svg"></md-icon>
+                        <label>Password</label>
+                        <input ng-model="user.password" type="password" />
+                    </md-input-container>
+
+                    <md-card-actions>
+                        <section layout="row" layout-align="center">
+                            <div class="button-padding">
+                                <md-button ng-click="model.login(user)" class="md-raised md-primary">Login</md-button>
+                            </div>
+                        </section>
+                    </md-card-actions>
+                </form>
+                <div flex layout-fill>
+                    New to FoodForThought? <a href="#/signup">SignUp</a>
+                </div>
+                <div ng-show="model.loading" layout="column" layout-align="center center">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+            </md-card-content>
+        </md-card>
+
     </div>
 </div>
