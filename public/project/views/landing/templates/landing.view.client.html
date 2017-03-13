@@ -4,17 +4,23 @@
         <header>
             <md-toolbar style="background-color: rgba(113, 96, 199, 0.64);" md-scroll-shrink md-whiteframe="10">
                 <div class="md-toolbar-tools">
-                    <a href="#/">
+                    <a href="#/" ng-if="!model.user">
+                        <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
+                    </a>
+                    <a href="#/{{model.userId}}" ng-if="model.user">
                         <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                     </a>
                     <span flex></span>
-                    <div layout="row" class="header-buttons">
+                    <div layout="row" class="header-buttons" ng-if="!model.user">
                         <md-button class="md-raised" href="#/login">
                             <label>Log In</label>
                         </md-button>
                         <md-button class="md-raised" href="#/signup" style="background-color: #ffc800">
                             <label>Sign Up</label>
                         </md-button>
+                    </div>
+                    <div ng-if="model.user">
+                        <md-button class="md-raised" ng-click="model.Profile()">{{model.user.firstName}}</md-button>
                     </div>
                 </div>
             </md-toolbar>

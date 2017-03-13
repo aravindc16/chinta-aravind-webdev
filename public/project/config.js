@@ -23,5 +23,10 @@
                 controller: 'profileController',
                 controllerAs: 'model'
             })
+            .when('/:uid', {
+                templateUrl: 'views/landing/templates/landing.view.client.html',
+                controller: 'landingController',
+                controllerAs: 'model'
+            })
     }
 })();
