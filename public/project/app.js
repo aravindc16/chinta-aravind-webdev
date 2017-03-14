@@ -3,5 +3,5 @@
  */
 (function () {
     angular
-        .module('FoodForThoughtApp',['ngMaterial','ngRoute']);
+        .module('FoodForThoughtApp',['ngMap','ngMaterial','ngRoute']);
 })();

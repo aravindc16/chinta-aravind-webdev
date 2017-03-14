@@ -8,7 +8,7 @@
 
     function UserService($http) {
         var users = [
-            {firstName: 'Aravind', lastName: 'Chinta', _id:'1', email: 'aravindc16@gmail.com', username: 'achinta', password: 'abcd'}
+            {firstName: 'Aravind', lastName: 'Chinta', _id:'1', city: 'Boston', email: 'aravindc16@gmail.com', username: 'achinta', password: 'abcd'}
         ];
 
         var api = {

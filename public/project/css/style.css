@@ -25,7 +25,7 @@
  }
 
 .overlay-landing-color{
-    opacity:0.7;
+    opacity:0.3;
     background-color:#a498b1;
     position:fixed;
     width:100%;
@@ -125,7 +125,23 @@ md-card{
 
 .text-styling{
     position: relative;
-    margin-top: -20px;
+    bottom: 35px;
+    color: white;
+}
+
+.signup-card{
+    top:20px;
+    /*background-color: rgb(255,204,188);*/
+}
+
+.signup-card-content{
+    top: -25px;
+    position: relative;
+}
+
+.card-actions{
+    bottom: 20px;
+    position: relative;
 }
 
 .landing-div{

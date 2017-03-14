@@ -6,7 +6,7 @@
         .module('FoodForThoughtApp')
         .controller('landingController', LandingController);
 
-    function LandingController($mdDialog, $location, $routeParams, UserService) {
+    function LandingController($location, $routeParams, UserService) {
         var vm = this;
         var originatorEv;
 

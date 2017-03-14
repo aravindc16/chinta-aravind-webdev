@@ -1,8 +1,11 @@
+
 <div class="overlay-landing">
+
     <div class="overlay-landing-color"></div>
+
     <div class="overlay-landing-content">
         <header>
-            <md-toolbar style="background-color: rgba(113, 96, 199, 0.64);" md-scroll-shrink md-whiteframe="10">
+            <md-toolbar style="background-color: rgba(113, 96, 199, 0.64);" md-whiteframe="10">
                 <div class="md-toolbar-tools">
                     <a href="#/" ng-if="!model.user">
                         <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
@@ -20,24 +23,46 @@
                         </md-button>
                     </div>
                     <div ng-if="model.user">
-                        <md-button class="md-raised" ng-click="model.Profile()">{{model.user.firstName}}</md-button>
+                        <md-button href="#/user/{{model.userId}}">
+                            <md-icon md-svg-icon="icons/face.svg">
+                            </md-icon>
+                            {{model.user.firstName}}
+                        </md-button>
+
+                        <!--<md-menu>-->
+                            <!--<md-button aria-label="Open menu with custom trigger" class="" ng-click="$mdOpenMenu()"> Test </md-button>-->
+                            <!--<md-menu-content width="4" ng-mouseleave="$mdMenu.close()">-->
+                                <!--<md-menu-item>-->
+                                    <!--<md-button ng-click="">-->
+                                        <!--Profile-->
+                                    <!--</md-button>-->
+                                <!--</md-menu-item>-->
+                                <!--<md-menu-item>-->
+                                    <!--<md-button>-->
+                                        <!--Logout-->
+                                    <!--</md-button>-->
+                                <!--</md-menu-item>-->
+                            <!--</md-menu-content>-->
+                        <!--</md-menu>-->
                     </div>
                 </div>
             </md-toolbar>
+
         </header>
 
 
         <div layout="column" layout-fill flex>
             <div layout="column" layout-align="center center" flex>
 
-                <md-card style="background-color: rgba(0, 0, 0, 0.38)" md-whiteframe="20">
+                <md-card style="background-color: rgba(0, 0, 0, 0.56);" md-whiteframe="20">
                     <div layout="column" layout-align="center center" layout-padding>
-                <span style="color: white;" layout="column" layout-align="center center">
-                    <h1 class="center-header">FoodForThought</h1>
-                    </span>
+                        <span style="color: white;" layout="column" layout-align="center center">
+                            <h1 class="center-header">FoodForThought</h1>
+                        </span>
                         <p class="text-styling"><b>Best places to eat, drink and have fun around you.</b></p>
-                        <md-card-actions layout-gt-sm="row" flex-gt-sm>
+                        <md-card-actions layout="row" class="card-actions" flex>
                 <span style="padding-right: 23px;" flex>
+
                 <md-input-container class="md-block">
                     <label style="font-style: italic;color: white;font-size: 20px">Search me...</label>
                     <input type="search">
@@ -61,3 +86,4 @@
         </div>
     </div>
 </div>
+
