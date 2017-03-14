@@ -9,26 +9,53 @@
                     <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                 </a>
                 <span flex></span>
+                <md-button href="#/">
+                    Logout
+                </md-button>
             </div>
         </md-toolbar>
     </header>
 
-    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
-        <md-tab ng-disabled="tab.disabled" label="Profile">
-            <md-tab-body>
-                <div layout-padding style="font-family: 'Sansita', sans-serif;">
-                    <h1>{{model.user.firstName}} {{model.user.lastName}}</h1>
-                    <ng-map style="height:100%;width:400px;" default-style="false" center="[{{model.lat}}, {{model.long}}]">
-                    </ng-map>
+<!--Profile-->
+    <md-card style="height:60%;margin-top: 20px;font-family: 'Sansita', sans-serif;">
+        <md-card-content>
+            <div layout="row" layout-padding>
+
+                <div layout="column">
+                    <div layout="column" layout-align="center center" class="postAvatar">
+                        <img width="120" height="120" src="https://irs1.4sqi.net/img/user/original/22446252-PV3KKMPACA2X5ED1.jpg"/>
+                    </div>
+                    <h1>
+                        {{model.user.firstName}} {{model.user.lastName}}
+                    </h1>
+                    <p>{{model.user.email}} <br>
+                        {{model.city}}</p>
                 </div>
 
-            </md-tab-body>
-        </md-tab>
-        <md-tab ng-disabled="tab.disabled" label="Favourites">
-            <md-tab-label>
-                <md-icon md-svg-icon="icons/favourite.svg"></md-icon>
-            </md-tab-label>
+                <span flex></span>
 
-        </md-tab>
-    </md-tabs>
+                <div layout="column">
+                    <ng-map style="height:100%; width:400px;" center="[{{model.lat}}, {{model.long}}]">
+                    </ng-map>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-actions>
+            <md-button class="md-icon-button" href="#/user/{{model.userId}}/edit" aria-label="edit profile">
+                <md-icon md-svg-icon="icons/create_black.svg">
+                </md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="model.deleteUser()" aria-label="edit profile">
+                <md-icon md-svg-icon="icons/delete_black.svg">
+                </md-icon>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+    <!--Favourites-->
+    <md-card style="height: 400px;font-family: 'Sansita', sans-serif;">
+        <md-card-content>
+            Your Favourites
+        </md-card-content>
+    </md-card>
+
 </div>

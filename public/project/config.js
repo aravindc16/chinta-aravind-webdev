@@ -25,6 +25,11 @@
                 controller: 'profileController',
                 controllerAs: 'model'
             })
+            .when('/user/:uid/edit', {
+                templateUrl: 'views/user/templates/profile-edit.view.client.html',
+                controller: 'profileEditController',
+                controllerAs: 'model'
+            })
             .when('/:uid', {
                 templateUrl: 'views/landing/templates/landing.view.client.html',
                 controller: 'landingController',

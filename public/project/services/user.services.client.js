@@ -14,13 +14,35 @@
         var api = {
             "createUser" : createUser,
             "findUserById" : findUserById,
-            // "updateUser" : updateUser,
-            "findUserByCredentials" : findUserByCredentials
-            // "deleteUser": deleteUser,
+            "updateUser" : updateUser,
+            "findUserByCredentials" : findUserByCredentials,
+            "deleteUser": deleteUser
             // "findUserByUsername": findUserByUsername
         };
 
         return api;
+
+        function deleteUser(userId) {
+            for(var u in users){
+                if(users[u]._id == userId){
+                    users.splice(u,1);
+                    return 'success';
+                }
+            }
+            return null;
+        }
+
+        function updateUser(userId, newuser) {
+            for(var u in users){
+                if(users[u]._id == userId){
+                    users[u].firstName = newuser.firstName;
+                    users[u].lastName = newuser.lastName;
+                    users[u].email = newuser.email;
+                    users[u].city = newuser.city;
+                }
+            }
+            return angular.copy(users[u]);
+        }
 
         function findUserById(userId) {
             for(var u in users){
@@ -40,7 +62,6 @@
         function findUserByCredentials(username, password) {
             // console.log(users);
             for(var u in users){
-
                 if(users[u].username == username && users[u].password == password){
                     return angular.copy(users[u]);
                 }
