@@ -23,27 +23,32 @@
                         </md-button>
                     </div>
                     <div ng-if="model.user">
-                        <md-button href="#/user/{{model.userId}}">
-                            <md-icon md-svg-icon="icons/face.svg">
-                            </md-icon>
-                            {{model.user.firstName}}
-                        </md-button>
 
-                        <!--<md-menu>-->
-                            <!--<md-button aria-label="Open menu with custom trigger" class="" ng-click="$mdOpenMenu()"> Test </md-button>-->
-                            <!--<md-menu-content width="4" ng-mouseleave="$mdMenu.close()">-->
-                                <!--<md-menu-item>-->
-                                    <!--<md-button ng-click="">-->
-                                        <!--Profile-->
-                                    <!--</md-button>-->
-                                <!--</md-menu-item>-->
-                                <!--<md-menu-item>-->
-                                    <!--<md-button>-->
-                                        <!--Logout-->
-                                    <!--</md-button>-->
-                                <!--</md-menu-item>-->
-                            <!--</md-menu-content>-->
-                        <!--</md-menu>-->
+
+                        <md-menu md-offset="40 40">
+                            <md-button md-autofocus aria-label="Open menu with custom trigger"
+                                       ng-mouseenter="$mdOpenMenu()"
+                                       href="#/user/{{model.userId}}"
+                                       style="margin-right: 50px;">
+                                <md-icon md-svg-icon="icons/face.svg">
+                                </md-icon>
+                                {{model.user.firstName}}
+                            </md-button>
+                            <!--<md-button aria-label="Open menu with custom trigger" class="" ng-mouseenter="$mdOpenMenu()"> Test </md-button>-->
+                            <md-menu-content direction="down" width="2" ng-mouseleave="$mdMenu.close()">
+                                <md-menu-item>
+                                    <md-button href="#/user/{{model.userId}}">
+                                        <md-icon md-svg-icon="icons/person_black.svg">
+                                        </md-icon>Profile
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button href="#/">
+                                        Logout
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
                     </div>
                 </div>
             </md-toolbar>

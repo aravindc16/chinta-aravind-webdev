@@ -28,23 +28,23 @@
 .overlay{
      /*opacity:0.5;*/
      background-color:#a498b1;
-     /*position:absolute;*/
+     position:absolute;
      width:100%;
      height:100%;
      top:0px;
      left:0px;
-     z-index:1000;
+     z-index:0;
  }
 
 .overlay-landing-color{
     opacity:0.3;
     background-color:#a498b1;
-    position:fixed;
+    position:absolute;
     width:100%;
     height:100%;
     top:0px;
     left:0px;
-    z-index:1000;
+    z-index:0;
 }
 
 .overlay-landing-content{
@@ -55,7 +55,7 @@
     height:100%;
     top:0px;
     left:0px;
-    z-index:1000;
+    z-index:0;
 }
 
 .overlay-landing{
@@ -77,12 +77,12 @@
 
     /* Pick a solid background color that will be displayed while the background image is loading */
     background-color:#464646;
-    position:fixed;
+    position:absolute;
     width:100%;
     height:100%;
     top:0px;
     left:0px;
-    z-index:1000;
+    z-index:0;
 }
 
 .margins{
