@@ -8,17 +8,11 @@
                         <label>Name</label>
                         <input ng-model="model.widget.name" type="text" />
                     </md-input-container>
-                    <div>
-                        <md-button ng-class="">
-                            <md-icon md-svg-icon="icons/bold.svg">
 
-                            </md-icon>
-                        </md-button>
-                    </div>
-                    <md-input-container class="md-block" flex md-no-float>
+
+                    <md-input-container class="md-block" flex>
                         <label>Text</label>
-                        <!--<input ng-model="model.widget.text" type="text" />-->
-                        <textarea ng-model="model.widget.text" rows="4"></textarea>
+                        <text-angular ng-model="model.widget.text"></text-angular>
                     </md-input-container>
                 </div>
             </md-content>
