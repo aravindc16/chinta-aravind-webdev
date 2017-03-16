@@ -24,7 +24,7 @@
                             <div ng-show="model.loading" layout="column" layout-align="center center">
                                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                             </div>
-                            <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.widgetType">
+                            <md-card ng-repeat="widget in model.widgets" ng-switch on="widget.type">
                                 <md-card-content layout="row" layout-align="space-between">
 
                                     <div ng-switch-when="HEADER">

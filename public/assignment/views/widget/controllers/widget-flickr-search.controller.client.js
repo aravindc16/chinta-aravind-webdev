@@ -33,9 +33,9 @@
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server;
             url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
 
-            var promise = WidgetService.updateWidget(vm.widgetId, {url: url, widgetType: 'IMAGE', width: '100%'});
+            var promise = WidgetService.updateWidget(vm.widgetId, {url: url, type: 'IMAGE', width: '100%'});
             promise.success(function (widget) {
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+widget._id);
+                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widgetId);
             })
 
         }

@@ -87,7 +87,7 @@
         vm.createHTML = createHTML;
 
         function createHTML(widget){
-            widget.widgetType = 'HTML';
+            widget.type = 'HTML';
             //Promise for HEADER.
             var promise = WidgetService.createWidget(vm.pageId, widget);
             promise.success(function (widget) {
@@ -98,7 +98,7 @@
         }
 
         function createYoutube(widget){
-            widget.widgetType = 'YOUTUBE';
+            widget.type = 'YOUTUBE';
             //Promise for YOUTUBE.
             var promise = WidgetService.createWidget(vm.pageId, widget);
             promise.success(function (widget) {
@@ -109,7 +109,7 @@
         }
 
         function createImage(widget){
-            widget.widgetType = 'IMAGE';
+            widget.type = 'IMAGE';
             //Promise for IMAGE.
             var promise = WidgetService.createWidget(vm.pageId, widget);
             promise.success(function (widget) {
@@ -119,7 +119,7 @@
         }
 
         function createHeader(widget) {
-            widget.widgetType = 'HEADER';
+            widget.type = 'HEADER';
             var promise = WidgetService.createWidget(vm.pageId, widget);
             promise.success(function (widget) {
                 vm.widget = widget;

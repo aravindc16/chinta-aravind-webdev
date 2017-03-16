@@ -1,21 +1,9 @@
 /**
  * Created by aravindchinta on 2/22/17.
  */
-module.exports = function (app) {
+module.exports = function (app, model) {
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
-
-    var widgets = [
-        { "_id": "1", "widgetType": "HEADER", "pageId": "3", "size": 2, "text": "GIZMODO"},
-        { "_id": "2", "widgetType": "HEADER", "pageId": "2", "size": 4, "text": "Lorem ipsum"},
-        { "_id": "3", "widgetType": "IMAGE", "pageId": "3", "width": "100%",
-            "url": "http://lorempixel.com/400/200/"},
-        { "_id": "4", "widgetType": "HTML", "pageId": "3", "text": "<p>Lorem ipsum</p>"},
-        { "_id": "5", "widgetType": "HEADER", "pageId": "1", "size": 4, "text": "Lorem ipsum"},
-        { "_id": "6", "widgetType": "YOUTUBE", "pageId": "1", "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": "7", "widgetType": "HTML", "pageId": "2", "text": "<p>Lorem ipsum</p>"}
-    ];
 
     app.get('/api/widget/:widgetId', findWidgetById);
     app.get('/api/page/:pageId/widget', findWidgetsByPageId);
@@ -40,105 +28,146 @@ module.exports = function (app) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        for(var i in widgets) {
-            if(widgets[i]._id == widgetId) {
-                widgets[i].url = "/uploads/" + filename;
-                widgets[i].width = width;
-            }
-        }
-
-        res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
-
+        // for(var i in widgets) {
+        //     if(widgets[i]._id == widgetId) {
+        //         widgets[i].url = "/uploads/" + filename;
+        //         widgets[i].width = width;
+        //     }
+        // }
+        var url = "/uploads/" + filename;
+        model.WidgetModel.updateWidget(widgetId, {'type': 'IMAGE', 'url': url, 'width': width })
+            .then(function (widget) {
+                res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
+            }, function (err) {
+                res.send('Could not update image');
+            })
     }
 
     function deleteWidget(req, res){
         var widgetId = req.params.widgetId;
-        for(var w in widgets){
-            if(widgets[w]._id == widgetId){
-                widgets.splice(w, 1);
-                res.sendStatus(200);
-            }
-        }
+
+        model.WidgetModel.deleteWidget(widgetId)
+            .then(function (widget) {
+                res.send(200);
+            },function () {
+                res.sendStatus(500).send('Could not delete widget');
+            });
     }
 
     function updateWidget(req, res){
         var widgetId = req.params.widgetId;
         var widget = req.body;
 
-        for(var w in widgets){
-            if(widgets[w]._id == widgetId && widget.widgetType == 'HEADER'){
-                widgets[w].text = widget.text;
-                widgets[w].size = widget.size;
-                res.send(widgets[w]);
-                return;
-            }else if(widgets[w]._id == widgetId && widget.widgetType == 'IMAGE'){
-                widgets[w].url = widget.url;
-                widgets[w].width = widget.width;
-                res.send(widgets[w]);
-                return;
-            }else if(widgets[w]._id == widgetId && widget.widgetType == 'YOUTUBE'){
-                widgets[w].url = widget.url;
-                widgets[w].width = widget.width;
-                res.send(widgets[w]);
-                return;
-            }else if(widgets[w]._id == widgetId && widget.widgetType == 'HTML'){
-                widgets[w].text = widget.text;
-                widgets[w].size = widget.size;
-                res.send(widgets[w]);
-                return;
-            }
-        }
+        model.WidgetModel.updateWidget(widgetId, widget)
+            .then(function (widget) {
+                res.send(widget);
+            }, function (err) {
+                res.sendStatus(500).send('Could not update the' + widget.type+ 'widget')
+            });
     }
 
     function createWidget(req, res) {
         var pageId = req.params.pageId;
         var widget = req.body;
 
-        if(widget.widgetType == 'HEADER'){
-            widget._id = (new Date()).getTime();
-            widget.pageId = pageId;
+        if(widget.type == 'HEADER'){
             widget.size = 3;
             widget.text = 'Change the text';
-            widgets.push(widget);
-            res.send(widget);
-        }else if(widget.widgetType == 'IMAGE'){
-            widget._id = (new Date()).getTime();
-            widget.pageId = pageId;
+            model.WidgetModel.createWidget(pageId, widget)
+                .then(function (widget) {
+                    model.PageModel.findPageById(pageId)
+                        .then(function (page) {
+                            page.widgets.push(widget._id);
+                            page.save();
+                            res.send(widget);
+                        }, function (err) {
+                            res.sendStatus(404).send('Could not find page to update ref of widget');
+                        })
+
+                }, function (err) {
+                    // console.log(err);
+                    res.send('Could not create Header Widget');
+                });
+        }else if(widget.type == 'IMAGE'){
+
+            widget.type = 'IMAGE';
             widget.width = '100%';
             widget.url = '';
-            widgets.push(widget);
-            res.send(widget);
-        }else if(widget.widgetType == 'YOUTUBE'){
-            widget._id = (new Date()).getTime();
-            widget.pageId = pageId;
+            model.WidgetModel.createWidget(pageId, widget)
+                .then(function (widget) {
+                    model.PageModel.findPageById(pageId)
+                        .then(function (page) {
+                            page.widgets.push(widget._id);
+                            page.save();
+                            res.send(widget);
+                        }, function (err) {
+                            res.sendStatus(404).send('Could not find page to update ref of widget');
+                        })
+
+                }, function (err) {
+                    res.sendStatus(500).send('Could not create Widget');
+                });
+        }else if(widget.type == 'YOUTUBE'){
+
+            widget.type = 'YOUTUBE';
             widget.width = '100%';
             widget.url = '';
-            widgets.push(widget);
-            res.send(widget);
+            model.WidgetModel.createWidget(pageId, widget)
+                .then(function (widget) {
+                    model.PageModel.findPageById(pageId)
+                        .then(function (page) {
+                            page.widgets.push(widget._id);
+                            page.save();
+                            res.send(widget);
+                        }, function (err) {
+                            res.sendStatus(404).send('Could not find page to update ref of widget');
+                        })
+
+                }, function (err) {
+                    res.sendStatus(500).send('Could not create Widget');
+                });
         }
-        else if(widget.widgetType == 'HTML'){
-            widget._id = (new Date()).getTime();
-            widget.pageId = pageId;
-            widget.size = '3';
+        else if(widget.type == 'HTML'){
+
+            widget.type = 'HTML';
+            widget.size = 3;
             widget.text = '<p>Your HTML Text</p>';
-            widgets.push(widget);
-            res.send(widget);
+            model.WidgetModel.createWidget(pageId, widget)
+                .then(function (widget) {
+                    model.PageModel.findPageById(pageId)
+                        .then(function (page) {
+                            page.widgets.push(widget._id);
+                            page.save();
+                            res.send(widget);
+                        }, function (err) {
+                            res.sendStatus(404).send('Could not find page to update ref of widget');
+                        })
+
+                }, function (err) {
+                    res.sendStatus(500).send('Could not create Widget');
+                });
         }
     }
 
     function findWidgetsByPageId(req, res){
         var pageId = req.params.pageId;
-        var localWidgets = widgets.filter(function (w) {
-            return w.pageId == pageId;
-        });
-        res.send(localWidgets);
+
+        model.WidgetModel.findWidgetsByPageId(pageId)
+            .then(function (widgets) {
+                res.send(widgets);
+            }, function (err) {
+                res.sendStatus(500).send('Could not find widgets for the page');
+            });
     }
 
     function findWidgetById(req, res) {
         var widgetId = req.params.widgetId;
-        var widget= widgets.find(function (w) {
-            return w._id == widgetId;
-        })
-        res.send(widget);
+        
+        model.WidgetModel.findWidgetById(widgetId)
+            .then(function (widget) {
+                res.send(widget);
+            }, function (err) {
+                res.sendStatus(404).send('Could not find widget');
+            });
     }
 }
