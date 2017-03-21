@@ -11,7 +11,7 @@ module.exports = function (app, model) {
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
     app.post('/api/upload', upload.single('myFile'), uploadImage);
-
+    
     function uploadImage(req, res){
 
         var widgetId      = req.body.widgetId;

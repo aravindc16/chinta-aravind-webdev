@@ -12,10 +12,15 @@
             'findPageByPageId': findPageByPageId,
             'createPage': createPage,
             'updatePage': updatePage,
-            'deletePage': deletePage
+            'deletePage': deletePage,
+            'sortWidgets': sortWidgets
         }
 
         return api;
+
+        function sortWidgets(pageId, start, end) {
+            return $http.put('/page/'+pageId+'/widget?initial='+start+'&final='+end);
+        }
 
         function deletePage(pageId){
             return $http.delete('/api/page/'+pageId);

@@ -9,15 +9,20 @@ module.exports = function () {
         'findUserById': findUserById,
         'findUserByUsername': findUserByUsername,
         'deleteUser': deleteUser,
-        'updateUser': updateUser
+        'updateUser': updateUser,
+        'setModel': setModel
     };
-
+    var model = {};
     var mongoose = require('mongoose');
 
     var UserSchema = require('./user.schema.server')();
     var UserModel = mongoose.model('UserModel', UserSchema);
 
     return api;
+
+    function setModel(_model) {
+        model = _model;
+    }
 
     function updateUser(userId, user){
         return UserModel.update({'_id':userId},

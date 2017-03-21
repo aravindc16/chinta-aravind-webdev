@@ -9,6 +9,20 @@ module.exports = function (app, model) {
     app.post('/api/website/:websiteId/page', createPage);
     app.put('/api/page/:pageId', updatePage);
     app.delete('/api/page/:pageId', deletePage);
+    app.put('/page/:pageId/widget', updateSortableWidgets);
+
+    function updateSortableWidgets(req, res) {
+        var pageId = req.params.pageId;
+        var start = req.query.initial;
+        var end = req.query.final;
+
+        model.PageModel.updateSortableWidgets(pageId, start, end)
+            .then(function (response) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(404);
+            });
+    }
 
     function deletePage(req, res){
         var pageId = req.params.pageId;
@@ -17,12 +31,36 @@ module.exports = function (app, model) {
         // 2. Deleting the widgets of that page
         // 3. Deleting the page
 
+        console.log('in delete fn, page service server')
         model.PageModel.findPageById(pageId)
             .then(function (page) {
+                console.log(page);
                 model.WebsiteModel.findWebsiteById(page._website)
                     .then(function (website) {
+                        console.log('Deleting website ref.')
                         website.pages.pull(pageId);          //First deleting the website reference
                         website.save();
+
+                        model.WidgetModel.findWidgetsByPageId(pageId)
+                            .then(function (widgets) {
+                                console.log('deleting widgets')
+                                for(var w in widgets){
+                                    model.WidgetModel.deleteWidget(widgets[w]._id)
+                                        .then(function (widget) {
+                                            res.sendStatus(200);
+                                        })
+                                }
+
+                                model.PageModel.deletePage(pageId)
+                                    .then(function (page) {
+                                        console.log('page got deleted')
+                                        res.sendStatus(200);
+                                    },function (err) {
+                                        res.sendStatus(404).send('Page not found to delete');
+                                    });
+
+                            });
+
 
                     },function (err) {
                         res.sendStatus(404).send('Website not found to delete the ref');
@@ -32,24 +70,10 @@ module.exports = function (app, model) {
             });
 
         //Deleting all the widgets in a page.
-        model.WidgetModel.findWidgetsByPageId(pageId)
-            .then(function (widgets) {
-                for(var w in widgets){
-                    model.WidgetModel.deleteWidget(widgets[w]._id)
-                        .then(function (widget) {
-                            res.sendStatus(200);
-                        })
-                }
 
-            })
 
         //And then finally deleting the page.
-        model.PageModel.deletePage(pageId)
-            .then(function (page) {
-                res.sendStatus(200);
-            },function (err) {
-                res.sendStatus(404).send('Page not found to delete');
-            })
+
     }
 
     function updatePage(req, res) {

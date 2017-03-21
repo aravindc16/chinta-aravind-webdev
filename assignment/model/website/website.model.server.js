@@ -3,7 +3,7 @@
  */
 module.exports = function () {
     var mongoose = require('mongoose');
-
+    var model = {};
     var WebsiteSchema = require('./website.schema.server')();
     var WebsiteModel = mongoose.model('Website', WebsiteSchema);
 
@@ -12,10 +12,15 @@ module.exports = function () {
         'findAllWebsitesForUser': findAllWebsitesForUser,
         'findWebsiteById': findWebsiteById,
         'updateWebsite':updateWebsite,
-        'deleteWebsite': deleteWebsite
+        'deleteWebsite': deleteWebsite,
+        'setModel': setModel
     }
 
     return api;
+
+    function setModel(_model) {
+        model = _model;
+    }
     
     function deleteWebsite(websiteId) {
         return WebsiteModel.remove({'_id':websiteId});
