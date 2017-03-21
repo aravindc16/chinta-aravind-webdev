@@ -19,6 +19,7 @@ module.exports = function () {
     return api;
     
     function deletePage(pageId) {
+        console.log('Deleting now...')
         return PageModel.remove({'_id': pageId});
     }
     

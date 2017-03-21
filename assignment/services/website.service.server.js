@@ -23,25 +23,38 @@ module.exports = function (app, model) {
                             },function (err) {
                                 res.sendStatus(404).send('User not found to delete the ref');
                             })
-            },function (err) {
+            })
+                                                 //And then deleting the pages.
+        model.PageModel.findAllPagesForWebsite(websiteId)
+            .then(function (pages) {
+                for(var p in pages){
+
+                    model.WidgetModel.findWidgetsByPageId(pages[p]._id)
+                        .then(function (widgets) {
+                            for(var w in widgets){
+                                model.WidgetModel.deleteWidget(widgets[w]._id)
+                                    .then(function (widget) {
+                                        res.sendStatus(200).send('Successfully deleted the widget.')
+                                    })
+                            }
+                        });
+
+                    model.PageModel.deletePage(pages[p]._id)
+                        .then(function (page) {
+                            res.sendStatus(200);
+                        })
+                }
 
             })
-            // .then(function () {
-            //     model.PageModel.findAllPagesForWebsite(websiteId)
-            //         .then(function (pages) {
-            //             //TODO: Chain the delete of pages.
-            //         },function (err) {
-            //
-            //         })
-            // })
-            .then(function () {                                     //And then deleting the website.
-                model.WebsiteModel.deleteWebsite(websiteId)
-                    .then(function (website) {
-                        res.sendStatus(200);
-                    },function (err) {
-                        res.sendStatus(404).send('Website not found to delete');
-                    });
-            });
+
+
+        model.WebsiteModel.deleteWebsite(websiteId)
+            .then(function (website) {
+                res.sendStatus(200);
+            },function (err) {
+                res.sendStatus(404).send('Website not found to delete');
+            })
+
 
 
     }

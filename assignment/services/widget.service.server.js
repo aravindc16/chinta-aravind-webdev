@@ -28,12 +28,6 @@ module.exports = function (app, model) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        // for(var i in widgets) {
-        //     if(widgets[i]._id == widgetId) {
-        //         widgets[i].url = "/uploads/" + filename;
-        //         widgets[i].width = width;
-        //     }
-        // }
         var url = "/uploads/" + filename;
         model.WidgetModel.updateWidget(widgetId, {'type': 'IMAGE', 'url': url, 'width': width })
             .then(function (widget) {

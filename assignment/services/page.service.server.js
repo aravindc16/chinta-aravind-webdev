@@ -13,12 +13,15 @@ module.exports = function (app, model) {
     function deletePage(req, res){
         var pageId = req.params.pageId;
 
+        // 1. Deleting the website reference when the page is deleted
+        // 2. Deleting the widgets of that page
+        // 3. Deleting the page
+
         model.PageModel.findPageById(pageId)
             .then(function (page) {
-                // console.log('this is' + website);
                 model.WebsiteModel.findWebsiteById(page._website)
                     .then(function (website) {
-                        website.pages.pull(pageId);          //First deleting the user reference
+                        website.pages.pull(pageId);          //First deleting the website reference
                         website.save();
 
                     },function (err) {
@@ -26,15 +29,27 @@ module.exports = function (app, model) {
                     })
             },function (err) {
 
-            })
-            .then(function () {                                     //And then deleting the website.
-                model.PageModel.deletePage(pageId)
-                    .then(function (page) {
-                        res.sendStatus(200);
-                    },function (err) {
-                        res.sendStatus(404).send('Page not found to delete');
-                    });
             });
+
+        //Deleting all the widgets in a page.
+        model.WidgetModel.findWidgetsByPageId(pageId)
+            .then(function (widgets) {
+                for(var w in widgets){
+                    model.WidgetModel.deleteWidget(widgets[w]._id)
+                        .then(function (widget) {
+                            res.sendStatus(200);
+                        })
+                }
+
+            })
+
+        //And then finally deleting the page.
+        model.PageModel.deletePage(pageId)
+            .then(function (page) {
+                res.sendStatus(200);
+            },function (err) {
+                res.sendStatus(404).send('Page not found to delete');
+            })
     }
 
     function updatePage(req, res) {
@@ -43,7 +58,7 @@ module.exports = function (app, model) {
 
         model.PageModel.updatePage(pageId, page)
             .then(function () {
-               res.send(page);
+                res.send(page);
             },function (err) {
                 res.sendStatus(500).send('Could not update the page');
             });
