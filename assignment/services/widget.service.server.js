@@ -150,6 +150,27 @@ module.exports = function (app, model) {
                 }, function (err) {
                     res.sendStatus(500).send('Could not create Widget');
                 });
+        }else if(widget.type == 'TEXT'){
+
+            widget.type = 'TEXT';
+            widget.text = 'Sample Text'
+            widget.rows = 1;
+            widget.formatted = false;
+            widget.placeholder = 'Feel free to edit your TEXT widget'
+            model.WidgetModel.createWidget(pageId, widget)
+                .then(function (widget) {
+                    model.PageModel.findPageById(pageId)
+                        .then(function (page) {
+                            page.widgets.push(widget._id);
+                            page.save();
+                            res.send(widget);
+                        }, function (err) {
+                            res.sendStatus(404).send('Could not find page to update ref of widget');
+                        })
+
+                }, function (err) {
+                    res.sendStatus(500).send('Could not create Widget');
+                });
         }
     }
 

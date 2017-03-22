@@ -50,6 +50,12 @@ module.exports = function () {
             return WidgetModel.update({'_id':widgetId}, {$set : {'url': widget.url, 'width': widget.width}});
         } else if(widget.type=='HTML'){
             return WidgetModel.update({'_id':widgetId}, {$set : {'text': widget.text, 'size': widget.size}});
+        } else if(widget.type=='TEXT'){
+            return WidgetModel.update({'_id':widgetId},
+                {$set : {'text':widget.text,
+                    'rows': widget.rows,
+                    'formatted': widget.formatted},
+                    'placeholder': widget.placeholder});
         }
 
     }

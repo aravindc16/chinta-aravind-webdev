@@ -43,6 +43,13 @@
                     </div>
                     <md-divider></md-divider>
                 </md-list-item>
+                <md-list-item ng-click="model.createText(widget)">
+                    <div style="align-content: flex-start">
+                        <md-icon md-svg-icon="icons/html.svg" aria-label="youtube"></md-icon>
+                        <label ng-model="widget.type" ng-init="widget.type='TEXT'">Text</label>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
             </md-content>
         </div>
     </main>

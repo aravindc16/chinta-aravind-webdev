@@ -85,7 +85,17 @@
         vm.createImage = createImage;
         vm.createYoutube = createYoutube;
         vm.createHTML = createHTML;
+        vm.createText = createText;
 
+        function createText(widget) {
+            widget.type = 'TEXT';
+            WidgetService.createWidget(vm.pageId, widget)
+                .success(function (widget) {
+                    vm.widget = widget;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
+                })
+        }
+        
         function createHTML(widget){
             widget.type = 'HTML';
             //Promise for HEADER.
