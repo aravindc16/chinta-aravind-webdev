@@ -15,10 +15,17 @@ module.exports = function () {
         'updatePage': updatePage,
         'deletePage': deletePage,
         'updateSortableWidgets': updateSortableWidgets,
-        'setModel': setModel
+        'setModel': setModel,
+        'findAllWidgetsForPage': findAllWidgetsForPage
     }
 
     return api;
+    
+    function findAllWidgetsForPage(pageId) {
+        return PageModel.findById(pageId)
+            .populate("widgets")
+            .exec();
+    }
 
     function setModel(_model) {
         model = _model;
@@ -27,13 +34,10 @@ module.exports = function () {
     function updateSortableWidgets(pageId, start, end) {
         return PageModel.findById(pageId)
             .then(function (page) {
-                console.log(start, end);
-                console.log("before" + page.widgets);
-                var final = page.widgets.splice(start, 1)[0];
-                console.log("final " + final);
-                page.widgets.splice(end, 0, final);
+                var final = page.widgets.splice(start-1, 1)[0];
+                page.widgets.splice(end-1, 0, final);
                 page.save();
-                console.log("after" + page.widgets);
+
             }, function (err) {
                 return err;
             });

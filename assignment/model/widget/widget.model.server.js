@@ -5,6 +5,7 @@ module.exports = function () {
     var mongoose = require('mongoose');
 
     var model = {};
+    var q = require('q');
     var WidgetSchema = require('./widget.schema.server')();
     var WidgetModel = mongoose.model('WidgetModel', WidgetSchema);
     var PageModel = require('../page/page.model.server');
@@ -29,14 +30,15 @@ module.exports = function () {
         return WidgetModel.remove({'_id':widgetId});
     }
 
+    //Fetching all the widgets from the page and displaying them in the order.
     function findWidgetsByPageId(pageId) {
-        // You need to return the array of [widgets] from Page schema else the order of widgets won't be saved.
+        var d = q.defer();
+        model.PageModel.findAllWidgetsForPage(pageId)
+            .then(function (pages) {
+                d.resolve(pages.widgets);
+            });
 
-        return model.PageModel.findPageById(pageId)
-            .then(function (page) {
-                return WidgetModel.find({'_id': {$in : page.widgets}});
-
-            })
+        return d.promise;
     }
 
     function updateWidget(widgetId, widget) {

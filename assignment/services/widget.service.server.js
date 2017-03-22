@@ -40,12 +40,22 @@ module.exports = function (app, model) {
     function deleteWidget(req, res){
         var widgetId = req.params.widgetId;
 
-        model.WidgetModel.deleteWidget(widgetId)
+        model.WidgetModel.findWidgetById(widgetId)
             .then(function (widget) {
-                res.send(200);
-            },function () {
-                res.sendStatus(500).send('Could not delete widget');
-            });
+                model.PageModel.findPageById(widget._page)
+                    .then(function (page) {
+                        page.widgets.pull(widgetId);
+                        page.save();
+
+                        model.WidgetModel.deleteWidget(widgetId)
+                            .then(function (widget) {
+                                res.send(200);
+                            },function () {
+                                res.sendStatus(500).send('Could not delete widget');
+                            });
+                    })
+            })
+
     }
 
     function updateWidget(req, res){
@@ -148,6 +158,7 @@ module.exports = function (app, model) {
 
         model.WidgetModel.findWidgetsByPageId(pageId)
             .then(function (widgets) {
+                // console.log(widgets);
                 res.send(widgets);
             }, function (err) {
                 res.sendStatus(500).send('Could not find widgets for the page');
