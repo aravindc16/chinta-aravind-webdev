@@ -1,7 +1,12 @@
 
+<!--Formatted-->
 <div ng-if="widget.formatted">
-    <text-angular ng-model="widget.text"></text-angular>
+    <md-input-container class="md-block">
+        <text-angular ng-model="widget.text"></text-angular>
+    </md-input-container>
 </div>
+
+<!--If not formatted-->
 <md-input-container class="md-block">
     {{widget.placeholder}}
     <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
