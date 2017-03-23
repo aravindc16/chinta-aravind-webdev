@@ -34,16 +34,16 @@ module.exports = function (app, model) {
         console.log('in delete fn, page service server')
         model.PageModel.findPageById(pageId)
             .then(function (page) {
-                console.log(page);
+
                 model.WebsiteModel.findWebsiteById(page._website)
                     .then(function (website) {
-                        console.log('Deleting website ref.')
+
                         website.pages.pull(pageId);          //First deleting the website reference
                         website.save();
 
                         model.WidgetModel.findWidgetsByPageId(pageId)
                             .then(function (widgets) {
-                                console.log('deleting widgets')
+
                                 for(var w in widgets){
                                     model.WidgetModel.deleteWidget(widgets[w]._id)
                                         .then(function (widget) {
@@ -53,14 +53,12 @@ module.exports = function (app, model) {
 
                                 model.PageModel.deletePage(pageId)
                                     .then(function (page) {
-                                        console.log('page got deleted')
+
                                         res.sendStatus(200);
                                     },function (err) {
                                         res.sendStatus(404).send('Page not found to delete');
                                     });
-
                             });
-
 
                     },function (err) {
                         res.sendStatus(404).send('Website not found to delete the ref');
@@ -68,12 +66,6 @@ module.exports = function (app, model) {
             },function (err) {
 
             });
-
-        //Deleting all the widgets in a page.
-
-
-        //And then finally deleting the page.
-
     }
 
     function updatePage(req, res) {

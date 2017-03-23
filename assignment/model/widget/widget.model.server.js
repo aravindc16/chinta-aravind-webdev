@@ -8,7 +8,6 @@ module.exports = function () {
     var q = require('q');
     var WidgetSchema = require('./widget.schema.server')();
     var WidgetModel = mongoose.model('WidgetModel', WidgetSchema);
-    var PageModel = require('../page/page.model.server');
 
     var api = {
         'createWidget': createWidget,
@@ -27,7 +26,11 @@ module.exports = function () {
     }
 
     function deleteWidget(widgetId) {
-        return WidgetModel.remove({'_id':widgetId});
+        var d = q.defer();
+        return WidgetModel.remove({'_id':widgetId}, function (err, response) {
+            d.resolve(response);
+        });
+        return d.promise;
     }
 
     //Fetching all the widgets from the page and displaying them in the order.
@@ -61,11 +64,24 @@ module.exports = function () {
     }
 
     function findWidgetById(widgetId) {
-        return WidgetModel.findOne({'_id':widgetId});
+        var d = q.defer();
+        WidgetModel.findOne({'_id':widgetId}, function (err, widget) {
+            if(widget){
+                d.resolve(widget);
+            }else{
+                d.reject(err);
+            }
+        });
+
+        return d.promise;
     }
 
     function createWidget(pageId, widget) {
         widget._page = pageId;
-        return WidgetModel.create(widget);
+        var d = q.defer();
+        WidgetModel.create(widget, function (err, widget) {
+            d.resolve(widget);
+        });
+        return d.promise;
     }
 }

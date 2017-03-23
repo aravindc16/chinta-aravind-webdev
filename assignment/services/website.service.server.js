@@ -14,7 +14,6 @@ module.exports = function (app, model) {
 
         model.WebsiteModel.findWebsiteById(websiteId)
             .then(function (website) {
-                // console.log('this is' + website);
                 model.UserModel.findUserById(website._user)
                     .then(function (user) {
                         user.websites.pull(websiteId);          //First deleting the user reference
@@ -22,9 +21,7 @@ module.exports = function (app, model) {
 
                         model.PageModel.findAllPagesForWebsite(websiteId)
                             .then(function (pages) {
-                                console.log(pages);
                                 for(var p in pages){
-
                                     model.WidgetModel.findWidgetsByPageId(pages[p]._id)
                                         .then(function (widgets) {
                                             for(var w in widgets) {
@@ -55,13 +52,6 @@ module.exports = function (app, model) {
                     });
             })
         //And then deleting the pages.
-
-
-
-
-
-
-
     }
 
     function updateWebsite(req, res){

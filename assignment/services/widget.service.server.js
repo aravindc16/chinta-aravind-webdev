@@ -89,7 +89,6 @@ module.exports = function (app, model) {
                         })
 
                 }, function (err) {
-                    // console.log(err);
                     res.send('Could not create Header Widget');
                 });
         }else if(widget.type == 'IMAGE'){
@@ -179,7 +178,6 @@ module.exports = function (app, model) {
 
         model.WidgetModel.findWidgetsByPageId(pageId)
             .then(function (widgets) {
-                // console.log(widgets);
                 res.send(widgets);
             }, function (err) {
                 res.sendStatus(500).send('Could not find widgets for the page');

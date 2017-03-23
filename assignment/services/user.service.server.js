@@ -1,8 +1,6 @@
 /**
  * Created by aravindchinta on 2/21/17.
  */
-
-
 module.exports = function (app, model) {
 
     // added the words login and register to differentiate between the two calls
@@ -18,7 +16,7 @@ module.exports = function (app, model) {
 
         model.UserModel.deleteUser(userId)
             .then(function (user) {         //Call if this function is successful.
-                res.sendStatus(200);        //TODO: Remove the websites. Call the delete which calls pages/widgets.
+                res.sendStatus(200);        
             }, function () {
                 res.sendStatus(400);
             });

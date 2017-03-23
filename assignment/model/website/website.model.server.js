@@ -4,6 +4,7 @@
 module.exports = function () {
     var mongoose = require('mongoose');
     var model = {};
+    var q = require('q');
     var WebsiteSchema = require('./website.schema.server')();
     var WebsiteModel = mongoose.model('Website', WebsiteSchema);
 
@@ -23,7 +24,11 @@ module.exports = function () {
     }
     
     function deleteWebsite(websiteId) {
-        return WebsiteModel.remove({'_id':websiteId});
+        var d= q.defer();
+        WebsiteModel.remove({'_id':websiteId}, function (err, response) {
+            d.resolve(response);
+        });
+        return d.promise;
     }
     
     function updateWebsite(websiteId, website) {
@@ -31,15 +36,33 @@ module.exports = function () {
     }
     
     function findWebsiteById(websiteId) {
-        return WebsiteModel.findOne({'_id': websiteId});
+        var d = q.defer();
+        WebsiteModel.findOne({'_id': websiteId}, function (err, website) {
+            if(website){
+                d.resolve(website);
+            }else{
+                d.reject(err);
+            }
+
+        });
+        return d.promise;
     }
     
     function findAllWebsitesForUser(userId) {
-        return WebsiteModel.find({'_user':userId});
+        var d = q.defer();
+        WebsiteModel.find({'_user':userId}, function (err, websites) {
+            d.resolve(websites);
+        });
+
+        return d.promise;
     }
 
     function createWebsiteForUser(userId, website) {
         website._user = userId;
-        return WebsiteModel.create(website);
+        var d = q.defer();
+        WebsiteModel.create(website, function (err, website) {
+            d.resolve(website);
+        });
+        return d.promise;
     }
 }

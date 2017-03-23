@@ -13,6 +13,7 @@ module.exports = function () {
         'setModel': setModel
     };
     var model = {};
+    var q= require('q');
     var mongoose = require('mongoose');
 
     var UserSchema = require('./user.schema.server')();
@@ -30,23 +31,53 @@ module.exports = function () {
     }
     
     function deleteUser(userId) {
-        return UserModel.remove({'_id':userId});
+        var d = q.defer();
+        UserModel.remove({'_id':userId}, function (err, response) {
+            d.resolve(response);
+        });
+        return d.promise;
     }
     
     function findUserByUsername(username) {
-        return UserModel.findOne({'username':username});
+        var d =q.defer();
+        UserModel.findOne({'username':username}, function (err, username) {
+            d.resolve(username);
+        });
+
+        return d.promise;
     }
     
     function findUserById(userId) {
-        return UserModel.findById(userId);
+        var d = q.defer();
+        UserModel.findById(userId, function (err, user) {
+            if(user){
+                d.resolve(user);
+            }else{
+                d.reject(err);
+            }
+
+        });
+        return d.promise;
     }
 
     function findUserByCredentials(username, password){
+        var d = q.defer();
+        UserModel.findOne({'username': username, 'password':password}, function (err, credentials) {
+            if(credentials){
+                d.resolve(credentials);
+            }else{
+                d.reject(err);
+            }
+        });
 
-        return UserModel.findOne({'username': username, 'password':password});
+        return d.promise;
     }
 
     function createUser(user){
-        return UserModel.create(user);
+        var d = q.defer();
+        UserModel.create(user, function (err, user) {
+            d.resolve(user);
+        });
+        return d.promise;
     }
 }
