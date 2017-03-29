@@ -41,7 +41,7 @@
             </md-content>
             <section layout="row" layout-align="center">
                 <md-button class="md-raised md-primary" href="#/user/{{model.user._id}}/website">Websites</md-button>
-                <md-button class="md-raised md-warn" href="#/login">Logout</md-button>
+                <md-button class="md-raised md-warn" ng-click="model.logout()">Logout</md-button>
             </section>
         </div>
     </main>

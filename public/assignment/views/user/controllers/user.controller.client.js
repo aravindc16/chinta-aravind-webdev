@@ -58,9 +58,10 @@
                 }).error(function (err){
 
                     // This is the promise for create user
-                    var promise = UserService.createUser(user);
+                    var promise = UserService.registerUser(user);
                     promise.success(function (user){
 
+                        vm.currentUser = user;
                         $mdDialog.show(
                             $mdDialog.alert()
                                 .clickOutsideToClose(true)
@@ -68,7 +69,7 @@
                                 .textContent("You have registered successfully.")
                                 .ok("OK"));
                         $location.url('/user/'+user._id);
-                    })
+                    });
                 })
 
 
@@ -76,23 +77,35 @@
         }
     }
 
-    function profileController($routeParams, $mdDialog, UserService, $location){
+    function profileController($routeParams, $mdDialog, UserService, $location, checkLoggedIn){
         var vm = this;
 
+        console.log(checkLoggedIn);
         var userId = $routeParams['uid'];
+        vm.currentUser = checkLoggedIn;
 
         function init() {
-            var promise = UserService.findUserById(userId);
-            promise.success(function (user){
-                vm.user = user;
-            })
+            vm.user = checkLoggedIn;
+            // var promise = UserService.findUserById(userId);
+            // promise.success(function (user){
+            //     vm.user = user;
+            // })
 
         }
         init();
 
         //event handlers
+        vm.logout = logout;
         vm.update = update;
         vm.deleteUser = deleteUser;
+
+        function logout(){
+            UserService.logout().then(function (response) {
+                $location.url('/login')
+            }, function (err) {
+                
+            })
+        }
 
         function deleteUser() {
 
@@ -100,7 +113,7 @@
                 .title("Unregister Warning!")
                 .textContent("Are you sure you want to unregister and delete your account?")
                 .ok("Yes")
-                .cancel("No!");
+                .cancel("No!..");
 
             $mdDialog.show(confirm).then(yes, nope);
 
@@ -164,11 +177,12 @@
                         .ok("OK"));
             }
 
-            var promise = UserService.findUserByCredentials(user.username, user.password);
+            var promise = UserService.login(user);
 
             promise
                 .success(function(user){
                     vm.loading = false;
+                    vm.currentUser = user;
                     $location.url('/user/'+user._id);
 
             })
@@ -187,7 +201,6 @@
                             .ok("OK"));
 
                 });
-
 
         }
     }

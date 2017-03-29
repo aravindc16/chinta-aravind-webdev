@@ -3,20 +3,126 @@
  */
 module.exports = function (app, model) {
 
-    // added the words login and register to differentiate between the two calls
+    var passport = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
+    var facebookConfig = {
+        clientID     : '769613213196086',
+        clientSecret : '071ef886873392d9ed4dcf07950e4702',
+        callbackURL  : "http://localhost:3000/auth/assignment/facebook/callback"
+    };
+
+    // added the words login and register to differentiate between the two call
     app.get('/api/user/login/', findUserByCredentials);
     app.get('/api/user/register/', findUserByUsername);
     app.get('/api/user/:userId', findUserById);
     app.put('/api/user/:userId', updateUser);
     app.post('/api/user', createUser);
     app.delete('/api/user/:userId', deleteUser);
+    //Secure login
+    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/loggedin', loggedIn);
+    app.post('/api/logout', logout);
+    app.post('/api/register', registerUser);
+    app.get ('/auth/assignment/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/assignment/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/assignment/#/user',
+            failureRedirect: '/assignment/#/login'
+        }));
+    //Passport
+    passport.deserializeUser(deserializeUser);
+    passport.serializeUser(serializeUser);
+    passport.use(new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
+    function registerUser(req, res) {
+        var user = req.body;
+        
+        model.UserModel.createUser(user)
+            .then(function (user) {
+                console.log(user);
+                if(user){
+                    req.login(user, function (err) {
+                        if(err){
+                            res.sendStatus(400).send(err);
+                        } else {
+                            res.send(user);
+                        }
+                    });
+                }
+            });
+    }
+
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200);
+    }
+
+    function loggedIn(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+    function localStrategy(username, password, done) {
+
+        model.UserModel.findUserByCredentials(username,password)
+            .then(function (user) {
+                if(user){
+                    return done(null, user);
+                }else {
+                    return done(null, false);
+                }
+            }, function (error) {
+                if(error){
+                    return done(err);
+                }
+            })
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        console.log(profile);
+        model.UserModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function (fbuser) {
+                    if (fbuser) {
+                        return done(null, fbuser);
+                    }
+                    else {
+                        fbuser = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            facebook: {
+                                token: token,
+                                id: profile.id,
+                                displayName: profile.displayName
+                            }
+                        };
+                        return model.UserModel
+                            .createUser(fbuser);
+
+                    }
+                }
+            )
+            .then(
+                function (user) {
+                    done(null, user);
+                }
+            );
+
+    }
+    
     function deleteUser(req, res){
         var userId = req.params.userId;
 
         model.UserModel.deleteUser(userId)
             .then(function (user) {         //Call if this function is successful.
-                res.sendStatus(200);        
+                res.sendStatus(200);
             }, function () {
                 res.sendStatus(400);
             });
@@ -89,5 +195,26 @@ module.exports = function (app, model) {
             }, function (error) {
                 res.sendStatus(404).send('No user found');
             })
+    }
+
+    //Passport functions
+
+    //Serialize maintains encrypted cookie session for a particular user.
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    //Deserialize: Get the currently logged in user by decrypting the encrypted cookie.
+    function deserializeUser(user, done) {
+        model.UserModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
     }
 }

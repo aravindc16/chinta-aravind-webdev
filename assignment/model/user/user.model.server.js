@@ -10,7 +10,8 @@ module.exports = function () {
         'findUserByUsername': findUserByUsername,
         'deleteUser': deleteUser,
         'updateUser': updateUser,
-        'setModel': setModel
+        'setModel': setModel,
+        'findUserByFacebookId': findUserByFacebookId
     };
     var model = {};
     var q= require('q');
@@ -20,6 +21,10 @@ module.exports = function () {
     var UserModel = mongoose.model('UserModel', UserSchema);
 
     return api;
+
+    function findUserByFacebookId(fbid) {
+        return UserModel.findOne({'facebook.id': fbid});
+    }
 
     function setModel(_model) {
         model = _model;
@@ -61,23 +66,20 @@ module.exports = function () {
     }
 
     function findUserByCredentials(username, password){
-        var d = q.defer();
-        UserModel.findOne({'username': username, 'password':password}, function (err, credentials) {
-            if(credentials){
-                d.resolve(credentials);
-            }else{
-                d.reject(err);
-            }
+        return UserModel.findOne({
+            username:username,
+            password:password
         });
-
-        return d.promise;
     }
 
     function createUser(user){
-        var d = q.defer();
-        UserModel.create(user, function (err, user) {
-            d.resolve(user);
-        });
-        return d.promise;
+
+        return UserModel.create(user);
+
+        // var d = q.defer();
+        // UserModel.create(user, function (err, user) {
+        //     d.resolve(user);
+        // });
+        // return d.promise;
     }
 }

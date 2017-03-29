@@ -13,10 +13,30 @@
             "updateUser" : updateUser,
             "findUserByCredentials" : findUserByCredentials,
             "deleteUser": deleteUser,
-            "findUserByUsername": findUserByUsername
+            "findUserByUsername": findUserByUsername,
+            'login': login,
+            'loggedIn': loggedIn,
+            'logout': logout,
+            'registerUser': registerUser
         };
 
         return api;
+        
+        function registerUser(user) {
+            return $http.post('/api/register', user);
+        }
+
+        function logout() {
+            return $http.post('/api/logout');
+        }
+
+        function loggedIn() {
+            return $http.post('/api/loggedIn');
+        }
+
+        function login(user) {
+            return $http.post("/api/login", user);
+        }
 
         function findUserByUsername(username){
             return $http.get('/api/user/register?username='+username);
