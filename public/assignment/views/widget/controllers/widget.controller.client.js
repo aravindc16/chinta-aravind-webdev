@@ -72,7 +72,7 @@
         }
     }
 
-    function widgetNewController($routeParams, $location, WidgetService){
+    function widgetNewController($mdDialog, $routeParams, $location, WidgetService){
         var vm = this;
 
         vm.userId = $routeParams['uid'];
@@ -98,44 +98,81 @@
         
         function createHTML(widget){
             widget.type = 'HTML';
-            //Promise for HEADER.
-            var promise = WidgetService.createWidget(vm.pageId, widget);
-            promise.success(function (widget) {
-                vm.widget = widget;
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
-            })
+            if(!widget.name){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Widget Name Error!")
+                        .textContent("HTML Widget must have a name.")
+                        .ok("OK"));
+            }else {
+                //Promise for HEADER.
+                var promise = WidgetService.createWidget(vm.pageId, widget);
+                promise.success(function (widget) {
+                    vm.widget = widget;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
+                });
+            }
 
         }
 
         function createYoutube(widget){
             widget.type = 'YOUTUBE';
-            //Promise for YOUTUBE.
-            var promise = WidgetService.createWidget(vm.pageId, widget);
-            promise.success(function (widget) {
-                vm.widget = widget;
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
-            })
+            if(!widget.name){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Widget Name Error!")
+                        .textContent("HTML Widget must have a name.")
+                        .ok("OK"));
+            }else {
+                //Promise for YOUTUBE.
+                var promise = WidgetService.createWidget(vm.pageId, widget);
+                promise.success(function (widget) {
+                    vm.widget = widget;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
+                });
+            }
+
 
         }
 
         function createImage(widget){
             widget.type = 'IMAGE';
-            //Promise for IMAGE.
-            var promise = WidgetService.createWidget(vm.pageId, widget);
-            promise.success(function (widget) {
-                vm.widget = widget;
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
-            })
+            if(!widget.name){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Widget Name Error!")
+                        .textContent("HTML Widget must have a name.")
+                        .ok("OK"));
+            }else {
+                //Promise for IMAGE.
+                var promise = WidgetService.createWidget(vm.pageId, widget);
+                promise.success(function (widget) {
+                    vm.widget = widget;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
+                });
+            }
+
         }
 
         function createHeader(widget) {
             widget.type = 'HEADER';
-            var promise = WidgetService.createWidget(vm.pageId, widget);
-            promise.success(function (widget) {
-                vm.widget = widget;
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
-            })
-
+            if(!widget.name){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Widget Name Error!")
+                        .textContent("HTML Widget must have a name.")
+                        .ok("OK"));
+            }else {
+                var promise = WidgetService.createWidget(vm.pageId, widget);
+                promise.success(function (widget) {
+                    vm.widget = widget;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+vm.widget._id);
+                });
+            }
         }
     }
 

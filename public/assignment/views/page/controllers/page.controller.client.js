@@ -58,17 +58,25 @@
         }
 
         function updatePage(page){
-            var promise = PageService.updatePage(vm.pageId, page);
-            promise.success(function (page) {
-                vm.page = page;
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
-            })
-
+            if(!page.name){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Page Name Error!")
+                        .textContent("Page must have a name.")
+                        .ok("OK"));
+            }else {
+                var promise = PageService.updatePage(vm.pageId, page);
+                promise.success(function (page) {
+                    vm.page = page;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+                });
+            }
         }
 
     }
 
-    function pageNewController($routeParams, $location, PageService){
+    function pageNewController($mdDialog, $routeParams, $location, PageService){
         var vm = this;
 
         vm.userId = $routeParams['uid'];
@@ -86,11 +94,20 @@
         vm.createPage = createPage;
 
         function createPage(page){
-            var promise = PageService.createPage(vm.websiteId, page);
-            promise.success(function (page) {
-                $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
-            })
 
+            if(!page.name){
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Page Name Error!")
+                        .textContent("Page must have a name.")
+                        .ok("OK"));
+            }else {
+                var promise = PageService.createPage(vm.websiteId, page);
+                promise.success(function (page) {
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page');
+                });
+            }
         }
     }
 
