@@ -6,11 +6,12 @@ module.exports = function (app, model) {
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
+    var bcrypt = require("bcrypt-nodejs");
 
     var facebookConfig = {
         clientID     : '769613213196086',
         clientSecret : '071ef886873392d9ed4dcf07950e4702',
-        callbackURL  : "http://localhost:3000/auth/assignment/facebook/callback"
+        callbackURL  : "http://localhost:3000/auth/facebook/callback"
     };
 
     // added the words login and register to differentiate between the two call
@@ -25,8 +26,8 @@ module.exports = function (app, model) {
     app.post('/api/loggedin', loggedIn);
     app.post('/api/logout', logout);
     app.post('/api/register', registerUser);
-    app.get ('/auth/assignment/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/assignment/facebook/callback',
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/assignment/#/user',
             failureRedirect: '/assignment/#/login'
@@ -39,10 +40,10 @@ module.exports = function (app, model) {
 
     function registerUser(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         
         model.UserModel.createUser(user)
             .then(function (user) {
-                console.log(user);
                 if(user){
                     req.login(user, function (err) {
                         if(err){
@@ -71,11 +72,13 @@ module.exports = function (app, model) {
 
     function localStrategy(username, password, done) {
 
-        model.UserModel.findUserByCredentials(username,password)
+        model.UserModel.findUserByUsername(username)
             .then(function (user) {
-                if(user){
+                console.log(user);
+                console.log();
+                if(user && bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
-                }else {
+                } else {
                     return done(null, false);
                 }
             }, function (error) {

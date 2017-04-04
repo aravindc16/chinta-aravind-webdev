@@ -1,0 +1,157 @@
+create table Customer (
+phone bigint not null, 
+	id int not null primary key,
+	foreign key(id) references User(id) on update cascade on delete cascade,
+	addressID int not null
+	);
+
+
+create table CustomerFavOrder(
+customer int not null,
+favOrder int not null,
+foreign key (customer) references Customer(id) on update cascade on delete cascade,
+foreign key(favOrder) references MainOrder(orderNumber) on update cascade on delete cascade,
+primary key(customer, favOrder)
+);
+
+create table CustomerFavRestaurant(
+restaurant int not null,
+foreign key (restaurant) references Customer(id) on update cascade on delete cascade,
+favRestaurant int not null,
+foreign key (favRestaurant) references Restaurant(id) on update cascade on delete cascade,
+primary key(restaurant, favRestaurant)
+);
+
+create table DBAdmin(
+id int not null primary key,
+foreign key(id) references User(id)
+	on update cascade
+	on delete cascade);
+
+create table RestaurantRep(
+id int not null primary key,
+foreign key(id) references User(id)
+	on update cascade
+	on delete cascade,
+restaurantId int not null);
+
+
+create table Feedback(
+id int not null primary key,
+username varchar(200),
+comment varchar(1000),
+restaurant int not null,
+foreign key(restaurant) references Restaurant(id) on update cascade on delete cascade,
+givenBy int not null,
+foreign key(givenBy) references User(id) on update cascade on delete cascade
+);
+
+
+create table User(
+id int not null primary key,
+username varchar(200) not null,
+email varchar(200) not null,
+password varchar(200) not null,
+address varchar(1000) not null
+);
+
+
+
+create table Restaurant(
+id int not null primary key,
+name varchar(200) not null,
+address varchar(1000) not null,
+phone bigint not null,
+zone enum ('East', 'West', "North", 'South', 'Central') not null
+);
+
+
+
+create table RestaurantMenu(
+menu int not null,
+foreign key (menu) references Restaurant(id) on update cascade on delete cascade,
+foodItem int not null,
+foreign key(foodItem) references FoodItem(id) on update cascade on delete cascade,
+primary key(menu, foodItem)
+);
+
+
+create table MainOrder(
+id int not null,
+orderNumber int not null primary key,
+status enum ('New', 'Approved', 'Declined') not null,
+user int not null,
+foreign key(user) references Customer(id) on update cascade on delete cascade,
+restaurant int not null,
+foreign key (restaurant) references Restaurant(id) on update cascade on delete cascade
+);
+
+
+
+create table MainOrderFoodItems(
+foodItem int not null,
+foreign key(foodItem) references MainOrder(orderNumber) on update cascade on delete cascade,
+items int not null,
+foreign key(items) references FoodItem(id) on update cascade on delete cascade,
+primary key(foodItem, items)
+);
+
+
+create table FoodOrder(
+id int not null primary key,
+foreign key(id) references MainOrder(orderNumber) on update cascade on delete cascade
+);
+
+
+
+create table TableReservation(
+id int not null primary key auto_increment,
+foreign key(id) references MainOrder(orderNumber) on update cascade on delete cascade,
+numberOfPeople int not null,
+timeOfReservation date not null);
+
+
+create table FoodItem(
+id int not null primary key,
+name varchar(200) not null,
+cost double not null,
+allergens enum ('Soy','Egg','Peanuts','Berries','Seafood'),
+partOf int not null,
+foreign key(partOf) references Restaurant (id) on update cascade on delete cascade);
+
+
+
+create table Bill(
+id int not null,
+billNumber int not null primary key,
+amount double not null,
+forOrder int not null,
+foreign key(forOrder) references MainOrder(orderNumber) on update cascade on delete cascade);
+
+create table BillFoodItems(
+bill int not null,
+foreign key (bill) references Bill(billNumber) on update cascade on delete cascade,
+items int not null,
+foreign key(items) references FoodItem(id) on update cascade on delete cascade,
+primary key(bill, items));
+
+
+create table RestaurantCuisine(
+rest int not null,
+foreign key(rest) references Restaurant(id) on update cascade on delete cascade,
+cuisine enum ('Indian', 'American', "Italian", 'Chinese', 'Mexican', 'Thai') not null,
+primary key(rest, cuisine)
+);
+
+
+
+create table RestaurantFoodItem(
+makes int not null,
+foreign key(makes) references FoodItem(id) on update cascade on delete cascade,
+madeBy int not null,
+foreign key(madeBy) references Restaurant(id) on update cascade on delete cascade,
+primary key(makes, madeBy)
+);
+
+insert into User(username, email, password, address) values('achinta','achinta@gmail.com','123', '100 Main Street');
+alter table restaurant add column type varchar(200);
