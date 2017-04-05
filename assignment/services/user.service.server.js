@@ -6,13 +6,26 @@ module.exports = function (app, model) {
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
+    var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
     var facebookConfig = {
         clientID     : '769613213196086',
         clientSecret : '071ef886873392d9ed4dcf07950e4702',
-        callbackURL  : "http://localhost:3000/auth/facebook/callback"
+        callbackURL  : 'http:/chinta-aravind-webdev.herokuapp.com/assignment/auth/facebook/callback'
     };
+
+    var googleConfig = {
+        clientID     : '310800080297-h3hkkglgshd7jeocajp4p1irbjm18jhg.apps.googleusercontent.com',
+        clientSecret : 'mC7kYjLHY1DJaklqcxp8yvHl',
+        callbackURL  : 'http://localhost:3000/assignment/auth/google/callback'
+    };
+
+    // var facebookConfig = {
+    //     clientID     : process.env.FACEBOOK_APP_ID,
+    //     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    //     callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    // }
 
     // added the words login and register to differentiate between the two call
     app.get('/api/user/login/', findUserByCredentials);
@@ -26,22 +39,24 @@ module.exports = function (app, model) {
     app.post('/api/loggedin', loggedIn);
     app.post('/api/logout', logout);
     app.post('/api/register', registerUser);
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/assignment/#/user',
-            failureRedirect: '/assignment/#/login'
+    app.get ('/assignment/auth/facebook111', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/assignment/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get('/assignment/auth/google/callback', passport.authenticate('google', {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'
+        }));
+    app.get('/assignment/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'
         }));
     //Passport
+
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use(new LocalStrategy(localStrategy));
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.deserializeUser(deserializeUser);
     passport.serializeUser(serializeUser);
-    passport.use(new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     function registerUser(req, res) {
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
-        
+
         model.UserModel.createUser(user)
             .then(function (user) {
                 if(user){
@@ -70,12 +85,49 @@ module.exports = function (app, model) {
         res.json(user);
     }
 
+    function googleStrategy(token, refreshToken, profile, done) {
+
+        console.log(profile);
+        model.UserModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return model.UserModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
     function localStrategy(username, password, done) {
 
         model.UserModel.findUserByUsername(username)
             .then(function (user) {
-                console.log(user);
-                console.log();
                 if(user && bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
                 } else {
@@ -90,36 +142,32 @@ module.exports = function (app, model) {
 
     function facebookStrategy(token, refreshToken, profile, done) {
         console.log(profile);
+
         model.UserModel
             .findUserByFacebookId(profile.id)
-            .then(
-                function (fbuser) {
-                    if (fbuser) {
-                        return done(null, fbuser);
-                    }
-                    else {
-                        fbuser = {
-                            username: profile.displayName.replace(/ /g, ''),
-                            facebook: {
-                                token: token,
-                                id: profile.id,
-                                displayName: profile.displayName
-                            }
-                        };
-                        return model.UserModel
-                            .createUser(fbuser);
-
-                    }
+            .then(function (user) {
+                if (user) {
+                    return done(null, user);
                 }
-            )
-            .then(
-                function (user) {
-                    done(null, user);
+                else {
+                    var userDetails = {};
+                    userDetails.username = profile.name.givenName || 'Anon';
+                    userDetails.facebook = {id: profile.id, token: token};
+                    return model.UserModel.createUser(userDetails);
                 }
-            );
+            }, function (err) {
+                return done(err);
+            })
+            .then(function (user) {
+                if (user) {
+                    return done(null, user);
+                }
+            }, function (err) {
+                return  done(err);
+            });
 
     }
-    
+
     function deleteUser(req, res){
         var userId = req.params.userId;
 
@@ -160,11 +208,11 @@ module.exports = function (app, model) {
         //DB query
         model.UserModel.findUserById(userId)
             .then(function (user) {
-                res.send(user);
-            },
-            function (err) {
-                res.sendStatus(404);
-            });
+                    res.send(user);
+                },
+                function (err) {
+                    res.sendStatus(404);
+                });
     }
 
     function findUserByUsername(req, res){
@@ -177,10 +225,10 @@ module.exports = function (app, model) {
                     }else {
                         res.send(user);
                     }
-            },
-            function (err) {
-                res.sendStatus(505);
-            })
+                },
+                function (err) {
+                    res.sendStatus(505);
+                })
 
     }
 

@@ -7,13 +7,15 @@
     
     function Configuration($routeProvider) {
         $routeProvider
-            .when('/', {
-                templateUrl: 'views/landing/templates/landing.view.client.html'
-            })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
                 controllerAs: 'model'
+            })
+            .when('/admin', {
+                templateUrl: 'views/user/admin/templates/admin-profile.view.client.html'
+                // controller: 'landingController',
+                // controllerAs: 'model'
             })
             .when('/signup', {
                 templateUrl: 'views/user/templates/signup.view.client.html',
@@ -35,5 +37,6 @@
                 controller: 'landingController',
                 controllerAs: 'model'
             })
+
     }
 })();
