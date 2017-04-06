@@ -19,10 +19,14 @@
     <md-card layout-padding ng-repeat="place in model.results">
 
         <div layout="row" layout-padding>
-            <img src="{{place.categories[0].icon.prefix}}bg_88{{place.categories[0].icon.suffix}}" height="30px" width="30px">
+            <img src="{{place.venue.categories[0].icon.prefix}}bg_88{{place.venue.categories[0].icon.suffix}}" height="30px" width="30px">
+
             <div layout="column">
-                {{place.name}}
+                <a class="md-primary" ng-click="model.getRestaurantDetails(place.venue.id)"><h2 style="color: blue">{{place.venue.name}}</h2></a>
+                {{place.venue.categories[0].shortName}} . {{place.venue.price.currency}}<br>
+                {{place.venue.location.address}}, {{place.venue.location.city}} {{place.venue.location.state}}
             </div>
+            <span class="pull-right" style="float: right" layout-padding>{{place.venue.rating}}</span>
         </div>
 
     </md-card>

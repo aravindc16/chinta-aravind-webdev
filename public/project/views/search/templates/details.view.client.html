@@ -1,0 +1,72 @@
+<div>
+    <header>
+        <md-toolbar style="background-color: rgba(41, 38, 140, 0.49);" md-scroll-shrink md-whiteframe="10">
+            <div class="md-toolbar-tools">
+                <a href="#/" ng-if="!model.user">
+                    <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
+                </a>
+                <a href="#/{{model.userId}}" ng-if="model.user">
+                    <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
+                </a>
+                <span flex></span>
+                <md-button ng-show="model.user" href="#/">
+                    Logout
+                </md-button>
+            </div>
+        </md-toolbar>
+    </header>
+
+<div layout-padding>
+    <md-card layout-padding layout="row" layout-fill>
+            <!--<div layout="row" ng-repeat="photo in model.details.photos.groups[0].items">-->
+                <!--<img ng-src="{{photo.prefix}}150x150{{photo.suffix}}"/>-->
+            <!--</div>-->
+            <div layout="column" layout-padding>
+                <h1>{{model.details.name}}</h1>
+                <span flex style="font-style: italic">"{{model.details.description}}"</span>
+                <span>{{model.details.location.address}}, {{model.details.location.city}} {{model.details.location.state}}</span>
+                <span>{{model.details.contact.formattedPhone}}</span>
+                <span>Timings:</span>
+                <div style="color:saddlebrown" ng-repeat="time in model.details.hours.timeframes">
+                    <div ng-repeat="t in time.open">
+                        {{time.days}}: {{t.renderedTime}}<br>
+                    </div>
+                </div>
+
+                <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
+
+                <md-button ng-if="!model.user.favourite" ng-click="model.addFavoriteRestaurant(model.details.id)" class="md-icon-button md-accent" aria-label="Favorite">
+                    <md-icon md-svg-icon="icons/favorite_empty.svg"></md-icon>
+                </md-button>
+
+                <md-button ng-if="model.user.favourite" ng-click="model.deleteFavoriteRestaurant(model.details.id)" class="md-icon-button md-accent" aria-label="Favorite">
+                    <md-icon md-svg-icon="icons/favorite_empty.svg"></md-icon>
+                </md-button>
+
+                <span>Top Comments</span>
+                <div ng-repeat="comment in model.details.tips.groups[0].items | limitTo: 10">
+                   <i> " {{comment.text}} " </i>
+                    <md-divider></md-divider>
+                </div>
+            </div>
+
+
+        <div style="height: 200px; width: 400px" class="pull-right-map" id="map" layout="column">
+
+        </div>
+    </md-card>
+
+    <md-card layout-padding>
+        <div layout="column" ng-repeat="review in model.reviews">
+
+        </div>
+        Liked it? Review, please.
+        <md-input-container>
+            <label>Review here...</label>
+            <textarea ng-model="review.text" row="4"></textarea>
+        </md-input-container>
+        <md-button ng-click="model.addReviews(model.details.name, review)" class="md-primary">Save</md-button>
+    </md-card>
+</div>
+
+</div>

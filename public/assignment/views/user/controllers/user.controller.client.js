@@ -88,7 +88,7 @@
 
             UserService.findCurrentUser()
                 .then(function (response) {
-                    
+
                     vm.user = response.data;
                 }, function (err) {
 

@@ -2,6 +2,21 @@
     background-color: #8596f5;
 }
 
+.pull-right{
+    position: absolute;
+    left: auto;
+    right: 20px;
+    border-radius: 3px;
+    background-color: coral;
+    color: white;
+}
+
+.pull-right-map{
+    position: absolute;
+    left: auto;
+    right: 20px;
+}
+
 .font-styling{
     font-family: 'Open Sans';
     font-style: italic;
@@ -94,6 +109,7 @@
 
 md-card{
     border-radius: 10px;
+    font-family: 'Sansita', sans-serif;
 }
 
 .login-page{
