@@ -17,10 +17,15 @@
             'login': login,
             'loggedIn': loggedIn,
             'logout': logout,
-            'registerUser': registerUser
+            'registerUser': registerUser,
+            'findCurrentUser': findCurrentUser
         };
 
         return api;
+
+        function findCurrentUser() {
+            return $http.get('/api/user');
+        }
         
         function registerUser(user) {
             return $http.post('/api/register', user);

@@ -85,11 +85,14 @@
         vm.currentUser = checkLoggedIn;
 
         function init() {
-            vm.user = checkLoggedIn;
-            // var promise = UserService.findUserById(userId);
-            // promise.success(function (user){
-            //     vm.user = user;
-            // })
+
+            UserService.findCurrentUser()
+                .then(function (response) {
+                    
+                    vm.user = response.data;
+                }, function (err) {
+
+                })
 
         }
         init();
@@ -157,7 +160,7 @@
 
     }
 
-    function loginController(UserService, $location, $mdDialog){
+    function loginController($http, UserService, $location, $mdDialog){
         var vm = this;
 
         //event handlers

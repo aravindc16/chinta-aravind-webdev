@@ -7,10 +7,20 @@
     
     function Configuration($routeProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: 'views/landing/templates/landing.view.client.html',
+                controller: 'landingController',
+                controllerAs: 'model'
+            })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
                 controllerAs: 'model'
+            })
+            .when('/searchResults/:name/location/:city', {
+            templateUrl: 'views/search/templates/search-results.view.client.html',
+            controller: 'SearchResultsController',
+            controllerAs: 'model'
             })
             .when('/admin', {
                 templateUrl: 'views/user/admin/templates/admin-profile.view.client.html'

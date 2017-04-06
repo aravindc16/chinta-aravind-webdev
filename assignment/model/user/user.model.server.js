@@ -78,13 +78,7 @@ module.exports = function () {
     }
 
     function createUser(user){
-
         return UserModel.create(user);
 
-        // var d = q.defer();
-        // UserModel.create(user, function (err, user) {
-        //     d.resolve(user);
-        // });
-        // return d.promise;
     }
 }

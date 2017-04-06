@@ -59,31 +59,50 @@
         <div layout="column" layout-fill flex>
             <div layout="column" layout-align="center center" flex>
 
-                <md-card style="background-color: rgba(0, 0, 0, 0.56);" md-whiteframe="20">
+                <md-card style="background-color: rgba(117, 76, 23, 0.31)" md-whiteframe="20">
                     <div layout="column" layout-align="center center" layout-padding>
                         <span style="color: white;" layout="column" layout-align="center center">
                             <h1 class="center-header">FoodForThought</h1>
                         </span>
                         <p class="text-styling"><b>Best places to eat, drink and have fun around you.</b></p>
+
                         <md-card-actions layout="row" class="card-actions" flex>
                 <span style="padding-right: 23px;" flex>
 
                 <md-input-container class="md-block">
                     <label style="font-style: italic;color: white;font-size: 20px">Search me...</label>
-                    <input type="search">
+                    <input ng-model="search.restaurant" type="text">
                 </md-input-container>
                     </span>
                             <md-divider></md-divider>
                             <span style="padding-left: 23px;" flex>
                 <md-input-container>
                     <label style="font-style: italic;color: white;font-size: 20px">City</label>
-                    <input type="text">
+                    <input ng-model="search.city" type="text">
                 </md-input-container>
                     </span>
-                            <md-button class="md-icon-button md-primary" style="margin-top: 15px;" aria-label="search">
+                            <md-button ng-click="model.searchPlace(search)" class="md-icon-button md-primary" style="margin-top: 15px;" aria-label="search">
                                 <md-icon md-svg-icon="icons/search_white.svg"></md-icon>
                             </md-button>
                         </md-card-actions>
+                        <div layout="row" style="color: white">
+
+                            <md-button ng-click="model.getFood()" aria-label="restaurants in your location">
+                                <img ng-src="icons/food.svg">
+
+                            </md-button>
+
+                            <md-button ng-click="model.getCoffee()" aria-label="coffee in your location">
+                                <img ng-src="icons/coffee.png" height="30px" width="30px">
+
+                            </md-button>
+
+                            <md-button ng-click="model.getDrinks()" aria-label="drinks in your location">
+                                <img ng-src="icons/drinks.png" height="30px" width="30px">
+
+                            </md-button>
+                        </div>
+
                     </div>
                 </md-card>
 

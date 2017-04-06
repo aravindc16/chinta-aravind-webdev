@@ -10,9 +10,9 @@ module.exports = function (app, model) {
     var bcrypt = require("bcrypt-nodejs");
 
     var facebookConfig = {
-        clientID     : '769613213196086',
-        clientSecret : '071ef886873392d9ed4dcf07950e4702',
-        callbackURL  : 'http:/chinta-aravind-webdev.herokuapp.com/assignment/auth/facebook/callback'
+        clientID     : '277687679348560',
+        clientSecret : 'd5a4aea417b3ab0a1b191cfedef2865c',
+        callbackURL  : '/assignment/api/auth/facebook/callback'
     };
 
     var googleConfig = {
@@ -39,12 +39,13 @@ module.exports = function (app, model) {
     app.post('/api/loggedin', loggedIn);
     app.post('/api/logout', logout);
     app.post('/api/register', registerUser);
-    app.get ('/assignment/auth/facebook111', passport.authenticate('facebook', { scope : 'email' }));
+    app.get ('/assignment/api/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/assignment/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    app.get('/assignment/auth/google/callback', passport.authenticate('google', {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'
+    app.get('/assignment/auth/google/callback', passport.authenticate('google', {successRedirect: '/assignment/#/login', failureRedirect: '/assignment/#/login'
         }));
-    app.get('/assignment/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'
+    app.get('/assignment/api/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'
         }));
+    app.get('/api/user', findCurrentUser);
     //Passport
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -52,6 +53,10 @@ module.exports = function (app, model) {
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.deserializeUser(deserializeUser);
     passport.serializeUser(serializeUser);
+
+    function findCurrentUser(req, res){
+        res.json(req.user);
+    }
 
     function registerUser(req, res) {
         var user = req.body;
@@ -141,7 +146,6 @@ module.exports = function (app, model) {
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        console.log(profile);
 
         model.UserModel
             .findUserByFacebookId(profile.id)
@@ -151,7 +155,9 @@ module.exports = function (app, model) {
                 }
                 else {
                     var userDetails = {};
-                    userDetails.username = profile.name.givenName || 'Anon';
+                    userDetails.username = profile.displayName.replace(/ /g, '');
+                    userDetails.firstName = profile.displayName.split(' ')[0];
+                    userDetails.lastName = profile.displayName.split(' ')[1];
                     userDetails.facebook = {id: profile.id, token: token};
                     return model.UserModel.createUser(userDetails);
                 }
