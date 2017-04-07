@@ -32,6 +32,7 @@
         vm.getDrinks = getDrinks;
         vm.getCoffee = getCoffee;
 
+
         function searchPlace(search) {
             var place = search.restaurant;
             var city = search.city;
@@ -42,7 +43,6 @@
                 }else {
                     city = "Boston";
                 }
-
             }
 
             if(!place){
@@ -66,15 +66,57 @@
         }
 
         function getFood() {
-            
+            var place = "pizza";
+            var city;
+            if(!city){
+                if(vm.userId){
+                    city = user.city;
+                }else {
+                    city = "Boston";
+                }
+            }
+
+            if(vm.userId){
+                $location.url('/searchResults/'+place+'/location/'+city+"/user/"+vm.userId);
+            }else{
+                $location.url('/searchResults/'+place+'/location/'+city);
+            }
         }
 
         function getDrinks() {
+            var place = "bar";
+            var city;
+            if(!city){
+                if(vm.userId){
+                    city = user.city;
+                }else {
+                    city = "Boston";
+                }
+            }
 
+            if(vm.userId){
+                $location.url('/searchResults/'+place+'/location/'+city+"/user/"+vm.userId);
+            }else{
+                $location.url('/searchResults/'+place+'/location/'+city);
+            }
         }
 
         function getCoffee() {
+            var place = "coffee";
+            var city;
+            if(!city){
+                if(vm.userId){
+                    city = user.city;
+                }else {
+                    city = "Boston";
+                }
+            }
 
+            if(vm.userId){
+                $location.url('/searchResults/'+place+'/location/'+city+"/user/"+vm.userId);
+            }else{
+                $location.url('/searchResults/'+place+'/location/'+city);
+            }
         }
 
 

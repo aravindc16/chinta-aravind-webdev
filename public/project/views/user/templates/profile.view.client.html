@@ -57,7 +57,7 @@
         </md-card-actions>
     </md-card>
     <!--Favourites-->
-    <md-card style="height: 400px;font-family: 'Sansita', sans-serif;">
+    <md-card layout="column" style="font-family: 'Sansita', sans-serif;">
         <md-card-content>
             <strong>Your Reviews</strong><br>
             <div layout="column" ng-repeat="review in model.reviews">
@@ -65,9 +65,16 @@
                 <i>{{review.review}}</i>
                 <br>
             </div>
-            <strong>Your Favourites</strong>
-            <div layout="column" ng-repeat="favorite in model.user.favourites">
-                <ul><li><a href="#/details/{{favorite.id}}/user/{{model.userId}}">{{favorite.restaurantName}}</a></li></ul>
+
+            <div layout="column">
+                <md-list>
+                    <strong>Your Favourites</strong>
+                    <md-list-item ng-repeat="favorite in model.user.favourites">
+                        <md-divider></md-divider>
+                        <a href="#/details/{{favorite.id}}/user/{{model.userId}}">{{favorite.restaurantName}}</a>
+                        <md-button ng-click="model.removeFavorite(favorite)" class="pull-right-map" aria-label="remove favorite"><md-icon md-svg-icon="./icons/delete_black.svg"></md-icon></md-button>
+                    </md-list-item>
+                </md-list>
             </div>
         </md-card-content>
     </md-card>

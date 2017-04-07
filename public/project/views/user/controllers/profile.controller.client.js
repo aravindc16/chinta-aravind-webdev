@@ -15,6 +15,7 @@
             var favs = [];
 
             vm.deleteUser = deleteUser;
+            vm.removeFavorite = removeFavorite;
 
             function init() {
 
@@ -36,17 +37,16 @@
                             .then(function (response) {
                                 vm.reviews = response.data;
                             });
-
-
-
-
                     });
-
-
-
-
             }
             init();
+
+            function removeFavorite(favorite) {
+                UserService.deleteFavoriteRestaurant(vm.userId, favorite)
+                    .then(function (response) {
+                        init();
+                    });
+            }
 
             function deleteUser(){
             var confirm = $mdDialog.confirm()
