@@ -11,7 +11,7 @@ module.exports = function () {
         email: String,
         city: String,
         password: String,
-        favourites: [{type: mongoose.Schema.Types.ObjectId, ref:'RestaurantModel'}],
+        favourites: [{'id': String, 'restaurantName': String}],
         follows: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
         followedBy: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
         roles: [{type: String, enum: ['USER', 'ADMIN'], default: 'USER'}]

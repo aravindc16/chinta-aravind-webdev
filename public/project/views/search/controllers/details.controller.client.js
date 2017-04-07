@@ -16,14 +16,27 @@
 
         vm.addReviews = addReviews;
         vm.viewProfile = viewProfile;
+        vm.addFavoriteRestaurant = addFavoriteRestaurant;
+        vm.deleteFavoriteRestaurant = deleteFavoriteRestaurant;
 
         function init() {
 
-
-
             UserService.findUserById(vm.userId)
                 .then(function (response) {
-                    user=response.data;
+                    user = response.data;
+                    if(user.favourites.length == 0){
+                        vm.favorite = false;
+                    }else{
+                        for (var f in user.favourites) {
+                            if (vm.id == user.favourites[f].id) {
+                                vm.favorite = true;
+                                break;
+                            } else {
+                                vm.favorite = false;
+                            }
+                        }
+                    }
+
                 });
 
 
@@ -62,10 +75,48 @@
                 }, function (err) {
                     
                 });
-
-
+            
         }
         init();
+        
+        function deleteFavoriteRestaurant(restaurant) {
+            UserService.deleteFavoriteRestaurant(vm.userId, restaurant)
+                .then(function (response) {
+                    UserService.findUserById(vm.userId)
+                        .then(function (response) {
+                            user=response.data;
+                            for(var f in user.favourites){
+                                if(restaurant.id != user.favourites[f].id){
+                                    vm.favorite = false;
+                                }else{
+                                    vm.favorite = true;
+                                }
+                            }
+                        });
+                });
+            init();
+        }
+        
+        function addFavoriteRestaurant(restaurant) {
+
+            UserService.addFavoriteRestaurant(vm.userId, restaurant)
+                .then(function (response) {
+                    UserService.findUserById(vm.userId)
+                        .then(function (response) {
+                            user=response.data;
+                            for(var f in user.favourites){
+                                if(restaurant.id == user.favourites[f].id){
+                                    vm.favorite = true;
+                                }else{
+                                    vm.favorite = false;
+                                }
+                            }
+                        });
+
+                }, function (err) {
+
+                })
+        }
 
 
         function viewProfile(username) {

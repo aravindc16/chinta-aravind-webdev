@@ -47,7 +47,7 @@
 
                 UserService.findUserByUsername(user.username)
                     .then(function (response) {
-                        if(response.data){
+                        if(!response.data){
                             UserService.createUser(user)
                                 .then(function (response) {
                                     var user = response.data;

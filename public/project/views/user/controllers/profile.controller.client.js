@@ -6,12 +6,13 @@
     angular.module('FoodForThoughtApp')
         .controller('profileController', ProfileController);
 
-    function ProfileController($mdDialog, $location, $http, $routeParams, UserService, ReviewService) {
+    function ProfileController($mdDialog, $location, $http, $routeParams, UserService, ReviewService, FoursquareSearchService) {
             var vm = this;
 
             vm.userId = $routeParams['uid'];
 
             var User = {};
+            var favs = [];
 
             vm.deleteUser = deleteUser;
 
@@ -20,6 +21,7 @@
                 UserService.findUserById(vm.userId)
                     .then(function (response) {
                         vm.user=response.data;
+
                         vm.avatar = vm.user.firstName.charAt(0) + vm.user.lastName.charAt(0);
                         var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+vm.user.city+'&sensor=false&key=AIzaSyB5Ae4ILNTqkQEPmk0AeBlak_bkNJI9wm4';
                         $http.get(url)
@@ -34,6 +36,10 @@
                             .then(function (response) {
                                 vm.reviews = response.data;
                             });
+
+
+
+
                     });
 
 

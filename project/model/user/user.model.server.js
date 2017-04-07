@@ -11,7 +11,9 @@ module.exports = function () {
         'findUserByCredentials': findUserByCredentials,
         'findUserByUsername': findUserByUsername,
         'deleteUser': deleteUser,
-        'updateUser': updateUser
+        'updateUser': updateUser,
+        'addFavoriteRestaurant': addFavoriteRestaurant,
+        'deleteFavoriteRestaurant': deleteFavoriteRestaurant
     };
 
     var model = {};
@@ -20,6 +22,25 @@ module.exports = function () {
     var UserModel = mongoose.model('userModel', UserSchema);
 
     return api;
+
+    function deleteFavoriteRestaurant(userId, restaurant) {
+
+        return UserModel.update({'_id': userId}, {$pull :{'favourites': {'id':restaurant.id}}});
+    }
+
+    function addFavoriteRestaurant(userId, restaurant) {
+
+        var fav = {
+            'id': restaurant.id,
+            'restaurantName': restaurant.name
+        };
+
+        return UserModel.findOne({'_id':userId})
+            .then(function (user) {
+                user.favourites.push(fav);
+                return user.save();
+            });
+    }
 
     function updateUser(userId, user) {
         return UserModel.update({'_id': userId},

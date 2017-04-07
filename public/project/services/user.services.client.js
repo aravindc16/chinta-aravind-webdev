@@ -17,10 +17,20 @@
             "updateUser" : updateUser,
             "findUserByCredentials" : findUserByCredentials,
             "deleteUser": deleteUser,
-            "findUserByUsername": findUserByUsername
+            "findUserByUsername": findUserByUsername,
+            "addFavoriteRestaurant":addFavoriteRestaurant,
+            'deleteFavoriteRestaurant':deleteFavoriteRestaurant
         };
 
         return api;
+
+        function deleteFavoriteRestaurant(userId, restaurant) {
+            return $http.put('/api/project/restaurant/favorite/delete/'+userId, restaurant);
+        }
+
+        function addFavoriteRestaurant(userId, restaurant) {
+            return $http.put('/api/project/restaurant/favorite/'+userId, restaurant);
+        }
 
         function findUserByUsername(username) {
             return $http.get('/api/project/username?username='+username);

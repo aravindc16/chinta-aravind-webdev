@@ -66,6 +66,9 @@
                 <br>
             </div>
             <strong>Your Favourites</strong>
+            <div layout="column" ng-repeat="favorite in model.user.favourites">
+                <ul><li><a href="#/details/{{favorite.id}}/user/{{model.userId}}">{{favorite.restaurantName}}</a></li></ul>
+            </div>
         </md-card-content>
     </md-card>
 

@@ -35,12 +35,12 @@
 
                 <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
 
-                <md-button ng-if="!model.user.favourite" ng-click="model.addFavoriteRestaurant(model.details.id)" class="md-icon-button md-accent" aria-label="Favorite">
+                <md-button ng-show="model.favorite == false" ng-click="model.addFavoriteRestaurant(model.details)" class="md-icon-button md-accent" aria-label="Favorite">
                     <md-icon md-svg-icon="icons/favorite_empty.svg"></md-icon>
                 </md-button>
 
-                <md-button ng-if="model.user.favourite" ng-click="model.deleteFavoriteRestaurant(model.details.id)" class="md-icon-button md-accent" aria-label="Favorite">
-                    <md-icon md-svg-icon="icons/favorite_empty.svg"></md-icon>
+                <md-button ng-show="model.favorite == true" ng-click="model.deleteFavoriteRestaurant(model.details)" class="md-icon-button md-accent" aria-label="Favorite">
+                    <md-icon md-svg-icon="icons/favorite.svg"></md-icon>
                 </md-button>
 
                 <span>Top Comments</span>
