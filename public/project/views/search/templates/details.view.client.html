@@ -9,7 +9,7 @@
                     <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                 </a>
                 <span flex></span>
-                <md-button ng-show="model.user" href="#/">
+                <md-button ng-show="model.userId" href="#/">
                     Logout
                 </md-button>
             </div>
@@ -55,12 +55,16 @@
 
         </div>
     </md-card>
-
+<!--Reviews-->
     <md-card layout-padding>
+        <strong>Reviews From Other Users:</strong>
         <div layout="column" ng-repeat="review in model.reviews">
-
+            <a ng-show="model.userId" href="#/user/{{model.userId}}">@{{review.username}}</a>
+            <a ng-show="!model.userId">@{{review.username}}</a>
+            <i>"{{review.review}}"</i>
+            <br>
         </div>
-        Liked it? Review, please.
+        <strong>Liked it? Review, please.</strong>
         <md-input-container>
             <label>Review here...</label>
             <textarea ng-model="review.text" row="4"></textarea>

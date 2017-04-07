@@ -10,6 +10,7 @@
         var vm = this;
 
         vm.userId = $routeParams['uid'];
+        // console.log(vm.userId);
 
         function init() {
             UserService.findUserById(vm.userId)
@@ -42,7 +43,12 @@
                         .textContent("Please enter a name or place or restaurant to search for.")
                         .ok("OK"));
             }else {
-                $location.url('/searchResults/'+place+'/location/'+city);
+                if(vm.userId){
+                    $location.url('/searchResults/'+place+'/location/'+city+"/user/"+vm.userId);
+                }else{
+                    $location.url('/searchResults/'+place+'/location/'+city);
+                }
+
 
             }
 

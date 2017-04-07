@@ -17,12 +17,22 @@
                 controller: 'loginController',
                 controllerAs: 'model'
             })
-            .when('/searchResults/:name/location/:city', {
+            .when('/searchResults/:name/location/:city/', {
+                templateUrl: 'views/search/templates/search-results.view.client.html',
+                controller: 'SearchResultsController',
+                controllerAs: 'model'
+            })
+            .when('/searchResults/:name/location/:city/user/:uid', {
                 templateUrl: 'views/search/templates/search-results.view.client.html',
                 controller: 'SearchResultsController',
                 controllerAs: 'model'
             })
             .when('/details/:id', {
+                templateUrl: 'views/search/templates/details.view.client.html',
+                controller: 'DetailsController',
+                controllerAs: 'model'
+            })
+            .when('/details/:id/user/:uid', {
                 templateUrl: 'views/search/templates/details.view.client.html',
                 controller: 'DetailsController',
                 controllerAs: 'model'

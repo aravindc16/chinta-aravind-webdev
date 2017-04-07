@@ -15,13 +15,16 @@ module.exports = function () {
     // mongoose.createConnection(connectionString);
 
     var userModel = require('./user/user.model.server')();
+    var reviewModel = require('./review/review.model.server')();
 
     //Getting all the models of all types of views in one variable and returning them to app.
     var models = {
-        UserModel: userModel
+        UserModel: userModel,
+        ReviewModel: reviewModel
     };
 
     userModel.setModel(models);
+    reviewModel.setModel(models);
 
     return models;
 
