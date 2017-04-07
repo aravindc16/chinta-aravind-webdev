@@ -11,10 +11,15 @@ module.exports = function () {
     var api = {
         'setModel': setModel,
         'addReview': addReview,
-        'findReviewsForRestaurant':findReviewsForRestaurant
+        'findReviewsForRestaurant':findReviewsForRestaurant,
+        'findAllReviewsByUser': findAllReviewsByUser
     }
 
     return api;
+    
+    function findAllReviewsByUser(username) {
+        return ReviewModel.find({'username':username});
+    }
 
     function findReviewsForRestaurant(restName) {
         return ReviewModel.find({'restaurantName':restName});

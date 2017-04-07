@@ -15,6 +15,7 @@
         var user= {};
 
         vm.addReviews = addReviews;
+        vm.viewProfile = viewProfile;
 
         function init() {
 
@@ -66,6 +67,14 @@
         }
         init();
 
+
+        function viewProfile(username) {
+            UserService.findUserByUsername(username)
+                .then(function (response) {
+                    user = response.data;
+                    $location.url('/user/'+user._id);
+                })
+        }
 
         
         function addReviews(name, review) {

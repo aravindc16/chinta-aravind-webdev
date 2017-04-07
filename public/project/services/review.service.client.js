@@ -8,10 +8,15 @@
     function ReviewService($http) {
         var api = {
             'addReview': addReview,
-            'findReviewsForRestaurant': findReviewsForRestaurant
+            'findReviewsForRestaurant': findReviewsForRestaurant,
+            'findAllReviewsByUser': findAllReviewsByUser
         };
 
         return api;
+
+        function findAllReviewsByUser(username) {
+            return $http.get('/api/project/review/user/'+username);
+        }
 
         function findReviewsForRestaurant(restName) {
             return $http.get('/api/project/review/'+restName);

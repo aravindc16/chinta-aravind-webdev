@@ -12,13 +12,18 @@
         vm.userId = $routeParams['uid'];
         // console.log(vm.userId);
 
+        var user = {};
+
         function init() {
             UserService.findUserById(vm.userId)
                 .then(function (response) {
                     vm.user= response.data;
+                    user = vm.user;
                 });
         }
         init();
+
+
 
         vm.Profile = Profile;
         vm.Logout = Logout;
@@ -32,7 +37,12 @@
             var city = search.city;
 
             if(!city){
-                city = "Boston";
+                if(vm.userId){
+                    city = user.city;
+                }else {
+                    city = "Boston";
+                }
+
             }
 
             if(!place){

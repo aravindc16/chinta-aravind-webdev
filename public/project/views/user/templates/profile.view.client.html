@@ -2,10 +2,10 @@
     <header>
         <md-toolbar style="background-color: rgba(41, 38, 140, 0.49);" md-scroll-shrink md-whiteframe="10">
             <div class="md-toolbar-tools">
-                <a href="#/" ng-if="!model.user">
+                <a href="#/" ng-if="!model.userId">
                     <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                 </a>
-                <a href="#/{{model.userId}}" ng-if="model.user">
+                <a href="#/{{model.userId}}" ng-if="model.userId">
                     <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                 </a>
                 <span flex></span>
@@ -59,7 +59,13 @@
     <!--Favourites-->
     <md-card style="height: 400px;font-family: 'Sansita', sans-serif;">
         <md-card-content>
-            Your Favourites
+            <strong>Your Reviews</strong><br>
+            <div layout="column" ng-repeat="review in model.reviews">
+                @{{review.restaurantName}}
+                <i>{{review.review}}</i>
+                <br>
+            </div>
+            <strong>Your Favourites</strong>
         </md-card-content>
     </md-card>
 

@@ -47,24 +47,29 @@
 
                 UserService.findUserByUsername(user.username)
                     .then(function (response) {
-                        UserService.createUser(user)
-                            .then(function (response) {
-                                var user = response.data;
-                                $mdDialog.show(
-                                    $mdDialog.alert()
-                                        .clickOutsideToClose(true)
-                                        .title("Registration Success!")
-                                        .textContent("You have registered successfully.")
-                                        .ok("OK"));
-                                $location.url('/user/'+user._id);
-                            });
+                        if(response.data){
+                            UserService.createUser(user)
+                                .then(function (response) {
+                                    var user = response.data;
+                                    $mdDialog.show(
+                                        $mdDialog.alert()
+                                            .clickOutsideToClose(true)
+                                            .title("Registration Success!")
+                                            .textContent("You have registered successfully.")
+                                            .ok("OK"));
+                                    $location.url('/user/'+user._id);
+                                });
+                        }else{
+                            $mdDialog.show(
+                                $mdDialog.alert()
+                                    .clickOutsideToClose(true)
+                                    .title("Registration Error!")
+                                    .textContent("Sorry username already taken.")
+                                    .ok("OK"));
+                        }
+
                     }, function (err) {
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title("Registration Error!")
-                                .textContent("Sorry username already taken.")
-                                .ok("OK"));
+
                     })
 
 

@@ -42,9 +42,9 @@ module.exports = function (app, model) {
         model.UserModel.findUserByUsername(username)
             .then(function (user) {
                 if(user){
-                    res.sendStatus(500).send('Username already taken');
+                    res.send(user);
                 }else{
-                    res.sendStatus(200);
+                    res.sendStatus(500);
                 }
             })
     }

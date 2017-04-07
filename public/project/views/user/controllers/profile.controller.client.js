@@ -6,14 +6,17 @@
     angular.module('FoodForThoughtApp')
         .controller('profileController', ProfileController);
 
-    function ProfileController($mdDialog, $location, $http, $routeParams, UserService) {
+    function ProfileController($mdDialog, $location, $http, $routeParams, UserService, ReviewService) {
             var vm = this;
 
             vm.userId = $routeParams['uid'];
 
+            var User = {};
+
             vm.deleteUser = deleteUser;
 
             function init() {
+
                 UserService.findUserById(vm.userId)
                     .then(function (response) {
                         vm.user=response.data;
@@ -27,7 +30,14 @@
                             },function () {
 
                             });
+                        ReviewService.findAllReviewsByUser(vm.user.username)
+                            .then(function (response) {
+                                vm.reviews = response.data;
+                            });
                     });
+
+
+
 
             }
             init();
