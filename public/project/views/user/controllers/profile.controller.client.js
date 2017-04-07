@@ -14,16 +14,21 @@
             vm.deleteUser = deleteUser;
 
             function init() {
-                vm.user = UserService.findUserById(vm.userId);
-                var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+vm.user.city+'&sensor=false&key=AIzaSyB5Ae4ILNTqkQEPmk0AeBlak_bkNJI9wm4';
-                $http.get(url)
+                UserService.findUserById(vm.userId)
                     .then(function (response) {
-                        vm.lat = response.data.results[0].geometry.location.lat;
-                        vm.long = response.data.results[0].geometry.location.lng;
-                        vm.city = response.data.results[0].formatted_address;
-                    },function () {
-                        
+                        vm.user=response.data;
+                        vm.avatar = vm.user.firstName.charAt(0) + vm.user.lastName.charAt(0);
+                        var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+vm.user.city+'&sensor=false&key=AIzaSyB5Ae4ILNTqkQEPmk0AeBlak_bkNJI9wm4';
+                        $http.get(url)
+                            .then(function (response) {
+                                vm.lat = response.data.results[0].geometry.location.lat;
+                                vm.long = response.data.results[0].geometry.location.lng;
+                                vm.city = response.data.results[0].formatted_address;
+                            },function () {
+
+                            });
                     });
+
             }
             init();
 
@@ -41,20 +46,24 @@
             }
 
             function yes(){
-                var response = UserService.deleteUser(vm.userId);
-                if(response == 'success'){
-                    $location.url('/');
-                }else{
-                    $mdDialog.show(
-                        $mdDialog.alert()
-                            .clickOutsideToClose(true)
-                            .title("Delete Error!")
-                            .textContent("We love you so much that we couldn't delete you.")
-                            .ok("OK"));
+                UserService.deleteUser(vm.userId)
+                    .then(function (response) {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                                .clickOutsideToClose(true)
+                                .title("Delete Success!")
+                                .textContent("Sorry to see you go. Come back soon.")
+                                .ok("OK"));
+                        $location.url('/');
+                    }, function (err) {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                                .clickOutsideToClose(true)
+                                .title("Delete Error!")
+                                .textContent("We love you so much that we couldn't delete you.")
+                                .ok("OK"));
+                    });
                 }
-
-
-            }
             }
 
 

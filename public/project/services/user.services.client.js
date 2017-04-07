@@ -16,58 +16,38 @@
             "findUserById" : findUserById,
             "updateUser" : updateUser,
             "findUserByCredentials" : findUserByCredentials,
-            "deleteUser": deleteUser
-            // "findUserByUsername": findUserByUsername
+            "deleteUser": deleteUser,
+            "findUserByUsername": findUserByUsername
         };
 
         return api;
 
+        function findUserByUsername(username) {
+            return $http.get('/api/project/username?username='+username);
+        }
+
         function deleteUser(userId) {
-            for(var u in users){
-                if(users[u]._id == userId){
-                    users.splice(u,1);
-                    return 'success';
-                }
-            }
-            return null;
+            return $http.delete('/api/project/user/'+userId);
         }
 
         function updateUser(userId, newuser) {
-            for(var u in users){
-                if(users[u]._id == userId){
-                    users[u].firstName = newuser.firstName;
-                    users[u].lastName = newuser.lastName;
-                    users[u].email = newuser.email;
-                    users[u].city = newuser.city;
-                }
-            }
-            return angular.copy(users[u]);
+            return $http.put('/api/project/user/'+userId, newuser);
         }
 
         function findUserById(userId) {
-            for(var u in users){
-                if(users[u]._id == userId){
-                    return angular.copy(users[u]);
-                }
-            }
-            return null;
+
+            return $http.get('/api/project/user/'+userId);
         }
 
         function createUser(newUser) {
-            newUser._id = (new Date()).getTime();
-            users.push(newUser);
-            return newUser;
+
+            return $http.post('/api/project/register', newUser);
+
         }
 
         function findUserByCredentials(username, password) {
-            // console.log(users);
-            for(var u in users){
-                if(users[u].username == username && users[u].password == password){
-                    return angular.copy(users[u]);
-                }
-            }
-            return null;
-        }
 
+            return $http.get('/api/project/user?username='+username+"&password="+password);
+        }
     }
 })();

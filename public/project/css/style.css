@@ -39,6 +39,8 @@
     margin-top: 20px;
     position: relative;
     bottom: 3px;
+    color: white;
+    background-color: blue;
 }
 .overlay{
      /*opacity:0.5;*/

@@ -11,15 +11,30 @@
         vm.userId = $routeParams['uid'];
 
         function init() {
-            vm.user = UserService.findUserById(vm.userId);
+            UserService.findUserById(vm.userId)
+                .then(function (response) {
+                    vm.user=response.data;
+                });
         }
         init();
 
         vm.update = update;
 
         function update(newuser) {
-            var newuser = UserService.updateUser(vm.userId, newuser);
-            $location.url('user/'+newuser._id);
+            UserService.updateUser(vm.userId, newuser)
+                .then(function (response) {
+                    console.log(response);
+                    newuser = response.data;
+                    $location.url('user/'+vm.userId);
+                }, function (err) {
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title("Update Error!")
+                            .textContent("Sorry, update didn't go through. Please try again.")
+                            .ok("OK"));
+                });
+
         }
     }
 })();

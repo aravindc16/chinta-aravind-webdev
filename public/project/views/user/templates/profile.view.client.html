@@ -22,8 +22,9 @@
             <div layout="row" layout-padding>
 
                 <div layout="column">
+                    <!--model.avatar shows the first char of firstName and the first of lastName-->
                     <div layout="column" layout-align="center center" class="postAvatar">
-                        <img width="120" height="120" src="https://irs1.4sqi.net/img/user/original/22446252-PV3KKMPACA2X5ED1.jpg"/>
+                        <h1 style="font-size: 50px;left: 35px; bottom: 10px; position: relative;">{{model.avatar}}</h1>
                     </div>
                     <h1>
                         {{model.user.firstName}} {{model.user.lastName}}

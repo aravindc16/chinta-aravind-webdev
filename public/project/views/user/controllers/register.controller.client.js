@@ -44,16 +44,30 @@
                         .textContent("Passwords do not match.")
                         .ok("OK"));
             } else{
-                var user = UserService.createUser(user);
 
-                    console.log(user);
-                    $mdDialog.show(
-                        $mdDialog.alert()
-                            .clickOutsideToClose(true)
-                            .title("Registration Success!")
-                            .textContent("You have registered successfully.")
-                            .ok("OK"));
-                    $location.url('/user/'+user._id);
+                UserService.findUserByUsername(user.username)
+                    .then(function (response) {
+                        UserService.createUser(user)
+                            .then(function (response) {
+                                var user = response.data;
+                                $mdDialog.show(
+                                    $mdDialog.alert()
+                                        .clickOutsideToClose(true)
+                                        .title("Registration Success!")
+                                        .textContent("You have registered successfully.")
+                                        .ok("OK"));
+                                $location.url('/user/'+user._id);
+                            });
+                    }, function (err) {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                                .clickOutsideToClose(true)
+                                .title("Registration Error!")
+                                .textContent("Sorry username already taken.")
+                                .ok("OK"));
+                    })
+
+
 
 
             }
