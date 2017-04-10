@@ -131,6 +131,7 @@
         function addReviews(name, review) {
             init();
 
+            vm.review = "";
             if(vm.userId){
                 ReviewService.addReview(user.username, name, review)
                     .then(function (response) {
@@ -151,13 +152,25 @@
                                 .ok("OK"));
                     });
             }else{
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        .clickOutsideToClose(true)
-                        .title("Review error!")
-                        .textContent("Sorry, you need to login to post a review.")
-                        .ok("OK"));
-                $location.url('/login')
+                var user = {'username': "Anonymous"};
+                ReviewService.addReview(user.username, name, review)
+                    .then(function (response) {
+                        vm.review = response.data;
+
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                                .clickOutsideToClose(true)
+                                .title("Review Success!")
+                                .textContent("We appreciate your review. Thank you!")
+                                .ok("OK"));
+                    }, function (err) {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                                .clickOutsideToClose(true)
+                                .title("Review error!")
+                                .textContent("Sorry, we couldn't save your review. Please try again.")
+                                .ok("OK"));
+                    });
             }
 
         }
