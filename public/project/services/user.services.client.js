@@ -19,10 +19,20 @@
             "deleteUser": deleteUser,
             "findUserByUsername": findUserByUsername,
             "addFavoriteRestaurant":addFavoriteRestaurant,
-            'deleteFavoriteRestaurant':deleteFavoriteRestaurant
+            'deleteFavoriteRestaurant':deleteFavoriteRestaurant,
+            "followUser": followUser,
+            "unFollowUser": unFollowUser
         };
 
         return api;
+
+        function unFollowUser(userId, user) {
+            return $http.put('/api/project/unfollow/'+userId, user);
+        }
+
+        function followUser(userId, user) {
+            return $http.put('/api/project/follow/'+userId, user);
+        }
 
         function deleteFavoriteRestaurant(userId, restaurant) {
             return $http.put('/api/project/restaurant/favorite/delete/'+userId, restaurant);

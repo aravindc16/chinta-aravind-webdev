@@ -18,12 +18,16 @@
         vm.viewProfile = viewProfile;
         vm.addFavoriteRestaurant = addFavoriteRestaurant;
         vm.deleteFavoriteRestaurant = deleteFavoriteRestaurant;
+        vm.followUser = followUser;
+        vm.unFollowUser = unFollowUser;
 
         function init() {
 
             UserService.findUserById(vm.userId)
                 .then(function (response) {
                     user = response.data;
+
+                    vm.username = user.username; //This is for the check so that the logged in person doesn't follow themselves.
                     if(user.favourites.length == 0){
                         vm.favorite = false;
                     }else{
@@ -36,7 +40,6 @@
                             }
                         }
                     }
-
                 });
 
 
@@ -71,6 +74,25 @@
                         .then(function (response) {
                             vm.reviews = response.data;
                             // vm.reviews = response.data;
+                            for(var r in vm.reviews){
+                                if(vm.reviews[r].username != "Anonymous"){
+                                    UserService.findUserByUsername(vm.reviews[r].username)
+                                        .then(function (response) {
+                                            if(user.follows.length == 0){
+                                                vm.alreadyFollows = false;
+                                            } else {
+                                                for(var u in user.follows){
+                                                    if(response.data._id == user.follows[u]){
+                                                        vm.alreadyFollows = true;
+                                                        break;
+                                                    }else{
+                                                        vm.alreadyFollows = false;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                }
+                            }
                         })
                 }, function (err) {
                     
@@ -78,6 +100,52 @@
             
         }
         init();
+
+        var userToFollow = {};
+
+        function unFollowUser(username) {
+            UserService.findUserByUsername(username)
+                .then(function (response) {
+
+                    vm.userToFollow = response.data;
+                    userToFollow = vm.userToFollow;
+
+                    UserService.unFollowUser(vm.userId, response.data)
+                        .then(function (response) {
+
+                            for(var u in response.data.follows){
+                                if(userToFollow._id != response.data.follows[u]){
+                                    vm.alreadyFollows = false;
+                                }else{
+                                    vm.alreadyFollows = true;
+                                }
+                            }
+                        })
+                });
+            //Introducing 100 ms delay to call the init function because it is taking some time for the user model to get updated and it shows that the current user
+            // is still following the other user.
+            setTimeout(init, 100);
+        }
+
+        function followUser(username) {
+
+            UserService.findUserByUsername(username)
+                .then(function (response) {
+                    vm.userToFollow = response.data;
+                    userToFollow = vm.userToFollow;
+                    UserService.followUser(vm.userId, response.data)
+                        .then(function (response) {
+                           for(var u in response.data.follows){
+                               if(userToFollow._id == response.data.follows[u]){
+                                   vm.alreadyFollows = true;
+                               }else{
+                                   vm.alreadyFollows = false;
+                               }
+                           }
+                        })
+                });
+
+        }
         
         function deleteFavoriteRestaurant(restaurant) {
             UserService.deleteFavoriteRestaurant(vm.userId, restaurant)

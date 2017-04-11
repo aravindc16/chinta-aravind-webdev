@@ -13,7 +13,11 @@ module.exports = function () {
         'deleteUser': deleteUser,
         'updateUser': updateUser,
         'addFavoriteRestaurant': addFavoriteRestaurant,
-        'deleteFavoriteRestaurant': deleteFavoriteRestaurant
+        'deleteFavoriteRestaurant': deleteFavoriteRestaurant,
+        'followUser': followUser,
+        'addFollowedByUser': addFollowedByUser,
+        'unFollowUser': unFollowUser,
+        'removeFollowedByUser': removeFollowedByUser
     };
 
     var model = {};
@@ -22,6 +26,39 @@ module.exports = function () {
     var UserModel = mongoose.model('userModel', UserSchema);
 
     return api;
+
+    function removeFollowedByUser(userId, user) {
+        return UserModel.findOne({'_id':user._id})
+            .then(function (user) {
+                user.followedBy.pull(userId);
+                return user.save();
+            })
+    }
+
+    function unFollowUser(userId, newUser) {
+        return UserModel.findOne({'_id':userId})
+            .then(function (user) {
+                user.follows.pull(newUser._id);
+                return user.save();
+            })
+    }
+
+    function addFollowedByUser(userId, user) {
+        return UserModel.findOne({'_id':user._id})
+            .then(function (user) {
+                user.followedBy.push(userId);
+                return user.save();
+            })
+    }
+
+    function followUser(userId, newUser) {
+
+        return UserModel.findOne({'_id': userId})
+            .then(function (user) {
+                user.follows.push(newUser._id);
+                return user.save();
+            });
+    }
 
     function deleteFavoriteRestaurant(userId, restaurant) {
 

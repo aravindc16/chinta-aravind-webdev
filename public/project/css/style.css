@@ -2,6 +2,18 @@
     background-color: #8596f5;
 }
 
+.follow{
+    background-color: white;
+    border-radius: 3px;
+    text-transform: lowercase;
+}
+
+.following{
+    border-radius: 3px;
+    background-color: lightskyblue;
+    text-transform: lowercase;
+}
+
 .pull-right{
     position: absolute;
     left: auto;

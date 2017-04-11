@@ -11,6 +11,46 @@ module.exports = function (app, model) {
     app.put('/api/project/user/:uid', updateUser);
     app.put('/api/project/restaurant/favorite/:uid', addFavoriteRestaurant);
     app.put('/api/project/restaurant/favorite/delete/:uid', deleteFavoriteRestaurant);
+    app.put('/api/project/follow/:uid', followUser);
+    app.put('/api/project/unfollow/:uid',unFollowUser);
+
+    function unFollowUser(req, res) {
+        var userId = req.params['uid'];
+        var user = req.body;
+
+        model.UserModel.unFollowUser(userId, user)
+            .then(function (newUser) {
+                if(newUser){
+                    model.UserModel.removeFollowedByUser(userId, user)
+                        .then(function (user) {
+
+                        });
+                }
+                res.send(newUser);
+            }, function (err) {
+                res.sendStatus(500).send('Could not unfollow user');
+            })
+    }
+
+    function followUser(req, res) {
+        var userId = req.params['uid'];
+        var user = req.body;
+
+        model.UserModel.followUser(userId, user)
+            .then(function (newUser) {
+
+                if(newUser){
+                    model.UserModel.addFollowedByUser(userId, user)
+                        .then(function (user) {
+
+                        });
+                }
+                res.send(newUser);
+            }, function (err) {
+                res.sendStatus(500).send('Could not follow user');
+            });
+
+    }
 
     function deleteFavoriteRestaurant(req, res) {
         var userId = req.params['uid'];
