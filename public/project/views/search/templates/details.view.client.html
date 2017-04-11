@@ -80,23 +80,25 @@
     </md-card>
 <!--Reviews-->
     <md-card layout-padding>
+
         <strong>Reviews From Other Users:</strong>
         <div layout="column" ng-repeat="review in model.reviews">
+
             <a ng-show="model.userId" ng-click="model.viewProfile(review.username)">@{{review.username}}</a>
-            <md-button class="pull-right-map"
-                       ng-show="model.userId && review.username != 'Anonymous' && review.username != model.username && model.alreadyFollows == false"
-                       ng-click="model.followUser(review.username)">
-                <!--<md-icon md-svg-icon="icons/face.svg">-->
-                <!--</md-icon>-->
-                <div class="follow">Follow</div>
-            </md-button>
-            <md-button class="pull-right-map"
-                       ng-show="model.userId && review.username != 'Anonymous' && review.username != model.username && model.alreadyFollows == true"
-                       ng-click="model.unFollowUser(review.username)">
-                <!--<md-icon md-svg-icon="icons/face_happy.svg">-->
-                <!--</md-icon>-->
-                <div class="following">Following</div>
-            </md-button>
+
+                <md-button class="pull-right-map"
+                           ng-show="model.userId && review.username != 'Anonymous' && review.username != model.username && (model.Follows == false || model.alreadyFollows.indexOf(review.username)  == -1) "
+                           ng-click="model.followUser(review.username)">
+
+                    <div class="follow">Follow</div>
+                </md-button>
+                <md-button class="pull-right-map"
+                           ng-show="model.userId && review.username != 'Anonymous' && review.username != model.username && model.alreadyFollows.indexOf(review.username) >= 0"
+                           ng-click="model.unFollowUser(review.username)">
+
+                    <div class="following">Following</div>
+                </md-button>
+
             <a ng-show="!model.userId">@{{review.username}}</a>
             <i>"{{review.review}}"</i>
             <br>

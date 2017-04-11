@@ -26,7 +26,7 @@
             UserService.findUserById(vm.userId)
                 .then(function (response) {
                     user = response.data;
-                    console.log(user);
+
                     vm.loggedInUser = user;
                     vm.username = user.username; //This is for the check so that the logged in person doesn't follow themselves.
                     if(user.favourites.length == 0){
@@ -74,20 +74,19 @@
                     ReviewService.findReviewsForRestaurant(vm.details.name)
                         .then(function (response) {
                             vm.reviews = response.data;
-                            // vm.reviews = response.data;
+
+                            vm.alreadyFollows = [];
                             for(var r in vm.reviews){
                                 if(vm.reviews[r].username != "Anonymous"){
                                     UserService.findUserByUsername(vm.reviews[r].username)
                                         .then(function (response) {
                                             if(user.follows.length == 0){
-                                                vm.alreadyFollows = false;
+                                                vm.Follows = false;
                                             } else {
                                                 for(var u in user.follows){
                                                     if(response.data._id == user.follows[u]){
-                                                        vm.alreadyFollows = true;
-                                                        break;
-                                                    }else{
-                                                        vm.alreadyFollows = false;
+
+                                                        vm.alreadyFollows.push(response.data.username);
                                                     }
                                                 }
                                             }
@@ -101,9 +100,6 @@
             
         }
         init();
-
-
-        console.log(user);
 
         var userToFollow = {};
 
@@ -119,9 +115,9 @@
 
                             for(var u in response.data.follows){
                                 if(userToFollow._id != response.data.follows[u]){
-                                    vm.alreadyFollows = false;
+                                    vm.Follows = false;
                                 }else{
-                                    vm.alreadyFollows = true;
+                                    vm.Follows = true;
                                 }
                             }
                         })
@@ -141,13 +137,15 @@
                         .then(function (response) {
                            for(var u in response.data.follows){
                                if(userToFollow._id == response.data.follows[u]){
-                                   vm.alreadyFollows = true;
+                                   vm.Follows = true;
                                }else{
-                                   vm.alreadyFollows = false;
+                                   vm.Follows = false;
                                }
                            }
                         })
                 });
+
+            setTimeout(init, 100);
 
         }
         

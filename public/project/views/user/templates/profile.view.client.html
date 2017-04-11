@@ -24,7 +24,7 @@
                 <div layout="column">
                     <!--model.avatar shows the first char of firstName and the first of lastName-->
                     <div layout="column" layout-align="center center" class="postAvatar">
-                        <h1 style="font-size: 50px;left: 35px; bottom: 10px; position: relative;">{{model.avatar}}</h1>
+                        <h1 style="font-size: 50px;left: 25px; bottom: 10px; position: relative;">{{model.avatar}}</h1>
                     </div>
                     <h1>
                         {{model.user.firstName}} {{model.user.lastName}}
@@ -73,6 +73,35 @@
                         <md-divider></md-divider>
                         <a href="#/details/{{favorite.id}}/user/{{model.userId}}">{{favorite.restaurantName}}</a>
                         <md-button ng-click="model.removeFavorite(favorite)" class="pull-right-map" aria-label="remove favorite"><md-icon md-svg-icon="./icons/delete_black.svg"></md-icon></md-button>
+                    </md-list-item>
+                </md-list>
+            </div>
+
+            <div layout="column">
+                <md-list>
+                    <strong>People whom you follow:</strong>
+                    <md-list-item ng-repeat="userFollow in model.userFollows">
+
+                        <span>{{userFollow.firstName}} {{userFollow.lastName}}</span>
+                        <!--If the user doesn't follow anyone-->
+                        <span ng-show="model.noFollows">None</span>
+                        <md-button class="pull-right-map"
+                                   ng-show="model.alreadyFollows == true"
+                                   ng-click="model.unFollowUser(userFollow)">
+                            <!--<md-icon md-svg-icon="icons/face_happy.svg">-->
+                            <!--</md-icon>-->
+                            <div class="following">Following</div>
+                        </md-button>
+                    </md-list-item>
+                </md-list>
+                <md-list>
+                    <strong>People who follow you:</strong>
+                    <md-list-item ng-repeat="userFollowedBy in model.userFollowedBy">
+                        <md-divider></md-divider>
+                        {{userFollowedBy.firstName}} {{userFollowedBy.lastName}}
+                        <!--If the user is not followed by anyone-->
+                        <span ng-show="model.noFollowedBy"> {{model.noFollowedBy}} None</span>
+
                     </md-list-item>
                 </md-list>
             </div>
