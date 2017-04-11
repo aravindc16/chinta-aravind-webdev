@@ -2,13 +2,20 @@
     angular.module('FoodForThoughtApp')
         .controller('SearchResultsController', SearchResultsController);
 
-    function SearchResultsController(FoursquareSearchService, $routeParams, $location) {
+    function SearchResultsController(FoursquareSearchService, UserService, $routeParams, $location) {
         var vm = this;
         vm.name = $routeParams['name'];
         vm.city = $routeParams['city'];
         vm.userId = $routeParams['uid'];
 
         function init(){
+
+            UserService.findUserById(vm.userId)
+                .then(function (response) {
+                    vm.user= response.data;
+                    user = vm.user;
+                });
+
             FoursquareSearchService.findRestaurantsByPlaceAndCity(vm.name, vm.city)
                 .then(function (response) {
                     vm.results = response.data.response.groups[0].items;

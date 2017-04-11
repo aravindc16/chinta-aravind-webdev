@@ -26,7 +26,8 @@
             UserService.findUserById(vm.userId)
                 .then(function (response) {
                     user = response.data;
-
+                    console.log(user);
+                    vm.loggedInUser = user;
                     vm.username = user.username; //This is for the check so that the logged in person doesn't follow themselves.
                     if(user.favourites.length == 0){
                         vm.favorite = false;
@@ -100,6 +101,9 @@
             
         }
         init();
+
+
+        console.log(user);
 
         var userToFollow = {};
 
@@ -197,7 +201,6 @@
 
         
         function addReviews(name, review) {
-            init();
 
             vm.review = "";
             if(vm.userId){
@@ -220,8 +223,8 @@
                                 .ok("OK"));
                     });
             }else{
-                var user = {'username': "Anonymous"};
-                ReviewService.addReview(user.username, name, review)
+                var newUser = {'username': "Anonymous"};
+                ReviewService.addReview(newUser.username, name, review)
                     .then(function (response) {
                         vm.review = response.data;
 
@@ -241,6 +244,7 @@
                     });
             }
 
+            init();
         }
     }
 })();

@@ -4,6 +4,7 @@
 
 .follow{
     background-color: white;
+    border: 1px solid #000;
     border-radius: 3px;
     text-transform: lowercase;
 }

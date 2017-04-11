@@ -9,9 +9,32 @@
                     <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                 </a>
                 <span flex></span>
-                <md-button ng-show="model.userId" href="#/">
-                    Logout
-                </md-button>
+            </div>
+            <div class="pull-right-map" ng-show="model.loggedInUser">
+                <md-menu ng-show="model.loggedInUser" md-offset="40 40">
+                    <md-button md-autofocus aria-label="Open menu with custom trigger"
+                               ng-mouseenter="$mdOpenMenu()"
+                               href="#/user/{{model.userId}}"
+                               style="margin-right: 50px;">
+                        <md-icon md-svg-icon="icons/face.svg">
+                        </md-icon>
+                        {{model.loggedInUser.firstName}}
+                    </md-button>
+                    <!--<md-button aria-label="Open menu with custom trigger" class="" ng-mouseenter="$mdOpenMenu()"> Test </md-button>-->
+                    <md-menu-content direction="down" width="2" ng-mouseleave="$mdMenu.close()">
+                        <md-menu-item>
+                            <md-button href="#/user/{{model.userId}}">
+                                <md-icon md-svg-icon="icons/person_black.svg">
+                                </md-icon>Profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button href="#/">
+                                Logout
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </div>
         </md-toolbar>
     </header>
