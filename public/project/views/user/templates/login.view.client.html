@@ -29,8 +29,16 @@
 
                     <md-card-actions>
                         <section layout="row" layout-align="center">
-                            <div class="button-padding">
+                            <div class="button-padding" layout="column">
                                 <md-button ng-click="model.login(user)" class="md-raised md-primary">Login</md-button>
+                                <!--<span style="position: relative; text-align: center"> OR </span>-->
+                                <!--<md-button href="/project/auth/google">-->
+                                    <!--<img ng-src="https://i.stack.imgur.com/JkSed.png" width="200px" height="50px">-->
+                                <!--</md-button>-->
+                                <span style="position: relative; text-align: center"> OR </span>
+                                <md-button href="/project/api/auth/facebook" aria-label="facebook login">
+                                    <img ng-src="https://i.stack.imgur.com/ZW4QC.png" width="200px" height="50px">
+                                </md-button>
                             </div>
                         </section>
                     </md-card-actions>

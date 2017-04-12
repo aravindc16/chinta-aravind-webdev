@@ -9,9 +9,7 @@
     function ProfileController($mdDialog, $location, $http, $routeParams, UserService, ReviewService, FoursquareSearchService, loggedIn) {
             var vm = this;
 
-            vm.userId = $routeParams['uid'];
-
-            console.log(loggedIn);
+            vm.userId = {};
 
             var User = {};
             var favs = [];
@@ -23,9 +21,10 @@
 
             function init() {
 
-                UserService.findUserById(vm.userId)
+                UserService.findCurrentLoggedInUser()
                     .then(function (response) {
                         vm.user=response.data;
+                        vm.userId = response.data._id;
 
                         vm.userFollows = [];
                         vm.userFollowedBy = [];

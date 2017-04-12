@@ -17,7 +17,9 @@ module.exports = function () {
         'followUser': followUser,
         'addFollowedByUser': addFollowedByUser,
         'unFollowUser': unFollowUser,
-        'removeFollowedByUser': removeFollowedByUser
+        'removeFollowedByUser': removeFollowedByUser,
+        'findUserByGoogleId': findUserByGoogleId,
+        'findUserByFacebookId': findUserByFacebookId
     };
 
     var model = {};
@@ -26,6 +28,14 @@ module.exports = function () {
     var UserModel = mongoose.model('userModel', UserSchema);
 
     return api;
+
+    function findUserByFacebookId(fbid) {
+        return UserModel.findOne({'facebook.id': fbid});
+    }
+
+    function findUserByGoogleId(googleId) {
+        return UserModel.findOne({'google.id': googleId});
+    }
 
     function removeFollowedByUser(userId, user) {
         return UserModel.findOne({'_id':user._id})
@@ -81,7 +91,7 @@ module.exports = function () {
 
     function updateUser(userId, user) {
         return UserModel.update({'_id': userId},
-            {$set: {'city':user.city, 'firstName':user.firstName, 'lastName': user.lastName}});
+            {$set: {'city':user.city, 'firstName':user.firstName, 'lastName': user.lastName, 'email':user.email}});
     }
     
     function deleteUser(userId) {
@@ -100,7 +110,7 @@ module.exports = function () {
     }
     
     function findUserById(userId) {
-        console.log('Call from deserialize')
+
         return UserModel.findById(userId);
     }
 
@@ -109,6 +119,9 @@ module.exports = function () {
     }
     
     function createUser(user) {
+        if(!user.city){
+            user.city = "Boston"
+        }
         return UserModel.create(user);
     }
 
