@@ -34,7 +34,10 @@
             .when('/user/:uid/website', {
                 templateUrl: 'views/website/templates/website-list.view.client.html',
                 controller: 'websiteListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when('/user/:uid/website/new', {
                 templateUrl: 'views/website/templates/website-new.view.client.html',

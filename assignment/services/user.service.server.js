@@ -4,6 +4,22 @@
 module.exports = function (app, model) {
 
     var passport = require('passport');
+
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
+
+    app.use(cookieParser());
+    app.use(session({
+        secret: 'this is assignment secret',
+        resave: true,
+        saveUninitialized: true,
+        cookie : { secure : false, maxAge : (4 * 60 * 60 * 1000) }
+    }));
+
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
@@ -49,7 +65,7 @@ module.exports = function (app, model) {
     //Passport
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('local', new LocalStrategy(localStrategy));
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.deserializeUser(deserializeUser);
     passport.serializeUser(serializeUser);
@@ -82,11 +98,13 @@ module.exports = function (app, model) {
     }
 
     function loggedIn(req, res) {
+        console.log(req);
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function login(req, res) {
         var user = req.user;
+        console.log(req);
         res.json(user);
     }
 
@@ -131,8 +149,10 @@ module.exports = function (app, model) {
 
     function localStrategy(username, password, done) {
 
+
         model.UserModel.findUserByUsername(username)
             .then(function (user) {
+
                 if(user && bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
                 } else {

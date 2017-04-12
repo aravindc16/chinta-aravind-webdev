@@ -9,6 +9,10 @@
     text-transform: lowercase;
 }
 
+.favorite-align{
+    position: relative; top: 25px;
+}
+
 .following{
     border-radius: 3px;
     background-color: lightskyblue;
@@ -22,6 +26,13 @@
     border-radius: 3px;
     background-color: coral;
     color: white;
+}
+
+.pull-right-name{
+    position: absolute;
+    left: auto;
+    right: 20px;
+    top: 10px;
 }
 
 .pull-right-map{

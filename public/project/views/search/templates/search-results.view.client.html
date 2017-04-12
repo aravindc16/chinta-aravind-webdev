@@ -11,7 +11,7 @@
                 <span flex></span>
 
             </div>
-            <div class="pull-right-map" ng-show="model.user">
+            <div class="pull-right-name" ng-show="model.user">
                 <md-menu ng-show="model.user" md-offset="40 40">
                     <md-button md-autofocus aria-label="Open menu with custom trigger"
                                ng-mouseenter="$mdOpenMenu()"
@@ -30,7 +30,7 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button href="#/">
+                            <md-button ng-click="model.logout()">
                                 Logout
                             </md-button>
                         </md-menu-item>

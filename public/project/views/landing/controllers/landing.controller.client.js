@@ -9,24 +9,28 @@
     function LandingController($mdDialog, $location, $routeParams, UserService, FoursquareSearchService) {
         var vm = this;
 
-        vm.userId = $routeParams['uid'];
+        // vm.userId = $routeParams['uid'];
         // console.log(vm.userId);
 
         var user = {};
 
         function init() {
-            UserService.findUserById(vm.userId)
+
+            UserService.findCurrentLoggedInUser()
                 .then(function (response) {
+                    console.log(response);
+                    vm.userId = response.data._id;
                     vm.user= response.data;
                     user = vm.user;
-                });
+                })
+
         }
         init();
 
 
 
         vm.Profile = Profile;
-        vm.Logout = Logout;
+        vm.logout = logout;
         vm.searchPlace = searchPlace;
         vm.getFood = getFood;
         vm.getDrinks = getDrinks;
@@ -124,8 +128,11 @@
             $location.url('user/'+vm.userId);
         }
 
-        function Logout() {
-            $location.url('/');
+        function logout() {
+            UserService.logout()
+                .then(function (response) {
+                    $location.url('/');
+                });
         }
     }
 })();

@@ -48,7 +48,7 @@
                 UserService.findUserByUsername(user.username)
                     .then(function (response) {
                         if(!response.data){
-                            UserService.createUser(user)
+                            UserService.registerUser(user)
                                 .then(function (response) {
                                     var user = response.data;
                                     $mdDialog.show(

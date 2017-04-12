@@ -6,10 +6,12 @@
     angular.module('FoodForThoughtApp')
         .controller('profileController', ProfileController);
 
-    function ProfileController($mdDialog, $location, $http, $routeParams, UserService, ReviewService, FoursquareSearchService) {
+    function ProfileController($mdDialog, $location, $http, $routeParams, UserService, ReviewService, FoursquareSearchService, loggedIn) {
             var vm = this;
 
             vm.userId = $routeParams['uid'];
+
+            console.log(loggedIn);
 
             var User = {};
             var favs = [];
@@ -17,6 +19,7 @@
             vm.deleteUser = deleteUser;
             vm.removeFavorite = removeFavorite;
             vm.unFollowUser = unFollowUser;
+            vm.logout = logout;
 
             function init() {
 
@@ -75,6 +78,13 @@
                     });
             }
             init();
+            
+            function logout() {
+                UserService.logout()
+                    .then(function (response) {
+                        $location.url('/');
+                    })
+            }
             
             function unFollowUser(user) {
                 UserService.unFollowUser(vm.userId, user)

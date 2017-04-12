@@ -92,12 +92,16 @@ module.exports = function () {
         return UserModel.findOne({'username':username});
     }
     
-    function findUserByCredentials(username, password) {
-        return UserModel.findOne({'username': username, 'password': password});
+    function findUserByCredentials(username,password) {
+        return UserModel.findOne({'username': username, 'password': password})
+            .then(function (user) {
+                return user;
+            });
     }
     
     function findUserById(userId) {
-        return UserModel.findOne({'_id':userId});
+        console.log('Call from deserialize')
+        return UserModel.findById(userId);
     }
 
     function setModel(_model) {
@@ -109,3 +113,4 @@ module.exports = function () {
     }
 
 }
+

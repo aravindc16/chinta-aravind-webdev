@@ -20,6 +20,7 @@
         vm.deleteFavoriteRestaurant = deleteFavoriteRestaurant;
         vm.followUser = followUser;
         vm.unFollowUser = unFollowUser;
+        vm.logout = logout;
 
         function init() {
 
@@ -80,15 +81,19 @@
                                 if(vm.reviews[r].username != "Anonymous"){
                                     UserService.findUserByUsername(vm.reviews[r].username)
                                         .then(function (response) {
-                                            if(user.follows.length == 0){
-                                                vm.Follows = false;
-                                            } else {
-                                                for(var u in user.follows){
-                                                    if(response.data._id == user.follows[u]){
+                                            if (user) {
+                                                if (user.follows.length == 0) {
+                                                    vm.Follows = false;
+                                                } else {
+                                                    for (var u in user.follows) {
+                                                        if (response.data._id == user.follows[u]) {
 
-                                                        vm.alreadyFollows.push(response.data.username);
+                                                            vm.alreadyFollows.push(response.data.username);
+                                                        }
                                                     }
                                                 }
+                                            } else {
+                                                vm.Follows = false;
                                             }
                                         });
                                 }
@@ -102,6 +107,13 @@
         init();
 
         var userToFollow = {};
+
+        function logout() {
+            UserService.logout()
+                .then(function (response) {
+                    $location.url('/');
+                });
+        }
 
         function unFollowUser(username) {
             UserService.findUserByUsername(username)

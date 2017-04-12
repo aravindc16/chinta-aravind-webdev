@@ -21,10 +21,35 @@
             "addFavoriteRestaurant":addFavoriteRestaurant,
             'deleteFavoriteRestaurant':deleteFavoriteRestaurant,
             "followUser": followUser,
-            "unFollowUser": unFollowUser
+            "unFollowUser": unFollowUser,
+            "login": login,
+            "logout": logout,
+            "registerUser": registerUser,
+            "loggedIn": loggedIn,
+            "findCurrentLoggedInUser": findCurrentLoggedInUser
         };
 
         return api;
+
+        function findCurrentLoggedInUser() {
+            return $http.get('/api/project/findCurrentLoggedInUser');
+        }
+
+        function loggedIn() {
+            return $http.post('/api/project/checkUserLogIn');
+        }
+
+        function registerUser(user) {
+            return $http.post('/api/project/registerUser',user);
+        }
+
+        function logout() {
+            return $http.post('/api/project/logout');
+        }
+
+        function login(user) {
+            return $http.post('/api/project/login', user);
+        }
 
         function unFollowUser(userId, user) {
             return $http.put('/api/project/unfollow/'+userId, user);

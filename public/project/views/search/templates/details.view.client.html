@@ -10,7 +10,7 @@
                 </a>
                 <span flex></span>
             </div>
-            <div class="pull-right-map" ng-show="model.loggedInUser">
+            <div class="pull-right-name" ng-show="model.loggedInUser">
                 <md-menu ng-show="model.loggedInUser" md-offset="40 40">
                     <md-button md-autofocus aria-label="Open menu with custom trigger"
                                ng-mouseenter="$mdOpenMenu()"
@@ -29,7 +29,7 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button href="#/">
+                            <md-button ng-click="model.logout()">
                                 Logout
                             </md-button>
                         </md-menu-item>
@@ -45,37 +45,42 @@
                 <!--<img ng-src="{{photo.prefix}}150x150{{photo.suffix}}"/>-->
             <!--</div>-->
             <div layout="column" layout-padding>
-                <h1>{{model.details.name}}</h1>
+                <div layout="row" layout-padding>
+                    <h1>{{model.details.name}}</h1>
+                    <span class="favorite-align">
+                        <md-button ng-show="model.favorite == false" ng-click="model.addFavoriteRestaurant(model.details)" class="md-icon-button md-accent" aria-label="Favorite">
+                            <md-icon md-svg-icon="icons/favorite_empty.svg"></md-icon>
+                        </md-button>
+
+                        <md-button ng-show="model.favorite == true" ng-click="model.deleteFavoriteRestaurant(model.details)" class="md-icon-button md-accent" aria-label="Favorite">
+                            <md-icon md-svg-icon="icons/favorite.svg"></md-icon>
+                        </md-button>
+                    </span>
+                </div>
                 <span flex style="font-style: italic">"{{model.details.description}}"</span>
                 <span>{{model.details.location.address}}, {{model.details.location.city}} {{model.details.location.state}}</span>
                 <span>{{model.details.contact.formattedPhone}}</span>
-                <span>Timings:</span>
-                <div style="color:saddlebrown" ng-repeat="time in model.details.hours.timeframes">
-                    <div ng-repeat="t in time.open">
-                        {{time.days}}: {{t.renderedTime}}<br>
-                    </div>
-                </div>
-
                 <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
 
-                <md-button ng-show="model.favorite == false" ng-click="model.addFavoriteRestaurant(model.details)" class="md-icon-button md-accent" aria-label="Favorite">
-                    <md-icon md-svg-icon="icons/favorite_empty.svg"></md-icon>
-                </md-button>
-
-                <md-button ng-show="model.favorite == true" ng-click="model.deleteFavoriteRestaurant(model.details)" class="md-icon-button md-accent" aria-label="Favorite">
-                    <md-icon md-svg-icon="icons/favorite.svg"></md-icon>
-                </md-button>
-
-                <span>Top Comments</span>
-                <div ng-repeat="comment in model.details.tips.groups[0].items | limitTo: 10">
+                <span><strong>Top Comments</strong></span>
+                <div ng-repeat="comment in model.details.tips.groups[0].items | limitTo: 5">
                    <i> " {{comment.text}} " </i>
                     <md-divider></md-divider>
                 </div>
             </div>
 
 
-        <div style="height: 200px; width: 400px" class="pull-right-map" id="map" layout="column">
+        <div style="height: 300px; width: 400px" class="pull-right-map" id="map" layout="column">
 
+        </div>
+    </md-card>
+    <!--Timings-->
+    <md-card layout-padding>
+        <span>Timings:</span>
+        <div style="color:saddlebrown" ng-repeat="time in model.details.hours.timeframes">
+            <div ng-repeat="t in time.open">
+                {{time.days}}: {{t.renderedTime}}<br>
+            </div>
         </div>
     </md-card>
 <!--Reviews-->

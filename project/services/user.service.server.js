@@ -3,6 +3,23 @@
  */
 module.exports = function (app, model) {
 
+    var passport = require('passport');
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
+
+    app.use(cookieParser());
+    app.use(session({
+        secret: 'this is project secret',
+        resave: true,
+        saveUninitialized: true,
+        cookie : { secure : false, maxAge : (4 * 60 * 60 * 1000) }
+    }));
+
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+    var LocalStrategy = require('passport-local').Strategy;
+
     app.post('/api/project/register', createUser);
     app.get('/api/project/user/:uid', findUserById);
     app.get('/api/project/user', findUserByCredentials);
@@ -13,6 +30,74 @@ module.exports = function (app, model) {
     app.put('/api/project/restaurant/favorite/delete/:uid', deleteFavoriteRestaurant);
     app.put('/api/project/follow/:uid', followUser);
     app.put('/api/project/unfollow/:uid',unFollowUser);
+    //Passport
+    app.post('/api/project/login', passport.authenticate('project'),  login);
+    app.post('/api/project/logout', logout);
+    app.post('/api/project/registerUser', registerUser);
+    app.post('/api/project/checkUserLogIn', loggedIn);
+    app.get('/api/project/findCurrentLoggedInUser', findCurrentLoggedInUser);
+
+    passport.use('project', new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+
+    function findCurrentLoggedInUser(req, res) {
+        console.log(req.isAuthenticated());
+        res.send(req.user);
+    }
+
+    function loggedIn(req, res) {
+
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function registerUser(user) {
+        var user = req.body;
+        model.UserModel.createUser(user)
+            .then(function(user){
+                if(user){
+                    req.login(user, function(err) {
+                        if(err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            }
+        );
+
+    }
+
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200);
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+
+    function localStrategy(username, password, done) {
+
+        model.UserModel.findUserByCredentials(username, password)
+            .then(function(user) {
+                    if(!user) {
+                        return done(null, false);
+                    } else {
+
+                        return done(null, user)
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
 
     function unFollowUser(req, res) {
         var userId = req.params['uid'];
@@ -155,6 +240,27 @@ module.exports = function (app, model) {
                 }
             })
 
+    }
+
+    //Passport functions
+
+    //Serialize maintains encrypted cookie session for a particular user.
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    //Deserialize: Get the currently logged in user by decrypting the encrypted cookie.
+    function deserializeUser(user, done) {
+        model.UserModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
     }
 
 }

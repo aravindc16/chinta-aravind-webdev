@@ -9,7 +9,7 @@
                     <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
                 </a>
                 <span flex></span>
-                <md-button href="#/">
+                <md-button ng-click="model.logout()">
                     Logout
                 </md-button>
             </div>
@@ -57,16 +57,9 @@
         </md-card-actions>
     </md-card>
     <!--Favourites-->
-    <md-card layout="column" style="font-family: 'Sansita', sans-serif;">
-        <md-card-content>
-            <strong>Your Reviews</strong><br>
-            <div layout="column" ng-repeat="review in model.reviews">
-                @{{review.restaurantName}}
-                <i>{{review.review}}</i>
-                <br>
-            </div>
-
-            <div layout="column">
+    <md-card style="font-family: 'Sansita', sans-serif;">
+        <md-card-content layout="row" layout-padding>
+            <div flex layout="column">
                 <md-list>
                     <strong>Your Favourites</strong>
                     <md-list-item ng-repeat="favorite in model.user.favourites">
@@ -76,8 +69,21 @@
                     </md-list-item>
                 </md-list>
             </div>
+            <md-divider></md-divider>
+            <div layout-padding flex>
+                <strong>Your Reviews</strong><br>
+                <div layout="column" ng-repeat="review in model.reviews">
+                    @{{review.restaurantName}}
+                    <i>{{review.review}}</i>
+                    <br>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
 
-            <div layout="column">
+    <md-card style="font-family: 'Sansita', sans-serif;">
+        <md-card-content layout="row" layout-padding>
+            <div flex layout="column">
                 <md-list>
                     <strong>People whom you follow:</strong>
                     <md-list-item ng-repeat="userFollow in model.userFollows">
@@ -90,10 +96,13 @@
                                    ng-click="model.unFollowUser(userFollow)">
                             <!--<md-icon md-svg-icon="icons/face_happy.svg">-->
                             <!--</md-icon>-->
-                            <div class="following">Following</div>
+                            <div class="following">Unfollow</div>
                         </md-button>
                     </md-list-item>
                 </md-list>
+            </div>
+            <md-divider></md-divider>
+                <div flex layout="column" ng-repeat="userFollow in model.userFollows">
                 <md-list>
                     <strong>People who follow you:</strong>
                     <md-list-item ng-repeat="userFollowedBy in model.userFollowedBy">
@@ -104,8 +113,10 @@
 
                     </md-list-item>
                 </md-list>
-            </div>
+                </div>
+
         </md-card-content>
     </md-card>
+
 
 </div>

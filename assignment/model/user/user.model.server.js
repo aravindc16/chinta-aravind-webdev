@@ -49,12 +49,8 @@ module.exports = function () {
     }
     
     function findUserByUsername(username) {
-        var d =q.defer();
-        UserModel.findOne({'username':username}, function (err, username) {
-            d.resolve(username);
-        });
 
-        return d.promise;
+        return UserModel.findOne({'username':username});
     }
     
     function findUserById(userId) {

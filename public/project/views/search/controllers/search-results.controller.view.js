@@ -26,6 +26,14 @@
         init();
 
         vm.getRestaurantDetails = getRestaurantDetails;
+        vm.logout = logout;
+
+        function logout() {
+            UserService.logout()
+                .then(function (response) {
+                    $location.url('/');
+                });
+        }
 
         function getRestaurantDetails(id) {
             if(vm.userId){
