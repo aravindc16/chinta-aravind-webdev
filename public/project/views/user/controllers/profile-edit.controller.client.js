@@ -23,7 +23,6 @@
         function update(newuser) {
             UserService.updateUser(vm.userId, newuser)
                 .then(function (response) {
-                    console.log(response);
                     newuser = response.data;
                     $location.url('user/'+vm.userId);
                 }, function (err) {

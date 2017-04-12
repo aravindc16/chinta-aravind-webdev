@@ -44,9 +44,13 @@
                 }
             })
             .when('/admin', {
-                templateUrl: 'views/user/admin/templates/admin-profile.view.client.html'
-                // controller: 'landingController',
-                // controllerAs: 'model'
+                templateUrl: 'views/admin/templates/admin-profile.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    adminUser: checkAdmin
+                }
+
             })
             .when('/signup', {
                 templateUrl: 'views/user/templates/signup.view.client.html',
@@ -93,7 +97,6 @@
         // UserService.loggedIn()
         $http.post('/api/project/checkUserLogIn')
             .then(function (response) {
-                console.log(response.data);
                 if(response.data != '0'){
                     d.resolve(response.data);
 
@@ -104,4 +107,20 @@
             });
         return d.promise;
     }
+
+    function checkAdmin(UserService, $q, $location, $http) {
+        var d = $q.defer();
+        UserService.checkAdmin()
+            .then(function (response) {
+                if(response.data != '0'){
+                    d.resolve(response.data);
+
+                } else {
+                    d.reject();
+                    $location.url('/user');
+                }
+            });
+        return d.promise;
+    }
+
 })();

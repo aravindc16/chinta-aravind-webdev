@@ -46,6 +46,9 @@ module.exports = function (app, model) {
     app.get ('/project/api/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/project/api/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/project/#/user', failureRedirect: '/project/#/login'
     }));
+    app.post('/api/project/checkAdmin', checkAdmin);
+    app.get('/api/project/admin/users', findAllUsers);
+    app.delete('/api/project/admin/user/:uid', removeUser);
 
 
     passport.use('project', new LocalStrategy(localStrategy));
@@ -53,9 +56,39 @@ module.exports = function (app, model) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+    function removeUser(req, res) {
+        var userId = req.params['uid'];
+
+        if(req.user && req.user.roles == "ADMIN"){
+            model.UserModel.removeUser(userId)
+                .then(function (user) {
+                    res.send(200);
+                }, function (err) {
+                    res.send(500);
+                })
+        }else{
+            res.send(401);
+        }
+
+    }
+
+    function findAllUsers(req, res) {
+        if(req.user && req.user.roles){
+            model.UserModel.findAllUsers()
+                .then(function (users) {
+                    res.send(users);
+                })
+        }else{
+            res.send(401);
+        }
+
+    }
+
+    function checkAdmin(req, res) {
+        res.send(req.isAuthenticated() && req.user.roles == "ADMIN" ? req.user : '0');
+    }
 
     function findCurrentLoggedInUser(req, res) {
-        console.log(req.isAuthenticated());
         res.send(req.user);
     }
 
@@ -63,7 +96,7 @@ module.exports = function (app, model) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
-    function registerUser(user) {
+    function registerUser(req, res) {
         var user = req.body;
         model.UserModel.createUser(user)
             .then(function(user){
@@ -92,8 +125,6 @@ module.exports = function (app, model) {
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
-
-        console.log(profile);
 
         model.UserModel
             .findUserByFacebookId(profile.id)

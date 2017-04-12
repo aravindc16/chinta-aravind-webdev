@@ -16,6 +16,26 @@
         <!--</md-toolbar>-->
     <!--</header>-->
 
-    <h1> Welcome to the Admin page.  </h1>
+    <div layout="row">
+        <h1 layout-padding flex> You are the boss! </h1>
+        <md-button flex class="pull-right-map" ng-click="model.logout()">
+            Logout
+        </md-button>
+    </div>
+
+
+
+    <md-card layout-padding>
+        <strong>Users in the system</strong>
+        <div ng-repeat="user in model.users">
+            {{user.firstName}} {{user.lastName}}
+            <span class="pull-right-map">
+                <md-button class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
+                    <md-icon md-svg-icon="icons/delete_black.svg">
+                    </md-icon>
+            </md-button>
+            </span>
+        </div>
+    </md-card>
 
 </div>

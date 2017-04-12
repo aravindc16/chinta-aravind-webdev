@@ -26,10 +26,25 @@
             "logout": logout,
             "registerUser": registerUser,
             "loggedIn": loggedIn,
-            "findCurrentLoggedInUser": findCurrentLoggedInUser
+            "findCurrentLoggedInUser": findCurrentLoggedInUser,
+            "checkAdmin": checkAdmin,
+            "findAllUsers": findAllUsers,
+            "removeUser": removeUser
         };
 
         return api;
+
+        function removeUser(user) {
+            return $http.delete('/api/project/admin/user/'+user._id);
+        }
+
+        function findAllUsers() {
+            return $http.get('/api/project/admin/users');
+        }
+        
+        function checkAdmin() {
+            return $http.post('/api/project/checkAdmin');
+        }
 
         function findCurrentLoggedInUser() {
             return $http.get('/api/project/findCurrentLoggedInUser');

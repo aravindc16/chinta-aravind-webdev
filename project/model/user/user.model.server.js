@@ -18,8 +18,9 @@ module.exports = function () {
         'addFollowedByUser': addFollowedByUser,
         'unFollowUser': unFollowUser,
         'removeFollowedByUser': removeFollowedByUser,
-        'findUserByGoogleId': findUserByGoogleId,
-        'findUserByFacebookId': findUserByFacebookId
+        'findUserByFacebookId': findUserByFacebookId,
+        "findAllUsers": findAllUsers,
+        "removeUser": removeUser
     };
 
     var model = {};
@@ -28,6 +29,14 @@ module.exports = function () {
     var UserModel = mongoose.model('userModel', UserSchema);
 
     return api;
+
+    function removeUser(userId) {
+        return UserModel.remove({'_id':userId});
+    }
+
+    function findAllUsers() {
+        return UserModel.find();
+    }
 
     function findUserByFacebookId(fbid) {
         return UserModel.findOne({'facebook.id': fbid});

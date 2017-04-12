@@ -18,7 +18,6 @@
 
             UserService.findCurrentLoggedInUser()
                 .then(function (response) {
-                    console.log(response);
                     vm.userId = response.data._id;
                     vm.user= response.data;
                     user = vm.user;
