@@ -257,13 +257,16 @@ module.exports = function (app, model) {
         var userId = req.params['uid'];
 
         if(req.user && req.user._id == userId){
-            model.UserModel.deleteUser(userId)
-                .then(function (user) {
-                    res.sendStatus(200);
-
-                }, function (err) {
-                    res.sendStatus(500).send('Could not delete. DB error.')
+            model.ReviewModel.removeReviewByUser(req.user.username)
+                .then(function (response) {
+                    model.UserModel.deleteUser(userId)
+                        .then(function (user) {
+                            res.sendStatus(200);
+                        }, function (err) {
+                            res.sendStatus(500).send('Could not delete. DB error.')
+                        });
                 });
+
         }else{
             res.send(401);
         }

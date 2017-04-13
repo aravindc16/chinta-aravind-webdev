@@ -14,10 +14,15 @@ module.exports = function () {
         'findReviewsForRestaurant':findReviewsForRestaurant,
         'findAllReviewsByUser': findAllReviewsByUser,
         "findAllReviews": findAllReviews,
-        "removeReview": removeReview
+        "removeReview": removeReview,
+        "removeReviewByUser": removeReviewByUser
     }
 
     return api;
+    
+    function removeReviewByUser(username) {
+        return ReviewModel.remove({'username': username});
+    }
 
     function removeReview(review) {
         return ReviewModel.remove({'_id':review._id});
