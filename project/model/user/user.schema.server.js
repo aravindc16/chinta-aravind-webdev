@@ -5,7 +5,7 @@ module.exports = function () {
     var mongoose = require('mongoose');
 
     var UserSchema = mongoose.Schema({
-        username: {type: String, required: true},
+        username: {type: String},
         facebook : {
             id: String,
             token: String
@@ -14,7 +14,7 @@ module.exports = function () {
         lastName: String,
         email: String,
         city: String,
-        password: {type: String, required: true},
+        password: {type: String},
         favourites: [{'id': String, 'restaurantName': String}],
         follows: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
         followedBy: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
