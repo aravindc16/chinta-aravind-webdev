@@ -7,6 +7,31 @@ module.exports = function (app, model) {
     app.post('/api/project/review/:restName/user/:username', addReview);
     app.get('/api/project/review/:restName', findReviewsForRestaurant);
     app.get('/api/project/review/user/:username', findAllReviewsByUser);
+    app.get('/api/project/admin/reviews', findAllReviews);
+    app.put('/api/project/admin/review', removeReview);
+
+    function removeReview(req, res) {
+        var review = req.body;
+        if(req.user && req.user.roles == 'ADMIN'){
+            model.ReviewModel.removeReview(review)
+                .then(function (response) {
+                    res.sendStatus(200)
+                }, function (err) {
+                    res.sendStatus(500).send(err);
+                })
+        }
+    }
+
+    function findAllReviews(req, res) {
+        if(req.user && req.user.roles == "ADMIN"){
+            model.ReviewModel.findAllReviews()
+                .then(function (reviews) {
+                    res.send(reviews);
+                })
+        }else{
+            res.sendStatus(401);
+        }
+    }
 
     function findAllReviewsByUser(req, res) {
         var username = req.params['username'];

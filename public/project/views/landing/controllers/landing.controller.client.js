@@ -37,25 +37,21 @@
 
 
         function searchPlace(search) {
-            var place = search.restaurant;
-            var city = search.city;
 
-            if(!city){
-                if(vm.userId){
-                    city = user.city;
-                }else {
-                    city = "Boston";
-                }
-            }
-
-            if(!place){
+            var city = {};
+            if(!search){
                 $mdDialog.show(
                     $mdDialog.alert()
                         .clickOutsideToClose(true)
                         .title("Place error!")
                         .textContent("Please enter a name or place or restaurant to search for.")
                         .ok("OK"));
-            }else {
+            }else{
+                city = search.city;
+                if(!city){
+                    city = "Boston"
+                }
+                var place = search.restaurant;
                 if(vm.userId){
                     $location.url('/searchResults/'+place+'/location/'+city+"/user/"+vm.userId);
                 }else{

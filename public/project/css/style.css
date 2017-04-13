@@ -19,6 +19,12 @@
     text-transform: lowercase;
 }
 
+.top-margin-delete-admin{
+    position: absolute;
+    left: auto;
+    right: 20px;
+}
+
 .pull-right{
     position: absolute;
     left: auto;

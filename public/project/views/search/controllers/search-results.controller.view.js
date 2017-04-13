@@ -10,17 +10,19 @@
 
         function init(){
 
-            UserService.findUserById(vm.userId)
-                .then(function (response) {
-                    vm.user= response.data;
-                    user = vm.user;
-                });
+            if(vm.userId){
+                UserService.findUserById(vm.userId)
+                    .then(function (response) {
+                        vm.user= response.data;
+                        user = vm.user;
+                    });
+            }
+
 
             FoursquareSearchService.findRestaurantsByPlaceAndCity(vm.name, vm.city)
                 .then(function (response) {
                     vm.results = response.data.response.groups[0].items;
                 }, function (err) {
-                    console.log(err);
                 });
         }
         init();

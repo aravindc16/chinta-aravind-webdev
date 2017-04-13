@@ -25,17 +25,56 @@
 
 
 
-    <md-card layout-padding>
-        <strong>Users in the system</strong>
-        <div ng-repeat="user in model.users">
-            {{user.firstName}} {{user.lastName}}
-            <span class="pull-right-map">
-                <md-button class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
-                    <md-icon md-svg-icon="icons/delete_black.svg">
-                    </md-icon>
-            </md-button>
-            </span>
-        </div>
-    </md-card>
+
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Users">
+                    <md-card >
+                        <md-content layout-padding>
+                            <div ng-repeat="user in model.users">
+                                {{user.firstName}} {{user.lastName}}
+                                <span class="pull-right-map">
+                                    <md-button class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
+                                         <md-icon md-svg-icon="icons/delete_black.svg">
+                                         </md-icon>
+                                     </md-button>
+                                </span>
+                            </div>
+                        </md-content>
+                    </md-card>
+                </md-tab>
+                <md-tab label="Reviews by users">
+                    <md-card>
+                        <md-content layout-padding>
+                            <!--model.reviews is an array of all users with reviews.-->
+                            <!--review is an array of all reviews per user-->
+                            <!--r is individual document-->
+                            <strong>User Reviews:</strong>
+                            <div ng-show="review.length != 0" ng-repeat="review in model.reviews">
+                                <div ng-repeat="r in review" layout-padding>
+                                    <strong>{{r.username}}</strong>({{r.restaurantName}}): <i style="color: lightslategrey;">"{{r.review}}"</i>
+                                    <span >
+                                        <md-button class="md-icon-button " ng-click="model.removeReview(r)" aria-label="edit profile">
+                                             <md-icon md-svg-icon="icons/delete_black.svg">
+                                             </md-icon>
+                                         </md-button>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <strong>Anonymous Reviews:</strong>
+                            <div layout-padding ng-repeat="ar in model.anonReviews">
+                                ({{ar.restaurantName}}): <i style="color: lightslategrey;">"{{ar.review}}"</i>
+                                <span>
+                                        <md-button class="md-icon-button " ng-click="model.removeReview(r)" aria-label="edit profile">
+                                             <md-icon md-svg-icon="icons/delete_black.svg">
+                                             </md-icon>
+                                        </md-button>
+                                </span>
+                            </div>
+
+                        </md-content>
+                    </md-card>
+                </md-tab>
+            </md-tabs>
 
 </div>

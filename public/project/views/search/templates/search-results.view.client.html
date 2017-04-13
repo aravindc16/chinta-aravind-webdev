@@ -43,7 +43,7 @@
     <md-card layout-padding ng-repeat="place in model.results">
 
         <div layout="row" layout-padding>
-            <img src="{{place.venue.categories[0].icon.prefix}}bg_88{{place.venue.categories[0].icon.suffix}}" height="30px" width="30px">
+            <img ng-src="{{place.venue.categories[0].icon.prefix}}bg_88{{place.venue.categories[0].icon.suffix}}" height="30px" width="30px">
 
             <div layout="column">
                 <a class="md-primary" ng-click="model.getRestaurantDetails(place.venue.id)"><h2 style="color: blue">{{place.venue.name}}</h2></a>

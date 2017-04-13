@@ -51,6 +51,7 @@ module.exports = function (app, model) {
     app.delete('/api/project/admin/user/:uid', removeUser);
 
 
+
     passport.use('project', new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
@@ -255,13 +256,18 @@ module.exports = function (app, model) {
     function deleteUser(req, res) {
         var userId = req.params['uid'];
 
-        model.UserModel.deleteUser(userId)
-            .then(function (user) {
-                 res.sendStatus(200);
+        if(req.user && req.user._id == userId){
+            model.UserModel.deleteUser(userId)
+                .then(function (user) {
+                    res.sendStatus(200);
 
-            }, function (err) {
-                res.sendStatus(500).send('Could not delete. DB error.')
-            })
+                }, function (err) {
+                    res.sendStatus(500).send('Could not delete. DB error.')
+                });
+        }else{
+            res.send(401);
+        }
+
     }
     
     function findUserByUsername(req, res) {

@@ -24,25 +24,28 @@
 
         function init() {
 
-            UserService.findUserById(vm.userId)
-                .then(function (response) {
-                    user = response.data;
+            if(vm.userId){
+                UserService.findUserById(vm.userId)
+                    .then(function (response) {
+                        user = response.data;
 
-                    vm.loggedInUser = user;
-                    vm.username = user.username; //This is for the check so that the logged in person doesn't follow themselves.
-                    if(user.favourites.length == 0){
-                        vm.favorite = false;
-                    }else{
-                        for (var f in user.favourites) {
-                            if (vm.id == user.favourites[f].id) {
-                                vm.favorite = true;
-                                break;
-                            } else {
-                                vm.favorite = false;
+                        vm.loggedInUser = user;
+                        vm.username = user.username; //This is for the check so that the logged in person doesn't follow themselves.
+                        if(user.favourites.length == 0){
+                            vm.favorite = false;
+                        }else{
+                            for (var f in user.favourites) {
+                                if (vm.id == user.favourites[f].id) {
+                                    vm.favorite = true;
+                                    break;
+                                } else {
+                                    vm.favorite = false;
+                                }
                             }
                         }
-                    }
-                });
+                    });
+            }
+
 
 
             FoursquareSearchService.findRestaurantById(vm.id)

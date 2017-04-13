@@ -46,7 +46,7 @@
                 <md-icon md-svg-icon="icons/create_black.svg">
                 </md-icon>
             </md-button>
-            <md-button class="md-icon-button" ng-click="model.deleteUser()" aria-label="edit profile">
+            <md-button ng-show="model.user.roles != 'ADMIN'" class="md-icon-button" ng-click="model.deleteUser()" aria-label="edit profile">
                 <md-icon md-svg-icon="icons/delete_black.svg">
                 </md-icon>
             </md-button>

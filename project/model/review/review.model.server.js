@@ -12,10 +12,20 @@ module.exports = function () {
         'setModel': setModel,
         'addReview': addReview,
         'findReviewsForRestaurant':findReviewsForRestaurant,
-        'findAllReviewsByUser': findAllReviewsByUser
+        'findAllReviewsByUser': findAllReviewsByUser,
+        "findAllReviews": findAllReviews,
+        "removeReview": removeReview
     }
 
     return api;
+
+    function removeReview(review) {
+        return ReviewModel.remove({'_id':review._id});
+    }
+    
+    function findAllReviews() {
+        return ReviewModel.find();
+    }
     
     function findAllReviewsByUser(username) {
         return ReviewModel.find({'username':username});

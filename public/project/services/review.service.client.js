@@ -9,10 +9,20 @@
         var api = {
             'addReview': addReview,
             'findReviewsForRestaurant': findReviewsForRestaurant,
-            'findAllReviewsByUser': findAllReviewsByUser
+            'findAllReviewsByUser': findAllReviewsByUser,
+            "findAllReviews": findAllReviews,
+            "removeReview": removeReview
         };
 
         return api;
+
+        function removeReview(review) {
+            return $http.put('/api/project/admin/review', review);
+        }
+
+        function findAllReviews() {
+            return $http.get('/api/project/admin/reviews');
+        }
 
         function findAllReviewsByUser(username) {
             return $http.get('/api/project/review/user/'+username);
