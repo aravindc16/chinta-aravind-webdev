@@ -8,10 +8,10 @@
             <md-toolbar style="background-color: rgba(113, 96, 199, 0.64);" md-whiteframe="10">
                 <div class="md-toolbar-tools">
                     <a href="#/" ng-if="!model.user">
-                        <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
+                        <img width="5%" height="5%" ng-src="http://training.fergflor.k12.mo.us/materials/brandstandards/otherlogos/fft_black.png">
                     </a>
                     <a href="#/{{model.userId}}" ng-if="model.user">
-                        <img width="40%" height="40%" ng-src="http://www.foodforthoughtmt.com/wp-content/uploads/2015/03/food_for_thought_logo.png">
+                        <img width="5%" height="5%" ng-src="http://training.fergflor.k12.mo.us/materials/brandstandards/otherlogos/fft_black.png">
                     </a>
                     <span flex></span>
                     <div layout="row" class="header-buttons" ng-show="!model.user">
@@ -50,11 +50,10 @@
                     </div>
                 </div>
             </md-toolbar>
-
         </header>
 
 
-        <div layout="column" layout-fill flex>
+        <div layout="column" flex style="position: relative;top: 100px;">
             <div layout="column" layout-align="center center" flex>
 
                 <md-card style="background-color: rgba(117, 76, 23, 0.31)" md-whiteframe="20">
@@ -69,14 +68,14 @@
 
                 <md-input-container class="md-block">
                     <label style="font-style: italic;color: white;font-size: 20px">Search me...</label>
-                    <input ng-model="search.restaurant" type="text">
+                    <input style="color: #ffffff;" ng-model="search.restaurant" type="text">
                 </md-input-container>
                     </span>
                             <md-divider></md-divider>
                             <span style="padding-left: 23px;" flex>
                 <md-input-container>
                     <label style="font-style: italic;color: white;font-size: 20px">City</label>
-                    <input ng-model="search.city" type="text">
+                    <input style="color: #ffffff;" ng-model="search.city" type="text">
                 </md-input-container>
                     </span>
                             <md-button ng-click="model.searchPlace(search)" class="md-icon-button md-primary" style="margin-top: 15px;" aria-label="search">
@@ -86,24 +85,23 @@
                         <div layout="row" style="color: white">
 
                             <md-button ng-click="model.getFood()" aria-label="restaurants in your location">
-                                <img ng-src="icons/food.svg">
+                                <img ng-src="icons/food.png" width="40px" height="40px">
 
                             </md-button>
 
                             <md-button ng-click="model.getCoffee()" aria-label="coffee in your location">
-                                <img ng-src="icons/coffee.png" height="30px" width="30px">
+                                <img ng-src="icons/coffee.png" height="40px" width="40px">
 
                             </md-button>
 
                             <md-button ng-click="model.getDrinks()" aria-label="drinks in your location">
-                                <img ng-src="icons/drinks.png" height="30px" width="30px">
+                                <img ng-src="icons/drinks.png" height="40px" width="40px">
 
                             </md-button>
                         </div>
 
                     </div>
                 </md-card>
-
             </div>
         </div>
     </div>

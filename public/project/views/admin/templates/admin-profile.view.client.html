@@ -28,14 +28,17 @@
                     <md-card >
                         <md-content layout-padding>
                             <div ng-repeat="user in model.users">
-                                <span ng-if="user.facebook">{{user.firstName}} {{user.lastName}} (FB Login)</span>
-                                <span ng-if="!user.facebook">{{user.firstName}} {{user.lastName}}</span>
-                                <span class="pull-right-map">
-                                    <md-button ng-if="user.roles != 'ADMIN'" class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
-                                         <md-icon md-svg-icon="icons/delete_black.svg">
-                                         </md-icon>
-                                     </md-button>
-                                </span>
+                                <table>
+                                    <span ng-if="user.facebook">{{user.firstName}} {{user.lastName}} (FB Login)</span>
+                                    <span ng-if="!user.facebook">{{user.firstName}} {{user.lastName}}</span>
+                                    <span class="pull-right-map">
+                                        <md-button ng-if="user.roles != 'ADMIN'" class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
+                                             <md-icon md-svg-icon="icons/delete_black.svg">
+                                             </md-icon>
+                                         </md-button>
+                                    </span>
+                                </table>
+
                             </div>
                         </md-content>
                     </md-card>
