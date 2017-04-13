@@ -22,18 +22,16 @@
             Logout
         </md-button>
     </div>
-
-
-
-
             <md-tabs md-dynamic-height md-border-bottom>
+                <!--Users tab-->
                 <md-tab label="Users">
                     <md-card >
                         <md-content layout-padding>
                             <div ng-repeat="user in model.users">
-                                {{user.firstName}} {{user.lastName}}
+                                <span ng-if="user.facebook">{{user.firstName}} {{user.lastName}} (FB Login)</span>
+                                <span ng-if="!user.facebook">{{user.firstName}} {{user.lastName}}</span>
                                 <span class="pull-right-map">
-                                    <md-button class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
+                                    <md-button ng-if="user.roles != 'ADMIN'" class="md-icon-button " ng-click="model.removeUser(user)" aria-label="edit profile">
                                          <md-icon md-svg-icon="icons/delete_black.svg">
                                          </md-icon>
                                      </md-button>
@@ -42,6 +40,7 @@
                         </md-content>
                     </md-card>
                 </md-tab>
+                <!--Reviews tab-->
                 <md-tab label="Reviews by users">
                     <md-card>
                         <md-content layout-padding>

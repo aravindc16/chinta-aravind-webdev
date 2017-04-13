@@ -48,8 +48,10 @@
                         .ok("OK"));
             }else{
                 city = search.city;
-                if(!city){
+                if(!city && !user.city){
                     city = "Boston"
+                }else if (!city){
+                    city = user.city;
                 }
                 var place = search.restaurant;
                 if(vm.userId){
