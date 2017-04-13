@@ -24,7 +24,7 @@ module.exports = function (app, model) {
     var facebookConfig = {
         clientID     : '277687679348560',
         clientSecret : 'd5a4aea417b3ab0a1b191cfedef2865c',
-        callbackURL  : '/project/api/auth/facebook/callback'
+        callbackURL  : process.env.FACEBOOK_CALLbACK_URL || '/project/api/auth/facebook/callback'
     };
 
     app.post('/api/project/register', createUser);
