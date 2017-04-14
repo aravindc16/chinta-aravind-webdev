@@ -89,6 +89,22 @@
                     loggedIn: checkUserLogIn
                 }
             })
+            .when('/restaurant/:id/order', {
+                templateUrl: 'views/restaurant/templates/restaurant.view.client.html',
+                controller:'resturantController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkUserLogIn
+                }
+            })
+            .when('/restaurant/:id/bill/:billId', {
+                templateUrl: 'views/restaurant/templates/bill.view.client.html',
+                controller:'resturantController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedIn: checkUserLogIn
+                }
+            })
 
     }
 

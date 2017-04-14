@@ -2,14 +2,13 @@
     <header>
         <md-toolbar style="background-color: rgba(41, 38, 140, 0.49);" md-scroll-shrink md-whiteframe="10">
             <div class="md-toolbar-tools">
-                <a href="#/" ng-if="!model.user">
+                <a href="#/" ng-if="!model.userId">
                     <img width="5%" height="5%" ng-src="http://training.fergflor.k12.mo.us/materials/brandstandards/otherlogos/fft_black.png">
                 </a>
-                <a href="#/{{model.userId}}" ng-if="model.user">
+                <a href="#/{{model.userId}}" ng-if="model.userId">
                     <img width="5%" height="5%" ng-src="http://training.fergflor.k12.mo.us/materials/brandstandards/otherlogos/fft_black.png">
                 </a>
                 <span flex></span>
-
             </div>
             <div class="pull-right-name" ng-show="model.user">
                 <md-menu ng-show="model.user" md-offset="40 40">
@@ -40,25 +39,16 @@
         </md-toolbar>
     </header>
 
-    <md-card layout-padding ng-repeat="place in model.results">
+    <md-card layout-padding>
+        <h3>Thank you for your order.</h3> <br>
+        <span>{{model.restaurantName}} is preparing your order and it should be ready in 20 minutes for pickup.</span>
 
-        <div layout="row" layout-padding>
-            <img ng-src="{{place.venue.categories[0].icon.prefix}}bg_88{{place.venue.categories[0].icon.suffix}}" height="30px" width="30px">
-
-            <div layout="column">
-                <a class="md-primary" ng-click="model.getRestaurantDetails(place.venue.id)"><h2 style="color: blue">{{place.venue.name}}</h2></a>
-                {{place.venue.categories[0].shortName}} . {{place.venue.price.currency}}<br>
-                {{place.venue.location.address}}, {{place.venue.location.city}} {{place.venue.location.state}}
-                {{place.location.lat}}
-                <span class="pull-right-map">
-                    <a href="https://www.google.com/maps/place/{{place.venue.name}}/@{{place.venue.location.lat}},{{place.venue.location.lng}},18z">
-                        Location
-                    </a>
-                </span>
-            </div>
-            <span class="pull-right" style="float: right" layout-padding>{{place.venue.rating}}</span>
-
-        </div>
+        <h4>Your Order#: {{model.bill._id}}</h4>
+        <span>Name:{{model.bill.name}}</span>
+        <ul ng-repeat="order in model.bill.order[0]">
+            <li>{{order.name}}<span layout-padding class="pull-right-map">${{order.price}}</span></li>
+        </ul>
+        <span><strong>Total Amount: </strong><span layout-padding   class="pull-right-map">${{model.bill.total}}</span></span>
 
     </md-card>
 

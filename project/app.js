@@ -6,4 +6,5 @@ module.exports = function (app) {
 
     require('./services/user.service.server')(app, model);
     require('./services/review.service.server')(app, model);
+    require('./services/restaurant.service.server')(app, model);
 }

@@ -60,7 +60,11 @@
                 <span flex style="font-style: italic">"{{model.details.description}}"</span>
                 <span>{{model.details.location.address}}, {{model.details.location.city}} {{model.details.location.state}}</span>
                 <span>{{model.details.contact.formattedPhone}}</span>
-                <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
+                <div layout="row">
+                    <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
+                    <span><md-button class="md-primary" href="#/restaurant/{{model.details.id}}/order">Place an Order</md-button></span>
+                </div>
+
 
                 <span><strong>Top Comments</strong></span>
                 <div ng-repeat="comment in model.details.tips.groups[0].items | limitTo: 5">
@@ -70,7 +74,7 @@
             </div>
 
 
-        <div style="height: 300px; width: 400px" class="pull-right-map" id="map" layout="column">
+        <div style="height: 300px; width: 400px" class="pull-right-map" id="map" layout="column" show-gt-xs>
 
         </div>
     </md-card>

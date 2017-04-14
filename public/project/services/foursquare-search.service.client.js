@@ -9,10 +9,16 @@
     function FoursquareSearchService($http) {
         var api = {
             'findRestaurantsByPlaceAndCity': findRestaurantsByPlaceAndCity,
-            'findRestaurantById': findRestaurantById
+            'findRestaurantById': findRestaurantById,
+            'findMenuForRestaurant': findMenuForRestaurant
         };
 
         return api;
+        
+        function findMenuForRestaurant(restId) {
+            var url = "https://api.foursquare.com/v2/venues/"+restId+"/menu?&client_id=5OCQBYEE3PJRCWZJKQN1ETDIDIW32WRBFRJH33N2PPOFNEO1&client_secret=WGPOYKK1TG1UGIF45MB4MINNJ344DN1KOS4HNWBXUJ4OUZNE&v=20170405";
+            return $http.get(url);
+        }
 
         function findRestaurantById(id){
             var url = "https://api.foursquare.com/v2/venues/"+id+"?&client_id=5OCQBYEE3PJRCWZJKQN1ETDIDIW32WRBFRJH33N2PPOFNEO1&client_secret=WGPOYKK1TG1UGIF45MB4MINNJ344DN1KOS4HNWBXUJ4OUZNE&v=20170405";
