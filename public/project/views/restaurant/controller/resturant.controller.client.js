@@ -76,20 +76,52 @@
             order.userId = user._id;
             order.restId = vm.restId;
             order.restName = restName;
-            console.log(order);
-            RestaurantService.placeOrder(order, vm.list)
-                .then(function (response) {
-                    if(response){
 
+            if(order.phone && order.name){
+
+                if(order.phone.length != 10){
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title("Phone Error!")
+                            .textContent("Please enter a valid phone number.")
+                            .ok("OK"));
+                }else{
+                    if(vm.list.length == 0){
                         $mdDialog.show(
                             $mdDialog.alert()
                                 .clickOutsideToClose(true)
-                                .title("Order Success!")
-                                .textContent("Your order has been successfully place. Your bill amount is: $"+response.data.total)
+                                .title("Items Error!")
+                                .textContent("You must choose the items that you want to order!.")
                                 .ok("OK"));
-                        $location.url('/restaurant/'+vm.restId+'/bill/'+response.data._id);
+                    }else{
+                        RestaurantService.placeOrder(order, vm.list)
+                            .then(function (response) {
+                                if(response){
+                                    $mdDialog.show(
+                                        $mdDialog.alert()
+                                            .clickOutsideToClose(true)
+                                            .title("Order Success!")
+                                            .textContent("Thank you for placing your order with "+restName+
+                                                ". Your bill amount is $"+response.data.total+". Please have it ready when you come for pickup.")
+                                            .ok("OK"));
+                                    $location.url('/restaurant/'+vm.restId+'/bill/'+response.data._id);
+                                }
+                            });
                     }
-                });
+
+                }
+
+
+            }else{
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title("Order Error!")
+                        .textContent("Please enter both your name and phone.")
+                        .ok("OK"));
+            }
+
 
 
         }
