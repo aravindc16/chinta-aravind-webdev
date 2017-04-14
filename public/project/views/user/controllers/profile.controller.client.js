@@ -27,7 +27,6 @@
                             vm.user=response.data;
                             // vm.userId = response.data._id;
                             logInUser = response.data;
-                            // console.log(response.data);
 
                             vm.userFollows = [];
                             vm.userFollowedBy = [];
@@ -90,7 +89,6 @@
                         vm.user=response.data;
                         vm.userId = response.data._id;
                         logInUser = response.data;
-                        console.log(response.data);
 
                         vm.userFollows = [];
                         vm.userFollowedBy = [];
