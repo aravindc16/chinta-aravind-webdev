@@ -41,7 +41,7 @@
                         // console.log(response.data.response.menu.menus.items[0].entries.items[0].entries.items);
                         vm.menu = response.data.response.menu.menus.items[0].entries.items[0].entries.items;
                     }
-                })
+                });
 
             if(vm.billId){
                 RestaurantService.findOrderByBillId(vm.billId)

@@ -197,10 +197,10 @@ module.exports = function (app, model) {
         model.UserModel.followUser(userId, user)
             .then(function (newUser) {
 
+                console.log(newUser);
                 if(newUser){
                     model.UserModel.addFollowedByUser(userId, user)
                         .then(function (user) {
-
                         });
                 }
                 res.send(newUser);

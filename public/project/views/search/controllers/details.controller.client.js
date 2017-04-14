@@ -46,6 +46,15 @@
                     });
             }
 
+            FoursquareSearchService.findMenuForRestaurant(vm.id)
+                .then(function (response) {
+                    if(response.data.response.menu.menus.count == 0){
+                        vm.canOrder = false;
+                    }else{
+                        vm.canOrder = true;
+                    }
+                });
+
 
 
             FoursquareSearchService.findRestaurantById(vm.id)

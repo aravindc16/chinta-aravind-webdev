@@ -83,6 +83,7 @@
 
     <md-card style="font-family: 'Sansita', sans-serif;">
         <md-card-content layout="row" layout-padding>
+
             <div flex layout="column">
                 <md-list>
                     <strong>People whom you follow:</strong>
@@ -101,8 +102,10 @@
                     </md-list-item>
                 </md-list>
             </div>
+
             <md-divider></md-divider>
-                <div flex layout="column" ng-repeat="userFollow in model.userFollows">
+
+                <div flex layout="column">
                 <md-list>
                     <strong>People who follow you:</strong>
                     <md-list-item ng-repeat="userFollowedBy in model.userFollowedBy">
