@@ -226,44 +226,65 @@
 
             vm.review = "";
             if(vm.userId){
-                ReviewService.addReview(user.username, name, review)
-                    .then(function (response) {
-                        vm.review = response.data;
 
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title("Review Success!")
-                                .textContent("We appreciate your review. Thank you!")
-                                .ok("OK"));
-                    }, function (err) {
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title("Review error!")
-                                .textContent("Sorry, we couldn't save your review. Please try again.")
-                                .ok("OK"));
-                    });
+                if(review){
+                    ReviewService.addReview(user.username, name, review)
+                        .then(function (response) {
+                            vm.review = response.data;
+
+                            $mdDialog.show(
+                                $mdDialog.alert()
+                                    .clickOutsideToClose(true)
+                                    .title("Review Success!")
+                                    .textContent("We appreciate your review. Thank you!")
+                                    .ok("OK"));
+                        }, function (err) {
+                            $mdDialog.show(
+                                $mdDialog.alert()
+                                    .clickOutsideToClose(true)
+                                    .title("Review error!")
+                                    .textContent("Sorry, we couldn't save your review. Please try again.")
+                                    .ok("OK"));
+                        });
+                }else{
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title("Review error!")
+                            .textContent("Can't post an empty review.")
+                            .ok("OK"));
+                }
+
             }else{
-                var newUser = {'username': "Anonymous"};
-                ReviewService.addReview(newUser.username, name, review)
-                    .then(function (response) {
-                        vm.review = response.data;
+                if(review){
+                    var newUser = {'username': "Anonymous"};
+                    ReviewService.addReview(newUser.username, name, review)
+                        .then(function (response) {
+                            vm.review = response.data;
 
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title("Review Success!")
-                                .textContent("We appreciate your review. Thank you!")
-                                .ok("OK"));
-                    }, function (err) {
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title("Review error!")
-                                .textContent("Sorry, we couldn't save your review. Please try again.")
-                                .ok("OK"));
-                    });
+                            $mdDialog.show(
+                                $mdDialog.alert()
+                                    .clickOutsideToClose(true)
+                                    .title("Review Success!")
+                                    .textContent("We appreciate your review. Thank you!")
+                                    .ok("OK"));
+                        }, function (err) {
+                            $mdDialog.show(
+                                $mdDialog.alert()
+                                    .clickOutsideToClose(true)
+                                    .title("Review error!")
+                                    .textContent("Sorry, we couldn't save your review. Please try again.")
+                                    .ok("OK"));
+                        });
+                }else{
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .clickOutsideToClose(true)
+                            .title("Review error!")
+                            .textContent("Can't post an empty review.")
+                            .ok("OK"));
+                }
+
             }
 
             init();
