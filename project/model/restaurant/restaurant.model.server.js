@@ -11,10 +11,25 @@ module.exports = function () {
     var api = {
         'placeOrder': placeOrder,
         'setModel': setModel,
-        "findOrderByBillId": findOrderByBillId
+        "findOrderByBillId": findOrderByBillId,
+        "findOrderByUserId": findOrderByUserId,
+        "findAllOrders": findAllOrders,
+        "removeOrder": removeOrder
     };
 
     return api;
+
+    function removeOrder(order) {
+        return RestaurantModel.remove({'_id':order._id});
+    }
+
+    function findAllOrders() {
+        return RestaurantModel.find();
+    }
+
+    function findOrderByUserId(userId) {
+        return RestaurantModel.find({'userId': userId});
+    }
     
     function findOrderByBillId(billId) {
         return RestaurantModel.findById(billId);

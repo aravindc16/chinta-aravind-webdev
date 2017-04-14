@@ -47,6 +47,7 @@ module.exports = function (app, model) {
     app.get('/project/api/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: '/project/#/user', failureRedirect: '/project/#/login'
     }));
     app.post('/api/project/checkAdmin', checkAdmin);
+    app.post('/api/project/checkManager', checkManager);
     app.get('/api/project/admin/users', findAllUsers);
     app.delete('/api/project/admin/user/:uid', removeUser);
 
@@ -87,6 +88,10 @@ module.exports = function (app, model) {
 
     function checkAdmin(req, res) {
         res.send(req.isAuthenticated() && req.user.roles == "ADMIN" ? req.user : '0');
+    }
+
+    function checkManager(req, res) {
+        res.send(req.isAuthenticated() && (req.user.roles == "MANAGER" || req.user.roles == "ADMIN") ? req.user : '0');
     }
 
     function findCurrentLoggedInUser(req, res) {
@@ -197,7 +202,6 @@ module.exports = function (app, model) {
         model.UserModel.followUser(userId, user)
             .then(function (newUser) {
 
-                console.log(newUser);
                 if(newUser){
                     model.UserModel.addFollowedByUser(userId, user)
                         .then(function (user) {
@@ -230,7 +234,7 @@ module.exports = function (app, model) {
 
         model.UserModel.addFavoriteRestaurant(userId, restaurant)
             .then(function (user) {
-                console.log(user);
+
                 if(user){
                     res.send(user);
                 }else{

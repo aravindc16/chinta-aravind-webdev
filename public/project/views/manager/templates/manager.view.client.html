@@ -1,0 +1,22 @@
+<div>
+    <div layout="row">
+        <h1 layout-padding flex> People and their Orders from your Restaurants </h1>
+        <md-button flex class="pull-right-map" ng-click="model.logout()">
+            Logout
+        </md-button>
+    </div>
+
+    <md-card>
+        <md-content layout-padding>
+            <div ng-repeat="order in model.orders">
+                Order by {{order.name}} from {{order.restName}}: <a href="#/restaurant/{{order.restId}}/bill/{{order._id}}">{{order._id}}</a>
+                <span>
+                    <md-button class="md-icon-button " ng-click="model.removeOrder(order)" aria-label="edit profile">
+                        <md-icon md-svg-icon="icons/delete_black.svg">
+                        </md-icon>
+                    </md-button>
+                </span>
+            </div>
+        </md-content>
+    </md-card>
+</div>

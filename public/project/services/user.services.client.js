@@ -29,10 +29,15 @@
             "findCurrentLoggedInUser": findCurrentLoggedInUser,
             "checkAdmin": checkAdmin,
             "findAllUsers": findAllUsers,
-            "removeUser": removeUser
+            "removeUser": removeUser,
+            "checkManager": checkManager
         };
 
         return api;
+
+        function checkManager() {
+            return $http.post('/api/project/checkManager');
+        }
 
         function removeUser(user) {
             return $http.delete('/api/project/admin/user/'+user._id);

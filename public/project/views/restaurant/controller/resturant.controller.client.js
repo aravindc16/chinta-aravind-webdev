@@ -13,6 +13,7 @@
 
         var user = {};
         vm.list = [];
+        var restName = {};
 
         function init() {
 
@@ -25,6 +26,7 @@
             FoursquareSearchService.findRestaurantById(vm.restId)
                 .then(function (response) {
                     vm.restaurantName = response.data.response.venue.name;
+                    restName = response.data.response.venue.name;
                 })
 
             FoursquareSearchService.findMenuForRestaurant(vm.restId)
@@ -71,6 +73,10 @@
 
         function placeOrder(order) {
             order.name = user.firstName;
+            order.userId = user._id;
+            order.restId = vm.restId;
+            order.restName = restName;
+            console.log(order);
             RestaurantService.placeOrder(order, vm.list)
                 .then(function (response) {
                     if(response){

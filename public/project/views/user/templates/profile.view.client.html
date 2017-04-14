@@ -54,6 +54,10 @@
                 <md-icon md-svg-icon="icons/person_black.svg">
                 </md-icon>
             </md-button>
+            <md-button class="md-icon-button" ng-show="model.user.roles == 'MANAGER'" href="#/manager" aria-label="manager page">
+                <md-icon md-svg-icon="icons/person_black.svg">
+                </md-icon>
+            </md-button>
         </md-card-actions>
     </md-card>
     <!--Favourites-->
@@ -119,6 +123,15 @@
                 </div>
 
         </md-card-content>
+    </md-card>
+
+    <md-card layout-padding>
+        <h4>Your Orders</h4>
+        <div ng-repeat="order in model.orders">
+            <ul>
+                <li>Order from {{order.restName}}: <a href="#/restaurant/{{order.restId}}/bill/{{order._id}}">{{order._id}}</a></li>
+            </ul>
+        </div>
     </md-card>
 
 

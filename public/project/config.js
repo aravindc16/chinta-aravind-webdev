@@ -52,6 +52,15 @@
                 }
 
             })
+            .when('/manager', {
+                templateUrl: 'views/manager/templates/manager.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    managerUser: checkManager
+                }
+
+            })
             .when('/signup', {
                 templateUrl: 'views/user/templates/signup.view.client.html',
                 controller: 'registerController',
@@ -138,5 +147,22 @@
             });
         return d.promise;
     }
+
+    function checkManager(UserService, $q, $location, $http) {
+        var d = $q.defer();
+        UserService.checkManager()
+            .then(function (response) {
+                if(response.data != '0'){
+                    d.resolve(response.data);
+
+                } else {
+                    d.reject();
+                    $location.url('/user');
+                }
+            });
+        return d.promise;
+    }
+
+
 
 })();

@@ -5,12 +5,13 @@
     angular.module('FoodForThoughtApp')
         .controller('adminController', adminController);
 
-    function adminController(UserService, $location, ReviewService) {
+    function adminController(UserService, $location, ReviewService, RestaurantService) {
         var vm = this;
         
         vm.removeUser = removeUser;
         vm.logout = logout;
         vm.removeReview = removeReview;
+        vm.removeOrder = removeOrder;
         
         function init() {
             UserService.findAllUsers()
@@ -32,8 +33,20 @@
                 .then(function (response) {
                     vm.anonReviews = response.data;
                 });
+
+            RestaurantService.findAllOrders()
+                .then(function (response) {
+                    vm.orders = response.data;
+                })
         }
         init();
+
+        function removeOrder(order) {
+            RestaurantService.removeOrder(order)
+                .then(function (response) {
+                    init();
+                })
+        }
 
         function removeReview(review) {
             ReviewService.removeReview(review)

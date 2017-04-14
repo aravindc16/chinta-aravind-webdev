@@ -36,6 +36,10 @@
                                              <md-icon md-svg-icon="icons/delete_black.svg">
                                              </md-icon>
                                          </md-button>
+                                        <md-button ng-if="user.roles != 'ADMIN'" class="md-icon-button " href="#/user/{{user._id}}/edit" aria-label="edit profile">
+                                             <md-icon md-svg-icon="icons/create_black.svg">
+                                             </md-icon>
+                                         </md-button>
                                     </span>
                                 </table>
 
@@ -75,6 +79,24 @@
                             </div>
 
                         </md-content>
+                    </md-card>
+                </md-tab>
+
+                <!--Orderes-->
+                <md-tab label="Orders By Users">
+                    <md-card>
+                    <md-content layout-padding>
+                        <div ng-repeat="order in model.orders">
+                            Order by {{order.name}} from {{order.restName}}: <a href="#/restaurant/{{order.restId}}/bill/{{order._id}}">{{order._id}}</a>
+                            <span>
+                                <md-button class="md-icon-button " ng-click="model.removeOrder(order)" aria-label="edit profile">
+                                    <md-icon md-svg-icon="icons/delete_black.svg">
+                                    </md-icon>
+                                </md-button>
+                            </span>
+                        </div>
+
+                    </md-content>
                     </md-card>
                 </md-tab>
             </md-tabs>

@@ -62,7 +62,7 @@
                 <span>{{model.details.contact.formattedPhone}}</span>
                 <div layout="row">
                     <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
-                    <span><md-button class="md-primary" href="#/restaurant/{{model.details.id}}/order" ng-show="model.canOrder == true">Place an Order</md-button></span>
+                    <span><md-button class="md-primary" href="#/restaurant/{{model.details.id}}/order" ng-show="model.canOrder == true && model.loggedInUser">Place an Order</md-button></span>
                 </div>
 
 

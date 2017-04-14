@@ -8,10 +8,25 @@
     function RestaurantService($http) {
         var api = {
             "placeOrder": placeOrder,
-            "findOrderByBillId": findOrderByBillId
+            "findOrderByBillId": findOrderByBillId,
+            "findOrderByUserId": findOrderByUserId,
+            "findAllOrders": findAllOrders,
+            "removeOrder": removeOrder
         };
 
         return api;
+
+        function removeOrder(order) {
+            return $http.put('/api/project/admin/restaurant/order', order);
+        }
+
+        function findAllOrders() {
+            return $http.get('/api/project/admin/restaurant/order');
+        }
+
+        function findOrderByUserId(userId) {
+            return $http.get('/api/project/restaurant/order/user/'+userId);
+        }
 
         function findOrderByBillId(billId) {
             return $http.get('/api/project/restaurant/order/bill/'+billId);
@@ -21,6 +36,9 @@
             var finalOrder = {
                 'name': order.name,
                 'phone': order.phone,
+                'userId': order.userId,
+                'restId': order.restId,
+                'restName': order.restName,
                 'order': []
             };
 
