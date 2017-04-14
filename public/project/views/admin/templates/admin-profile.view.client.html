@@ -63,11 +63,11 @@
                                 </div>
                             </div>
 
-                            <strong>Anonymous Reviews:</strong>
+                            <span ng-show="model.anonReviews.length != 0"><strong>Anonymous Reviews:</strong></span>
                             <div layout-padding ng-repeat="ar in model.anonReviews">
                                 ({{ar.restaurantName}}): <i style="color: lightslategrey;">"{{ar.review}}"</i>
                                 <span>
-                                        <md-button class="md-icon-button " ng-click="model.removeReview(r)" aria-label="edit profile">
+                                        <md-button class="md-icon-button " ng-click="model.removeReview(ar)" aria-label="edit profile">
                                              <md-icon md-svg-icon="icons/delete_black.svg">
                                              </md-icon>
                                         </md-button>
