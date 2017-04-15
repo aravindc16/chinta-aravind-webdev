@@ -9,9 +9,35 @@
                     <img width="5%" height="5%" ng-src="http://training.fergflor.k12.mo.us/materials/brandstandards/otherlogos/fft_black.png">
                 </a>
                 <span flex></span>
-                <md-button ng-click="model.logout()">
-                    Logout
-                </md-button>
+                <!--<md-button ng-click="model.logout()">-->
+                    <!--Logout-->
+                <!--</md-button>-->
+            </div>
+            <div class="pull-right-name" ng-show="model.currentUser.username != model.user.username">
+                <md-menu ng-show="model.user" md-offset="40 40">
+                    <md-button md-autofocus aria-label="Open menu with custom trigger"
+                               ng-mouseenter="$mdOpenMenu()"
+                               href="#/user/{{model.userId}}"
+                               style="margin-right: 50px;">
+                        <md-icon md-svg-icon="icons/face.svg">
+                        </md-icon>
+                        {{model.currentUser.firstName}}
+                    </md-button>
+                    <!--<md-button aria-label="Open menu with custom trigger" class="" ng-mouseenter="$mdOpenMenu()"> Test </md-button>-->
+                    <md-menu-content direction="down" width="2" ng-mouseleave="$mdMenu.close()">
+                        <md-menu-item>
+                            <md-button href="#/user">
+                                <md-icon md-svg-icon="icons/person_black.svg">
+                                </md-icon>Profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="model.logout()">
+                                Logout
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </div>
         </md-toolbar>
     </header>
@@ -42,19 +68,19 @@
             </div>
         </md-card-content>
         <md-card-actions>
-            <md-button class="md-icon-button" href="#/user/{{model.userId}}/edit" aria-label="edit profile">
+            <md-button ng-show="model.currentUser.username == model.user.username" class="md-icon-button" href="#/user/{{model.userId}}/edit" aria-label="edit profile">
                 <md-icon md-svg-icon="icons/create_black.svg">
                 </md-icon>
             </md-button>
-            <md-button ng-show="model.user.roles != 'ADMIN'" class="md-icon-button" ng-click="model.deleteUser()" aria-label="edit profile">
+            <md-button ng-show="model.user.roles != 'ADMIN' && model.currentUser.username == model.user.username" class="md-icon-button" ng-click="model.deleteUser()" aria-label="edit profile">
                 <md-icon md-svg-icon="icons/delete_black.svg">
                 </md-icon>
             </md-button>
-            <md-button class="md-icon-button" ng-show="model.user.roles == 'ADMIN'" href="#/admin" aria-label="admin page">
+            <md-button class="md-icon-button" ng-show="model.user.roles == 'ADMIN' && model.currentUser.username == model.user.username" href="#/admin" aria-label="admin page">
                 <md-icon md-svg-icon="icons/person_black.svg">
                 </md-icon>
             </md-button>
-            <md-button class="md-icon-button" ng-show="model.user.roles == 'MANAGER'" href="#/manager" aria-label="manager page">
+            <md-button class="md-icon-button" ng-show="model.user.roles == 'MANAGER' && model.currentUser.username == model.user.username" href="#/manager" aria-label="manager page">
                 <md-icon md-svg-icon="icons/person_black.svg">
                 </md-icon>
             </md-button>
@@ -85,7 +111,7 @@
         </md-card-content>
     </md-card>
 
-    <md-card style="font-family: 'Sansita', sans-serif;">
+    <md-card style="font-family: 'Sansita', sans-serif;" ng-show="model.currentUser.username == model.user.username">
         <md-card-content layout="row" layout-padding>
 
             <div flex layout="column">
@@ -125,7 +151,7 @@
         </md-card-content>
     </md-card>
 
-    <md-card layout-padding>
+    <md-card layout-padding ng-show="model.currentUser.username == model.user.username">
         <h4>Your Orders</h4>
         <div ng-repeat="order in model.orders">
             <ul>
