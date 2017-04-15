@@ -108,7 +108,7 @@
 
 .overlay-landing{
     /*opacity:0.5;*/
-    background-image: url(http://hivewallpaper.com/wallpaper/2014/12/food-wallpaper-download-5-high-resolution-wallpaper.jpg);
+    background-image: url(../icons/landing_image.jpg);
 
     /* Image is centered vertically and horizontally at all times */
     background-position: center center;
