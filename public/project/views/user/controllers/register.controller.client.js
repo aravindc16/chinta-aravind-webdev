@@ -48,6 +48,7 @@
                 UserService.findUserByUsername(user.username)
                     .then(function (response) {
                         if(!response.data){
+                            user.city = vm.city;
                             UserService.registerUser(user)
                                 .then(function (response) {
                                     var user = response.data;
