@@ -52,6 +52,15 @@
                 }
 
             })
+            .when('/admin/create', {
+                templateUrl: 'views/admin/templates/admin-create.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    adminUser: checkAdmin
+                }
+
+            })
             .when('/manager', {
                 templateUrl: 'views/manager/templates/manager.view.client.html',
                 controller: 'adminController',

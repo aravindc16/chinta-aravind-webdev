@@ -1,0 +1,67 @@
+<div class="md-inline-form">
+    <header>
+        <md-toolbar style="background-color: rgba(41, 38, 140, 0.49);" md-scroll-shrink md-whiteframe="10">
+            <div class="md-toolbar-tools">
+                <a href="#/">
+                    <img width="5%" height="5%" ng-src="http://training.fergflor.k12.mo.us/materials/brandstandards/otherlogos/fft_black.png">
+                </a>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+    </header>
+
+    <md-card md-whiteframe="10" style="height:70%" class="signup-card" flex>
+        <p class="login-page"> Create User</p>
+        <md-card-content layout="column" layout-align="center" class="signup-card-content">
+            <md-input-container class="md-block" flex>
+                <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                <label for="username">Username</label>
+                <input ng-model="newuser.username" id="username" type="text" required/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                <label for="username">First Name</label>
+                <input ng-model="newuser.firstName" id="firstname" type="text" />
+            </md-input-container>
+            <md-input-container  flex class="md-block">
+                <md-icon md-svg-icon="icons/person_black.svg"></md-icon>
+                <label for="username">Last Name</label>
+                <input ng-model="newuser.lastName" id="lastname" type="text" />
+            </md-input-container>
+            <md-input-container  flex class="md-block">
+                <md-icon md-svg-icon="icons/city.svg"></md-icon>
+                <label for="username">City (Search will be default to this)</label>
+                <input ng-model="newuser.city" id="city" type="text" />
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <md-icon md-svg-icon="icons/email.svg"></md-icon>
+                <label for="username">Email</label>
+                <input ng-model="newuser.email" id="email" type="email" />
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <md-icon md-svg-icon="icons/lock_closed.svg"></md-icon>
+                <label>Password</label>
+                <input ng-model="newuser.password" type="password" required/>
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <md-icon md-svg-icon="icons/lock_closed.svg"></md-icon>
+                <label>Verify Password</label>
+                <input ng-model="newuser.verifyPassword" type="password" required/>
+            </md-input-container>
+            <md-radio-group ng-model="newuser.gender">
+                <md-radio-button value="male" class="md-primary">Male</md-radio-button>
+                <md-radio-button value="female"> Female </md-radio-button>
+            </md-radio-group>
+            <md-card-actions>
+                <section layout="row" layout-align="center center" style="position: relative;bottom: 20px;">
+                    <div class="button-padding">
+                        <md-button class="md-raised md-primary" ng-click="model.createUser(newuser)">
+                            <label style="font-size: 17px">Create</label>
+                        </md-button>
+                    </div>
+                </section>
+            </md-card-actions>
+        </md-card-content>
+    </md-card>
+</div>
+

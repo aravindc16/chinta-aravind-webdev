@@ -45,6 +45,11 @@
 
                             </div>
                         </md-content>
+
+                        <md-button  class="md-icon-button " href="#/admin/create" aria-label="edit profile">
+                            <md-icon md-svg-icon="icons/person_add.svg">
+                            </md-icon>
+                        </md-button>
                     </md-card>
                 </md-tab>
                 <!--Reviews tab-->
@@ -97,6 +102,35 @@
                         </div>
 
                     </md-content>
+                    </md-card>
+                </md-tab>
+
+                <!--Favorites tab-->
+                <md-tab label="User Favourite Restaurants">
+                    <md-card>
+                        <md-content layout-padding>
+                            <div ng-repeat="user in model.users">
+                                {{user.firstName}}'s Favorite Restaurant(s)
+                                <ul ng-repeat="fav in user.favourites">
+                                    <li>
+                                        {{fav.restaurantName}}
+                                        <span>
+                                            <md-button class="md-icon-button" ng-click="model.removeFavorite(user, fav)" aria-label="edit profile">
+                                                <md-icon md-svg-icon="icons/delete_black.svg">
+                                                </md-icon>
+                                            </md-button>
+                                        </span>
+                                    </li>
+
+                                </ul>
+                                <ul ng-show="user.favourites.length==0">
+                                    <li>
+                                        <i>None</i>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </md-content>
                     </md-card>
                 </md-tab>
             </md-tabs>

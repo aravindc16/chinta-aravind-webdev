@@ -20,7 +20,9 @@ module.exports = function () {
         'removeFollowedByUser': removeFollowedByUser,
         'findUserByFacebookId': findUserByFacebookId,
         "findAllUsers": findAllUsers,
-        "removeUser": removeUser
+        "removeUser": removeUser,
+        "removeFavorite": removeFavorite,
+        "createUserByAdmin": createUserByAdmin
     };
 
     var model = {};
@@ -29,6 +31,14 @@ module.exports = function () {
     var UserModel = mongoose.model('userModel', UserSchema);
 
     return api;
+
+    function createUserByAdmin(user) {
+        return UserModel.create(user);
+    }
+
+    function removeFavorite(userId, fav) {
+        return UserModel.update({'_id': userId}, {$pull :{'favourites': {'id':fav.id}}});
+    }
 
     function removeUser(userId) {
         return UserModel.remove({'_id':userId});

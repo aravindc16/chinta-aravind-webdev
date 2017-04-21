@@ -50,13 +50,44 @@ module.exports = function (app, model) {
     app.post('/api/project/checkManager', checkManager);
     app.get('/api/project/admin/users', findAllUsers);
     app.delete('/api/project/admin/user/:uid', removeUser);
-
+    app.put('/api/project/admin/favorite/delete/:uid', removeFavorite);
+    app.post('/api/project/admin/create/user', createUserByAdmin);
 
 
     passport.use('project', new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+
+    function createUserByAdmin(req, res) {
+
+        var user = req.body;
+
+        if(req.user && req.user.roles == "ADMIN"){
+            model.UserModel.createUserByAdmin(user)
+                .then(function (user) {
+                    res.send(user)
+                }, function (err) {
+                    res.sendStatus(500);
+                })
+        }
+    }
+    
+    function removeFavorite(req, res) {
+
+        var userId = req.params['uid'];
+        var fav = req.body;
+
+        if(req.user && req.user.roles == "ADMIN"){
+            model.UserModel.removeFavorite(userId, fav)
+                .then(function (user) {
+                    res.send(user);
+                }, function (err) {
+                    res.sendStatus(500);
+                })
+        }
+    }
+
 
     function removeUser(req, res) {
         var userId = req.params['uid'];

@@ -30,10 +30,21 @@
             "checkAdmin": checkAdmin,
             "findAllUsers": findAllUsers,
             "removeUser": removeUser,
-            "checkManager": checkManager
+            "checkManager": checkManager,
+            "removeFavorite": removeFavorite,
+            "createUserByAdmin": createUserByAdmin
         };
 
         return api;
+
+        function createUserByAdmin(user) {
+            return $http.post('/api/project/admin/create/user', user);
+        }
+
+        function removeFavorite(user, fav) {
+            return $http.put('/api/project/admin/favorite/delete/'+user._id, fav);
+        }
+
 
         function checkManager() {
             return $http.post('/api/project/checkManager');
