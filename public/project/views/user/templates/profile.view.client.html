@@ -95,7 +95,7 @@
                     <md-list-item ng-repeat="favorite in model.user.favourites">
                         <md-divider></md-divider>
                         <a href="#/details/{{favorite.id}}/user/{{model.userId}}">{{favorite.restaurantName}}</a>
-                        <md-button ng-click="model.removeFavorite(favorite)" class="pull-right-map" aria-label="remove favorite"><md-icon md-svg-icon="./icons/delete_black.svg"></md-icon></md-button>
+                        <md-button ng-click="model.removeFavorite(favorite)" ng-show="model.currentUser.username == model.user.username" class="pull-right-map" aria-label="remove favorite"><md-icon md-svg-icon="./icons/delete_black.svg"></md-icon></md-button>
                     </md-list-item>
                 </md-list>
             </div>
