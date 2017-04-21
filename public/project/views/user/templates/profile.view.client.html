@@ -123,7 +123,7 @@
                     <strong>People whom you follow:</strong>
                     <md-list-item ng-repeat="userFollow in model.userFollows">
 
-                        <span>{{userFollow.firstName}} {{userFollow.lastName}}</span>
+                        <span><a href="#/user/{{userFollow._id}}">{{userFollow.firstName}} {{userFollow.lastName}}</a></span>
                         <!--If the user doesn't follow anyone-->
                         <span ng-show="model.noFollows">None</span>
                         <md-button class="pull-right-map"
