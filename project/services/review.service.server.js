@@ -9,6 +9,18 @@ module.exports = function (app, model) {
     app.get('/api/project/review/user/:username', findAllReviewsByUser);
     app.get('/api/project/admin/reviews', findAllReviews);
     app.put('/api/project/admin/review', removeReview);
+    app.delete('/api/project/user/review/delete/:reviewId', deleteReview);
+
+    function deleteReview(req, res) {
+        var review = req.params['reviewId'];
+
+        model.ReviewModel.deleteReview(review)
+            .then(function (review) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500);
+            })
+    }
 
     function removeReview(req, res) {
         var review = req.body;

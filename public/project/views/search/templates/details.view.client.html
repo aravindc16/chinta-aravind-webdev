@@ -95,6 +95,11 @@
 
             <a ng-show="model.userId" ng-click="model.viewProfile(review.username)">@{{review.username}}</a>
 
+            <md-button ng-show="model.loggedInUser.username == review.username" class="pull-right-map md-icon-button" ng-click="model.deleteReview(review)" aria-label="edit review">
+                <md-icon md-svg-icon="icons/delete_black.svg">
+                </md-icon>
+            </md-button>
+
                 <md-button class="pull-right-map"
                            ng-show="model.userId && review.username != 'Anonymous' && review.username != model.username && (model.Follows == false || model.alreadyFollows.indexOf(review.username)  == -1) "
                            ng-click="model.followUser(review.username)">

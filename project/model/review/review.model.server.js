@@ -15,10 +15,15 @@ module.exports = function () {
         'findAllReviewsByUser': findAllReviewsByUser,
         "findAllReviews": findAllReviews,
         "removeReview": removeReview,
-        "removeReviewByUser": removeReviewByUser
+        "removeReviewByUser": removeReviewByUser,
+        "deleteReview": deleteReview
     }
 
     return api;
+
+    function deleteReview(review) {
+        return ReviewModel.remove({'_id':review});
+    }
     
     function removeReviewByUser(username) {
         return ReviewModel.remove({'username': username});

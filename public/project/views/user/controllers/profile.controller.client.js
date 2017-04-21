@@ -20,6 +20,7 @@
             vm.removeFavorite = removeFavorite;
             vm.unFollowUser = unFollowUser;
             vm.logout = logout;
+            vm.deleteReview = deleteReview;
 
             function init() {
 
@@ -152,6 +153,13 @@
 
             }
             init();
+            
+            function deleteReview(review) {
+                ReviewService.deleteReview(review)
+                    .then(function (response) {
+                        init();
+                    })
+            }
             
             function logout() {
                 UserService.logout()

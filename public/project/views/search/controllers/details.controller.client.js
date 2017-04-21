@@ -21,6 +21,7 @@
         vm.followUser = followUser;
         vm.unFollowUser = unFollowUser;
         vm.logout = logout;
+        vm.deleteReview = deleteReview;
 
         function init() {
 
@@ -119,6 +120,13 @@
         init();
 
         var userToFollow = {};
+        
+        function deleteReview(review) {
+            ReviewService.deleteReview(review)
+                .then(function (response) {
+                    init();
+                })
+        }
 
         function logout() {
             UserService.logout()
