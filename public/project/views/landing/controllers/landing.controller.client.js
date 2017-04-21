@@ -47,7 +47,7 @@
                         .textContent("Please enter a name or place or restaurant to search for.")
                         .ok("OK"));
             }else{
-                city = search.city;
+                city = vm.city.split(',')[0];
                 if(!city && !user.city){
                     city = "Boston"
                 }else if (!city){

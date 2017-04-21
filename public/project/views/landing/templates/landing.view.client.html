@@ -75,7 +75,7 @@
                             <span style="padding-left: 23px;" flex>
                 <md-input-container>
                     <label style="font-style: italic;color: white;font-size: 20px">City</label>
-                    <input style="color: #ffffff;" ng-model="search.city" type="text">
+                    <input style="color: #ffffff;" type="text" ng-autocomplete="model.city" details="details1" options="options1" placeholder="Default (Home City)">
                 </md-input-container>
                     </span>
                             <md-button ng-click="model.searchPlace(search)" class="md-icon-button md-primary" style="margin-top: 15px;" aria-label="search">
@@ -99,6 +99,8 @@
 
                             </md-button>
                         </div>
+
+                        <!--<input type="text" ng-autocomplete="model.city" details="details1" options="options1" /><a ng-click="model.show(model.city)"> Show</a>-->
 
                     </div>
                 </md-card>
