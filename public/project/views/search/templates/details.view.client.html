@@ -57,11 +57,12 @@
                         </md-button>
                     </span>
                 </div>
-                <span flex style="font-style: italic">"{{model.details.description}}"</span>
-                <span>{{model.details.location.address}}, {{model.details.location.city}} {{model.details.location.state}}</span>
-                <span>{{model.details.contact.formattedPhone}}</span>
+                <span flex ng-show="model.details.description" style="font-style: italic">"{{model.details.description}}"</span>
+                <span flex ng-show="!model.details.description" style="font-style: italic">No Description Found.</span>
+                <span><md-icon md-svg-icon="icons/city.svg"></md-icon> &nbsp; {{model.details.location.address}}, {{model.details.location.city}} {{model.details.location.state}}</span>
+                <span ng-show="model.details.contact.formattedPhone"><md-icon md-svg-icon="icons/phone.svg"></md-icon> &nbsp; {{model.details.contact.formattedPhone}}</span>
                 <div layout="row">
-                    <span><md-button class="md-primary" href="{{model.details.url}}">Visit Website</md-button></span>
+                    <span><md-button class="md-primary" ng-show="model.details.url" href="{{model.details.url}}">Visit Website</md-button></span>
                     <span><md-button class="md-primary" href="#/restaurant/{{model.details.id}}/order" ng-show="model.canOrder == true && model.loggedInUser">Place an Order</md-button></span>
                 </div>
 
